@@ -1,0 +1,113 @@
+:root {
+  font-family: Ubuntu Mono, system-ui, sans-serif;
+  line-height: 1.2;
+  font-weight: 400;
+  color-scheme: light;
+  color: #d3b0c3;
+  background-color: #691935;
+
+  /* gradient taken from https://mycolor.space/gradient3?ori=to+left+top&hex=%23731D1D&hex2=%23731F2E&hex3=%2359163B&submit=submit */
+  background-image: linear-gradient(to left top, 
+                  #731d1d, #731d20, #731d24, 
+                  #731e27, #731e2a, #721d2d, 
+                  #701c2f, #6e1b32, #691935, 
+                  #641737, #5f1739, #59163b);
+
+  /* CSS HEX THEME */
+  --dark-grey: #222222
+  --med-grey: #2C2C2C
+  --light-grey: #898989
+  --red: #731F2E
+  --red-shade: #731D1D
+  --purple: #59163B
+  --dark-purple: #260119
+  --white: #d3b0c3
+  --yellow: #F28B50
+  --beige: #E7C2A3
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+a {
+  color: #898989;
+  text-decoration: none;
+}
+a:hover {
+  color: #898989;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+  /* padding-top: 5px;
+  padding-bottom: 14px; */
+  word-break: break-word;
+  white-space: normal;
+}
+
+form {
+  margin: 0;
+  padding: 0;
+  display: inline;
+  /* margin-top: -7px; */
+}
+
+input {
+  font-family: Ubuntu Mono;
+  border: none;
+  background-color: unset;
+  color:rgb(238, 238, 238);
+  width: 40%;
+  padding: 0;
+  margin: 0;
+  margin-top: -1px;
+  font-size: 16px;
+  color: #d3b0c3;
+  overflow: auto;
+}
+input:focus{
+  border:none;
+  outline: none;
+  box-shadow: none;
+  background-color: unset;
+}
+
+/* none of this scrollbar stuff is visible lol */
+
+::-webkit-scrollbar-track
+{
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #2C2C2C;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #2C2C2C;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #222222;
+  cursor: pointer;
+}
