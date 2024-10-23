@@ -6,6 +6,7 @@ function sleep(ms) {
 
 //returns @html for svelte to parse
 function determineCommandOutput(command) {
+  command = command.trim(); //trimming extraneous whitespace
   if(!command) { return null; } //checking for empty strings etc.
 
   if(command === 'help') {
