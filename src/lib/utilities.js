@@ -10,7 +10,7 @@ function determineCommandOutput(command) {
 
   if(command === 'help') {
     return `<p style="white-space:pre-wrap">
-pseudo-shell (psh), version 0.1.3
+pseudo-shell (psh), version 0.1.4
 
 hi visitor! if you'd like to read some of my poems you can &#96;ls&#96; to find my poems in this directory.
 use &#96;cat [FILENAME]&#96; to read the poems, e.g. &#96;cat personal2.txt&#96;.

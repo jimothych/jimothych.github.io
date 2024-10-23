@@ -72,7 +72,7 @@ export const poems = [
   my translation of Catullus 70
 
   <em>My woman says she would not choose Jove over me,
-  not even if he flew to her.
+  not even if he himself would fly to her.
   Thus she says; but what a woman says to her arduous lover
   ought to be written in the wind and the flowing water.
   </em>
