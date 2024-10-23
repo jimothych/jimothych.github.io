@@ -7,6 +7,9 @@
     masterLog = [...masterLog, messageObject];
   }
 
+  let inputValue = ''; //the value of the input field, constantly tracked by svelte
+  let submittedValue = null; //value passed into handleSubmit() once the input form is submitted
+
   let inputElementVisible = false; //to control visibility of input form
   async function bootTerminal() {
     await sleep(100);
@@ -15,10 +18,25 @@
     addLog({message: "Booting environment..."});
     await sleep(1300);
     inputElementVisible = true;
+
+    simulateHelp();
   }
 
-  let inputValue = '';
-  let submittedValue = null;
+  async function simulateHelp() {
+    await sleep(0);
+    document.getElementById("mainInput").focus();
+    await sleep(150);
+    inputValue = 'h'
+    await sleep(121);
+    inputValue = 'he'
+    await sleep(154);
+    inputValue = 'hel'
+    await sleep(101);
+    inputValue = 'help'
+    await sleep(174);
+    await handleSubmit();
+  }
+
   async function handleSubmit() { //called via form submission
     console.log(inputValue);
     submittedValue = inputValue;
@@ -49,7 +67,7 @@
   }
 
   async function handleAfterSubmitProcess() {
-    await sleep(100); //simulating latency, also conveniently pushes to bottom of div
+    await sleep(150); //simulating latency, also conveniently pushes to bottom of div
     inputElementVisible = true;
     await sleep(0); //hack to bypass odd Svelte DOM rendering and get the input to focus again
     document.getElementById("mainInput").focus();
@@ -84,7 +102,7 @@
   {/each}
   
   {#if inputElementVisible}
-  <form on:submit|preventDefault={handleSubmit} autocomplete="off">
+  <form on:submit|preventDefault={handleSubmit} autocomplete="off" name="mainForm">
     <p>
       <span style="color: #F28B50">user</span>@weewaa-land-352
       <span style="color: #898989"> ~/jameschang </span>›

@@ -42,15 +42,15 @@ export const poems = [
 
   whether he cross through
   sweltering Syrtes or the bitter Caucuses
-  or even those places where 
-  the forlorn Hydaspes sweeps.
+  or even those forlorn places where 
+  the Hydaspes sweeps.
 
-  For a wolf, while I sang of my Lalage
-  and wandered aimlessly beyond my cares,
+  For a wolf, while I was singing of my Lalage
+  and wandering aimlessly beyond my cares,
   fled from me, 
   though I was unarmed.
 
-  It was a horrid monster, which even
+  It was a horrid monster, that which even
   fierce Daunia in her broad oaks
   could not nurture,
   nor arid Juba, land of lions.
