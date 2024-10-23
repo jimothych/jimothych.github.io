@@ -67,7 +67,7 @@
   }
 
   async function handleAfterSubmitProcess() {
-    await sleep(50); //simulating latency, also conveniently pushes to bottom of div
+    await sleep(0); //conveniently pushes focus to bottom of div
     inputElementVisible = true;
     await sleep(0); //hack to bypass odd Svelte DOM rendering and get the input to focus again
     document.getElementById("mainInput").focus();
