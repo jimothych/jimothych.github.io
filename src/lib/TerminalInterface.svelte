@@ -22,7 +22,7 @@
     simulateHelp();
   }
 
-  async function simulateHelp() {
+  async function simulateHelp() { //cool typing "animation" using the input form's binded value
     await sleep(0);
     document.getElementById("mainInput").focus();
     await sleep(150);
@@ -54,7 +54,10 @@
 
     //step 2
     if(output) { //checking for null
-      if(output === 'reboot') { window.location.reload(); } //sudo reboot command entered
+      if(output === 'reboot') { //sudo reboot command entered
+        window.location.reload();
+        return; 
+      }
       if(output === 'clear') { //clearing master log
         handleClear();
         return;
@@ -69,7 +72,7 @@
   async function handleAfterSubmitProcess() {
     await sleep(0); //conveniently pushes focus to bottom of div
     inputElementVisible = true;
-    await sleep(0); //hack to bypass odd Svelte DOM rendering and get the input to focus again
+    await sleep(0); //hack to bypass odd DOM rendering and get the input to focus again
     document.getElementById("mainInput").focus();
   }
 

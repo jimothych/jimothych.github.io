@@ -17,12 +17,13 @@ hi visitor! if you'd like to read some of my poems you can &#96;ls&#96; to find 
 use &#96;cat [FILENAME]&#96; to read the poems, e.g. &#96;cat personal2.txt&#96;. 
 below are a few other commands you can run to learn more about me!
 
-usage:
+commands:
 ${createPaddedString(`whoami`, `who i am and what i do`)}
 ${createPaddedString(`projects`, `what i've been up to`)}
 ${createPaddedString(`socials`, `my socials`)}
 ${createPaddedString(`ls`, `list directory contents`)}
 ${createPaddedString(`cat [FILENAME]`, `print file contents to output, e.g. &#96;cat horace1-14.txt&#96;`)}
+${createPaddedString(`help`, `show this help message`)}
 ${createPaddedString(`clear`, `clear terminal`)}
 ${createPaddedString(`sudo reboot`, `makes the earth spin a bit faster`)}
 
@@ -78,12 +79,13 @@ function createPaddedString(word1, word2) { //helper for the above func
 
 function outputPoem(command) {
   const parsedArgArray = command.trim().split(" ");
-  if(parsedArgArray.length > 2) { return `psh: command not found: ${command}` }
+  if(parsedArgArray.length > 2) { return `psh: too many args, try just one file` }
   if(parsedArgArray[0] != "cat") { return `psh: command not found: ${command}` }
 
-  for(const poem of poems)
-  if(parsedArgArray[1].includes(poem.name)) { //matching command arg to poem name w/ leniency
-    return poem.content;
+  for(const poem of poems) {
+    if(parsedArgArray[1].includes(poem.name)) { //matching command arg to poem name w/ leniency
+      return poem.content;
+    }
   }
 }
 
