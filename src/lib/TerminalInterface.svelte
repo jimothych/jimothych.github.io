@@ -121,12 +121,15 @@
 
 <style>
   .terminal-interface {
+    box-sizing: border-box; /* forces css to calculate width as a total sum */
+    position: relative;
     display: flex;
     flex-direction: column;
     background-color: #260119;
     width: 100%;
     height: 100%;
     padding: 8px;
+    margin: 0;
     overflow-y: scroll;
     overflow-x: hidden;
   }

@@ -29,6 +29,9 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  scrollbar-width: none; /* Firefox hide scrollbar*/
+  -ms-overflow-style: none;  /* Internet Explorer 10+ hide scrollbar*/
 }
 a {
   color: #898989;
@@ -101,6 +104,7 @@ input:focus{
 	width: 10px;
 	background-color: #2C2C2C;
   cursor: pointer;
+  display: none;
 }
 
 ::-webkit-scrollbar-thumb

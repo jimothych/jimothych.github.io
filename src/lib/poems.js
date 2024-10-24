@@ -8,7 +8,7 @@ export const poems = [
   See not how your sides 
   are stripped bare of oars,
 
-  how the swift Southerly wind splits open your mast;
+  how the swift Southerly wind splits open your mast,
   how your sailyard groans by the keel,
   and without lash or rigging dares not harden
   ‘gainst the ruling waters?
@@ -71,7 +71,7 @@ export const poems = [
 `<span style="white-space: pre-wrap">
   my translation of Catullus 70
 
-  <em>My woman says she would not choose Jove over me,
+  <em>My woman says she would not choose Jove before me,
   not even if he himself would fly to her.
   Thus she says; but what a woman says to her arduous lover
   ought to be written in the wind and the flowing water.

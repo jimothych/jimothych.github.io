@@ -13,7 +13,7 @@ function determineCommandOutput(command) {
     return `<p style="white-space:pre-wrap">
 pseudo-shell (psh), version 0.1.6
 
-hi visitor! if you'd like to read some of my poems you can &#96;ls&#96; to find my poems stored in this directory.
+hi friend! if you'd like to read some of my poems you can &#96;ls&#96; to find my poems stored in this directory.
 use &#96;cat [FILENAME]&#96; to read the poems, e.g. &#96;cat personal2.txt&#96;. 
 below are a few other commands you can run to learn more about me!
 
