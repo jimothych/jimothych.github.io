@@ -7,7 +7,7 @@ function sleep(ms) {
 //returns @html for svelte to parse
 function determineCommandOutput(command) {
   command = command.trim(); //trimming extraneous whitespace
-  if(!command) { return null; } //checking for empty strings etc.
+  if(!command || command === 'psh') { return null; } //checking for empty strings etc.
 
   if(command === 'help') {
     return `<p style="white-space:pre-wrap">
@@ -85,6 +85,8 @@ function outputPoem(command) {
   for(const poem of poems) {
     if(parsedArgArray[1].includes(poem.name)) { //matching command arg to poem name w/ leniency
       return poem.content;
+    } else { //not a valid command
+      return `psh: no such file &#96;${parsedArgArray[1]}&#96;`;
     }
   }
 }
