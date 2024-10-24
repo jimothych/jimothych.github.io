@@ -78,7 +78,7 @@ function createPaddedString(word1, word2) { //helper for the above func
 }
 
 function outputPoem(command) {
-  const parsedArgArray = command.trim().split(" ");
+  const parsedArgArray = command.trim().split(/\s+/); //trim then greedy whitespace split
   if(parsedArgArray.length > 2) { return `psh: too many args, try just one file` } 
   if(parsedArgArray.length === 1) { return `usage: &#96;cat [FILENAME]&#96;`} //user entered `cat` w/ no args
   if(parsedArgArray[0] != "cat") { return `psh: command not found: ${command}` } //guarding against odd matched inputs

@@ -49,7 +49,7 @@
     addLog({message: 
             `<span style="color: #F28B50">user</span>@weewaa-land-352
             <span style="color: #898989"> ~/jameschang <span>
-            <span style="color: #d3b0c3">› ${submittedValue}</span>`
+            <span style="color: #d3b0c3; white-space: pre-wrap;">› ${submittedValue}</span>`
           });
 
     //step 2
