@@ -10,10 +10,12 @@
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^3.1.2",
+    "@types/dompurify": "^3.0.5",
     "svelte": "^4.2.19",
     "vite": "^5.4.8"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.6.0"
+    "@fortawesome/fontawesome-free": "^6.6.0",
+    "dompurify": "^3.1.7"
   }
 }

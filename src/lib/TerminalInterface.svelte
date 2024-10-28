@@ -1,5 +1,6 @@
 <script>
   import '@fortawesome/fontawesome-free/css/all.min.css'
+  import DOMPurify from 'dompurify';
   import { sleep, determineCommandOutput } from "./utilities"
 
   let masterLog = []; //array of objects; each object is a message
@@ -38,18 +39,20 @@
   }
 
   async function handleSubmit() { //called via form submission
-    console.log(inputValue);
+    console.log(`user inputted value: ${inputValue}`);
     submittedValue = inputValue;
     inputValue = '';
     inputElementVisible = false;
 
-    const output = determineCommandOutput(submittedValue);
+    const cleanedInput = DOMPurify.sanitize(submittedValue); //sanitizing input text
+    console.log(`sanitized input: ${cleanedInput}`);
+    const output = determineCommandOutput(cleanedInput);
 
     //step 1
     addLog({message: 
             `<span style="color: #F28B50">user</span>@weewaa-land-352
             <span style="color: #898989"> ~/jameschang <span>
-            <span style="color: #d3b0c3; white-space: pre-wrap;">› ${submittedValue}</span>`
+            <span style="color: #d3b0c3; white-space: pre-wrap;">› ${cleanedInput}</span>`
           });
 
     //step 2

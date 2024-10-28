@@ -72,7 +72,7 @@ export const poems = [
   my translation of Catullus 70
 
   <em>My woman says she would not choose Jove before me,
-  not even if he himself would fly to her.
+  not even if he himself should fly to her.
   Thus she says; but what a woman says to her arduous lover
   ought to be written in the wind and the flowing water.
   </em>
@@ -143,7 +143,7 @@ export const poems = [
   at the sand beneath his feet.
   Not much longer can he stand here:
   before dawn he'll fall into the current,
-  dashed headlong onto the pumice stones.
+  dashed headlong onto pumice stones.
   </em>
 </span>`},
 ]; 

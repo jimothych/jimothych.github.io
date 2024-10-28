@@ -4,7 +4,7 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-//returns @html for svelte to parse
+//returns @html for svelte to parse; function input has been sanitized
 function determineCommandOutput(command) {
   command = command.trim(); //trimming extraneous whitespace
   if(!command || command === 'psh') { return null; } //checking for empty strings etc.
@@ -88,6 +88,9 @@ function outputPoem(command) {
       return poem.content;
     } //else we continue to iterate
   }
+
+  //no poem found
+  return `psh: no such file &#96;${command}&#96;`;
 }
 
 export { sleep, determineCommandOutput }
