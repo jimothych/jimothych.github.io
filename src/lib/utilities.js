@@ -90,7 +90,7 @@ function outputPoem(command) {
   }
 
   //no poem found
-  return `psh: no such file &#96;${command}&#96;`;
+  return `psh: no such file &#96;${parsedArgArray[1]}&#96;`;
 }
 
 export { sleep, determineCommandOutput }
