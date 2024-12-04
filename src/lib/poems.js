@@ -8,7 +8,7 @@ export const poems = [
   See not how your sides 
   are stripped bare of oars,
 
-  how the swift Southerly wind splits open your mast,
+  how the swift southerly wind splits open your mast,
   how your sailyard groans by the keel,
   and without lash or rigging dares not harden
   ‘gainst the ruling waters?
@@ -93,7 +93,6 @@ export const poems = [
   for I fed the stain anew with my eyes,
   and sprayed it and rubbed it and
   let it bathe in baths of salt for weeks and change.
-  
   Ordeal's end: out came the shirt, stains 'n all;
   I knew nothing but nonsense
   for eight days after the fact.
@@ -102,48 +101,36 @@ export const poems = [
 
 {name: `personal2`, content: 
 `<span style="white-space: pre-wrap">
-  written 9/2/23
+  Whiffenpoofs, written 12/3/24
 
-  <em>Here the waters gather in small pools
-  along the dip and dale of concrete pavement.
-  Here the leaves fall onto each other
-  in their premeditated spots, making happy the passing day -
-  O, the clouds have fled at last!
-  And the grey of the earth will turn flush with flaxen sunlight,
-  the porcelain berries to glisten a brilliant blue,
-  and from my spot at the top of the cobbled stairs
-  I will listen to the sweating trees,
-  I will watch the hills dry by their sides.
-  Now a hanging fir will make me duck as I ramble,
-  the squirrels will go a-waltzing at my feet,
-  and I will hear the percolating steam,
-  the eastern winds that rush the hemlocks,
-  the scarlet oaks that dance in threes and fours
-  to the sound of sifting hair.
-  You sang in the wind once,
-  and now it sings you back to me,
-  a butterfly amid the wheat-ears, the poppy and the sea.
+  <em>I am rooting for him before he steps forward, and he is adjusting his bowtie and his glasses now, shifting slightly in his shoes. I am rooting for him, yes, but he takes two steps towards the mic and already I’ve placed the weight of the moon on his silly head, I’ve bored two holes through his midsection (clean through), and he needs to touch his glasses. I am clutching my stomach to hold down the bile. I want to shout, “Move! Be alive!” and strangle him under the dull red and green phosphorescence.
   </em>
 </span>`},
 
   {name: `personal3`, content: 
 `<span style="white-space: pre-wrap">
-  written 9/15/23
+  In response to Victor ‘MARKA27’ Quiñonez’s <em>Cranes in the Sky<em>, written 12/3/24
 
-  <em>Newly woken from quiet sleep
-  he finds himself alone on the shore.
-  Here he stands awhile.
-  The stars tread slowly abreast;
-  twice the cockerels sing.
-  The waves tug and ease...
-
-  He has looked for so long at ebbing sea
-  he feels himself piddling,
-  waning out and in as the salt waves toy
-  at the sand beneath his feet.
-  Not much longer can he stand here:
-  before dawn he'll fall into the current,
-  dashed headlong onto pumice stones.
+  <em>It has been twenty-eight days since the weather has warmed;
+  Now she is flying back home as the winds tug her on.
+  Sighted from over her shoulder the crane finds a perch
+  And sits on the breeze drawing circles in purplesque dawn.
+  Morning cracks smiles and angles the wind to her spot,
+  She dips and aligns as she ruffles her wings to alight.
+  A cascade of colour (the new shades of thistles in spring)
+  Follows her down to her perch by the bumbling stream.
+  Here by the road and the river the crane finds her stance
+  Atop the grey bars of that concrete which hold back the sky:
+  An angel, for certain, with bundles of blue close in tow
+  To coat the bland interstate roads in the feelings of gold –
+  Come to the dark earth and pick out the seeds to be sown,
+  Watch in the water through wheat-ears and cattails for growth,
+  Know when the dry air will pick up the scent of the firs,
+  The first breath of August, the parting leaves withered with cold –
+  See! She will free us from weathers of stillness and sloth,
+  Pinks from the rising day brought out from under her wings,
+  Browns from the loam of the south found from under her tongue:
+  She’s painting the hope of a new set of seasons.
   </em>
 </span>`},
 ]; 

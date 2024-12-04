@@ -40,7 +40,7 @@ ${createPaddedString(`sudo reboot`, `makes the earth spin a bit faster`)}
             <br>&emsp;`
   } else if(command === 'projects') {
     return `<br>
-            &emsp;<a href="https://github.com/SaveTubaTeam/saveTuba" target="_blank"><strong>Save Tuba</strong></a>
+            &emsp;<a href="https://github.com/SaveTubaTeam/saveTuba?tab=readme-ov-file#savetuba" target="_blank"><strong>Save Tuba</strong></a>
             <br>
             <span>&emsp;&emsp;a gamified educational platform for environmental sustainability education in Kazakhstan</span>
             <br><br>
