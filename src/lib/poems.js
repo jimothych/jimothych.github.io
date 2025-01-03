@@ -101,15 +101,27 @@ export const poems = [
 
 {name: `personal2`, content: 
 `<span style="white-space: pre-wrap">
-  Whiffenpoofs, written 12/3/24
+  Illiterate Boys, written 12/7/24
 
-  <em>I am rooting for him before he steps forward, and he is adjusting his bowtie and his glasses now, shifting slightly in his shoes. I am rooting for him, yes, but he takes two steps towards the mic and already I’ve placed the weight of the moon on his silly head, I’ve bored two holes through his midsection (clean through), and he needs to touch his glasses. I am clutching my stomach to hold down the bile. I want to shout, “Move! Be alive!” and strangle him under the dull red and green phosphorescence.
+  <em>Take me to your hiding place 
+  In the library of crooked shelves.
+  Point for me the seasons, the lone sailor, 
+  The quiet party for two, the pale-lit courtrooms;
+  Tell me what lies within hand-wrought folds.
+  It is your smile, the dip of your curls and tie,
+  The slight of your hands between the pages —
+  That! is enough literature for my twin eyes,
+  And if you were to lend me your hands
+  We would part the woods between your tresses,
+  The hunting party at your brow,
+  And upon those lips and behind the ear
+  We might find the Beast we are searching for.
   </em>
 </span>`},
 
   {name: `personal3`, content: 
 `<span style="white-space: pre-wrap">
-  In response to Victor ‘MARKA27’ Quiñonez’s <em>Cranes in the Sky<em>, written 12/3/24
+  In response to Victor ‘MARKA27’ Quiñonez’s <em>Cranes in the Sky</em>, written 12/3/24
 
   <em>It has been twenty-eight days since the weather has warmed;
   Now she is flying back home as the winds tug her on.
@@ -118,9 +130,9 @@ export const poems = [
   Morning cracks smiles and angles the wind to her spot,
   She dips and aligns as she ruffles her wings to alight.
   A cascade of colour (the new shades of thistles in spring)
-  Follows her down to her perch by the bumbling stream.
+  Follows her down to her perch by the underly stream.
   Here by the road and the river the crane finds her stance
-  Atop the grey bars of that concrete which hold back the sky:
+  Atop the grey bars of that concrete which holds back the sky:
   An angel, for certain, with bundles of blue close in tow
   To coat the bland interstate roads in the feelings of gold –
   Come to the dark earth and pick out the seeds to be sown,
