@@ -1,105 +1,45 @@
 export const poems = [
-  {name: `horace1-14`, content: 
+  {name: `poem1`, content: 
 `<span style="white-space: pre-wrap">
-  my translation of Horace's <em>Carmina</em> (Odes) 1.14
+  written 4/4/25
 
-  <em>O thankless ship, the morning tide takes you back to sea.
-  O where do you go? Come home to port.
-  See not how your sides 
-  are stripped bare of oars,
-
-  how the swift southerly wind splits open your mast,
-  how your sailyard groans by the keel,
-  and without lash or rigging dares not harden
-  ‘gainst the ruling waters?
-
-  Your canvased sails hang rent and low;
-  no gods, for want of voice, press its malady.
-  And though you are daughter of Pontic trees,
-  of noble woodland air,
-
-  boasting name and lineage – madly blind –
-  lo! can painted timbers quell a seaman's fear?
-  Beware the wind that
-  makes you its mock and jeer!
-
-  Your stature late made sick this heart of mine,
-  and still I love you thoroughly:
-  O shun the sea, which thickly pours 
-  its shining entrails through the Cyclades.
-  </em>
+  <em>Tremble me with honeyed fingers,
+  Make me more merry than Merlot leaves.
+  Settle them where springtime lingers,
+  You’ll have me biting on your sleeves.</em>
 </span>`},
 
-  {name: `horace1-22`, content: 
+  {name: `poem2`, content: 
 `<span style="white-space: pre-wrap">
-  my translation of Horace's <em>Carmina</em> (Odes) 1.22
+  <em>Xenia</em>, from Pound's <em>Personae</em> (1909), written 4/9/25
 
-  <em>Dear my Fuscus,
-
-  He who has lived a full life 
-  has no need for Maurian spear, nor bow, 
-  nor quiver of poisoned arrows,
-
-  whether he cross through
-  sweltering Syrtes or the bitter Caucuses
-  or even those forlorn places where 
-  the Hydaspes sweeps.
-
-  For a wolf, while I was singing of my Lalage
-  and wandering aimlessly beyond my cares,
-  fled from me, 
-  though I was unarmed.
-
-  It was a horrid monster, that which even
-  fierce Daunia in her broad oaks
-  could not nurture,
-  nor arid Juba, land of lions.
-
-  Put me in a faded field
-  where no tree is felt by summer breeze,
-  in a broad world of evil and fog
-  where Jupiter looms;
-
-  put me under the chariot of the sun
-  in a land without houses:
-  still will I love my Lalage,
-  sweetly laughing, sweetly talking.
-  </em>
+  <em>And unto your eyes my heart
+  Does beat with its own song,
+  Does hear the rain that sings low melodies of you —
+  Does hear the rain that loves to linger on your skin,
+  Slow-dropping as the roses droop their dew-bowed petals
+  To the dreams we’ve scattered o’er them passing by.</em>
 </span>`},
 
-  {name: `catullus70`, content: 
+  {name: `poem3`, content: 
 `<span style="white-space: pre-wrap">
-  my translation of Catullus 70
+  written 12/11/24
 
-  <em>My woman says she would not choose Jove before me,
-  not even if he himself should fly to her.
-  Thus she says; but what a woman says to her arduous lover
-  ought to be written in the wind and the flowing water.
-  </em>
+  <em>Turn on the lights! Roll up the doors!
+  Let us go a-marching through the factory
+  Wearing our company red boots in line;
+  Smile at your shoulder-man with a tip of the hat!
+  Tell Tom to unhook the forklifts,
+  Turn all the keys loose, set the machines a-drum!
+  Sweetness is again within our gloves.
+  But here is a squalid man with his apron untied
+  Dragging the flaps on the plaster floor —
+  Tie yourself up! Wear yourself with pride!
+  Have you not heard, brother?
+  Jim Carrey wants a new Ferrari!</em>
 </span>`},
 
-{name: `personal1`, content: 
-`<span style="white-space: pre-wrap">
-  written 9/2/23
-
-  <em>At the height of my delusion
-  I discovered a stain the color of burnt umber
-  nested clever on the shoulder-crease
-  of my two-buttoned shirt.
-  I saw it clearly then, and knew it to be yours.
-  So the white light came out to inspect
-  and found nothing where it stained my brain.
-  Off with the light then,
-  for I fed the stain anew with my eyes,
-  and sprayed it and rubbed it and
-  let it bathe in baths of salt for weeks and change.
-  Ordeal's end: out came the shirt, stains 'n all;
-  I knew nothing but nonsense
-  for eight days after the fact.
-  </em>
-</span>`},
-
-{name: `personal2`, content: 
+{name: `poem4`, content: 
 `<span style="white-space: pre-wrap">
   Illiterate Boys, written 12/7/24
 
@@ -119,7 +59,7 @@ export const poems = [
   </em>
 </span>`},
 
-  {name: `personal3`, content: 
+  {name: `poem5`, content: 
 `<span style="white-space: pre-wrap">
   In response to Victor ‘MARKA27’ Quiñonez’s <em>Cranes in the Sky</em>, written 12/3/24
 

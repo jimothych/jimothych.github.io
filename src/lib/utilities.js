@@ -40,18 +40,22 @@ ${createPaddedString(`sudo reboot`, `makes the earth spin a bit faster`)}
             <br>&emsp;`
   } else if(command === 'projects') {
     return `<br>
+            &emsp;<a><strong>Compiler</strong></a>
+            <br>
+            <span>&emsp;&emsp;building a compiler for the Jack programming language following Nand2Tetris</span>
+            <br><br>
             &emsp;<a href="https://github.com/SaveTubaTeam/saveTuba?tab=readme-ov-file#savetuba" target="_blank"><strong>Save Tuba</strong></a>
             <br>
             <span>&emsp;&emsp;a gamified educational platform for environmental sustainability education in Kazakhstan</span>
             <br><br>
-            &emsp;<a><strong>Boston University Mars Rover</strong></a>
+            &emsp;<a href="https://github.com/jimothych/LineFollowingCar?tab=readme-ov-file#demo"><strong>Line Following Car</strong></a>
             <br>
-            <span>&emsp;&emsp;building embedded software for robotic arm and 6-wheel drive train</span>
+            <span>&emsp;&emsp;project w/ friends: PID-controlled line following car</span>
             <br><br>
-            &emsp;<a><strong>Compiler</strong></a>
+            &emsp;<a href="https://github.com/jimothych/bRot_Flashcards?tab=readme-ov-file#design-decisions"><strong>bRot Flashcard App</strong></a>
             <br>
-            <span>&emsp;&emsp;building a compiler for the Jack programming language following Nand2Tetris</span>
-            <br>&emsp;
+            <span>&emsp;&emsp;group project w/ classmates; i did the UI and backend</span>
+            <br>
             `
   } else if(command === 'socials') {
     return `
@@ -60,7 +64,7 @@ ${createPaddedString(`sudo reboot`, `makes the earth spin a bit faster`)}
             &emsp;<a href="https://www.linkedin.com/in/james-chang-881115202/" target="_blank"><strong>LinkedIn</strong></a>
             `
   } else if(command === 'ls') {
-    return `horace1-14.txt&emsp;horace1-22.txt&emsp;catullus70.txt&emsp;personal1.txt&emsp;personal2.txt&emsp;personal3.txt`
+    return `poem1.txt&emsp;poem2.txt&emsp;poem3.txt&emsp;poem4.txt&emsp;poem5.txt`
   } else if (command.includes('cat')) {
     return outputPoem(command);
   } else if(command === 'clear') {
