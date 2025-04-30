@@ -3,29 +3,31 @@ export const poems = [
 `<span style="white-space: pre-wrap">
   written 4/4/25
 
-  <em>Tremble me with honeyed fingers,
+  Tremble me with honeyed fingers,
   Make me more merry than Merlot leaves.
   Settle them where springtime lingers,
-  You’ll have me biting on your sleeves.</em>
+  You’ll have me biting on your sleeves.
+
 </span>`},
 
   {name: `poem2`, content: 
 `<span style="white-space: pre-wrap">
   <em>Xenia</em>, from Pound's <em>Personae</em> (1909), written 4/9/25
 
-  <em>And unto your eyes my heart
+  And unto your eyes my heart
   Does beat with its own song,
   Does hear the rain that sings low melodies of you —
   Does hear the rain that loves to linger on your skin,
   Slow-dropping as the roses droop their dew-bowed petals
-  To the dreams we’ve scattered o’er them passing by.</em>
+  To the dreams we’ve scattered o’er them passing by.
+
 </span>`},
 
   {name: `poem3`, content: 
 `<span style="white-space: pre-wrap">
   written 12/11/24
 
-  <em>Turn on the lights! Roll up the doors!
+  Turn on the lights! Roll up the doors!
   Let us go a-marching through the factory
   Wearing our company red boots in line;
   Smile at your shoulder-man with a tip of the hat!
@@ -36,14 +38,15 @@ export const poems = [
   Dragging the flaps on the plaster floor —
   Tie yourself up! Wear yourself with pride!
   Have you not heard, brother?
-  Jim Carrey wants a new Ferrari!</em>
+  Jim Carrey wants a new Ferrari!
+
 </span>`},
 
 {name: `poem4`, content: 
 `<span style="white-space: pre-wrap">
   Illiterate Boys, written 12/7/24
 
-  <em>Take me to your hiding place 
+  Take me to your hiding place 
   In the library of crooked shelves.
   Point for me the seasons, the lone sailor, 
   The quiet party for two, the pale-lit courtrooms;
@@ -56,14 +59,14 @@ export const poems = [
   The hunting party at your brow,
   And upon those lips and behind the ear
   We might find the Beast we are searching for.
-  </em>
+  
 </span>`},
 
   {name: `poem5`, content: 
 `<span style="white-space: pre-wrap">
   In response to Victor ‘MARKA27’ Quiñonez’s <em>Cranes in the Sky</em>, written 12/3/24
 
-  <em>It has been twenty-eight days since the weather has warmed;
+  It has been twenty-eight days since the weather has warmed;
   Now she is flying back home as the winds tug her on.
   Sighted from over her shoulder the crane finds a perch
   And sits on the breeze drawing circles in purplesque dawn.
@@ -83,6 +86,6 @@ export const poems = [
   Pinks from the rising day brought out from under her wings,
   Browns from the loam of the south found from under her tongue:
   She’s painting the hope of a new set of seasons.
-  </em>
+  
 </span>`},
 ]; 

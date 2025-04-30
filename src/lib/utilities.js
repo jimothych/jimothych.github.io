@@ -54,8 +54,9 @@ ${createPaddedString(`sudo reboot`, `makes the earth spin a bit faster`)}
             <br><br>
             &emsp;<a href="https://github.com/jimothych/bRot_Flashcards?tab=readme-ov-file#design-decisions"><strong>bRot Flashcard App</strong></a>
             <br>
-            <span>&emsp;&emsp;group project w/ classmates; i did the UI and backend</span>
+            <span>&emsp;&emsp;group project: i did the UI and backend</span>
             <br>
+
             `
   } else if(command === 'socials') {
     return `
