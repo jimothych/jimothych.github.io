@@ -14,7 +14,7 @@ function determineCommandOutput(command) {
 pseudo-shell (psh), version 0.1.6
 
 hi friend! if you'd like to read some of my poems you can &#96;ls&#96; to find my poems stored in this directory.
-use &#96;cat [FILENAME]&#96; to read the poems, e.g. &#96;cat personal2.txt&#96;. 
+use &#96;cat [FILENAME]&#96; to read the poems, e.g. &#96;cat poem2.txt&#96;. 
 below are a few other commands you can run to learn more about me!
 
 commands:
@@ -22,7 +22,7 @@ ${createPaddedString(`whoami`, `who i am and what i do`)}
 ${createPaddedString(`projects`, `what i've been up to`)}
 ${createPaddedString(`socials`, `my socials`)}
 ${createPaddedString(`ls`, `list directory contents`)}
-${createPaddedString(`cat [FILENAME]`, `print file contents to output, e.g. &#96;cat horace1-14.txt&#96;`)}
+${createPaddedString(`cat [FILENAME]`, `print file contents to output, e.g. &#96;cat poem1.txt&#96;`)}
 ${createPaddedString(`help`, `show this help message`)}
 ${createPaddedString(`clear`, `clear terminal`)}
 ${createPaddedString(`sudo reboot`, `makes the earth spin a bit faster`)}
@@ -54,9 +54,8 @@ ${createPaddedString(`sudo reboot`, `makes the earth spin a bit faster`)}
             <br><br>
             &emsp;<a href="https://github.com/jimothych/bRot_Flashcards?tab=readme-ov-file#design-decisions"><strong>bRot Flashcard App</strong></a>
             <br>
-            <span>&emsp;&emsp;group project: i did the UI and backend</span>
-            <br>
-
+            <span>&emsp;&emsp;group project: I did the UI and backend</span>
+            <br><br>
             `
   } else if(command === 'socials') {
     return `
