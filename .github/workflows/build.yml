@@ -35,14 +35,6 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: docs
-
-      - name: Report build success
-        if: success()
-        run: echo "build success"
-
-      - name: Report build failure
-        if: failure()
-        run: echo "build fail"
   
   deploy:
     needs: build

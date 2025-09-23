@@ -30,29 +30,29 @@ ${createPaddedString(`sudo reboot`, `makes the earth spin a bit faster`)}
 </p>`
   } else if(command === 'whoami') {
     return `<br>
-            &emsp;Hi! I'm James, a Computer Engineer, aspiring Latinist, and poet studying at Boston University.
+            &emsp;Hi! I'm James, a Computer Engineer, Latinist, and poet studying at Boston University.
             <br><br>
-            &emsp;I am a pragmatic engineer who values honesty in communication and simplicity in solutions.
+            &emsp;I am a pragmatic engineer who values simplicity in design solutions.
             <br> 
-            &emsp;At the moment my primary interest lies in embedded systems programming. 
+            &emsp;At the moment my primary interest lies in embedded systems. 
             <br>
             &emsp;Please feel free to contact me anytime at jameschang2005@icloud.com
             <br>&emsp;`
   } else if(command === 'projects') {
     return `<br>
-            &emsp;<a><strong>Compiler</strong></a>
+            &emsp;<a><strong>C Compiler for Bare-Metal Arduino</strong></a>
             <br>
-            <span>&emsp;&emsp;building a compiler for the Jack programming language following Nand2Tetris</span>
+            <span>&emsp;&emsp;minimal C99 compiler for the avr-gcc toolchain w/ custom avr-libc</span>
             <br><br>
             &emsp;<a href="https://github.com/SaveTubaTeam/saveTuba?tab=readme-ov-file#savetuba" target="_blank"><strong>Save Tuba</strong></a>
             <br>
             <span>&emsp;&emsp;a gamified educational platform for environmental sustainability education in Kazakhstan</span>
             <br><br>
-            &emsp;<a href="https://github.com/jimothych/LineFollowingCar?tab=readme-ov-file#demo"><strong>Line Following Car</strong></a>
+            &emsp;<a href="https://github.com/jimothych/LineFollowingCar?tab=readme-ov-file#demo" target="_blank"><strong>Line Following Car</strong></a>
             <br>
             <span>&emsp;&emsp;project w/ friends: PID-controlled line following car</span>
             <br><br>
-            &emsp;<a href="https://github.com/jimothych/bRot_Flashcards?tab=readme-ov-file#design-decisions"><strong>bRot Flashcard App</strong></a>
+            &emsp;<a href="https://github.com/jimothych/bRot_Flashcards?tab=readme-ov-file#design-decisions" target="_blank"><strong>bRot Flashcard App</strong></a>
             <br>
             <span>&emsp;&emsp;group project: I did the UI and backend</span>
             <br><br>
@@ -64,7 +64,7 @@ ${createPaddedString(`sudo reboot`, `makes the earth spin a bit faster`)}
             &emsp;<a href="https://www.linkedin.com/in/james-chang-881115202/" target="_blank"><strong>LinkedIn</strong></a>
             `
   } else if(command === 'ls') {
-    return `poem1.txt&emsp;poem2.txt&emsp;poem3.txt&emsp;poem4.txt&emsp;poem5.txt`
+    return `poem1.txt&emsp;poem2.txt&emsp;poem3.txt&emsp;poem4.txt`
   } else if (command.includes('cat')) {
     return outputPoem(command);
   } else if(command === 'clear') {
