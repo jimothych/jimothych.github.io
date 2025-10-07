@@ -14,7 +14,7 @@
   let inputElementVisible = false; //to control visibility of input form
   async function bootTerminal() {
     await sleep(100);
-    addLog({message: "<em>salvete amici!</em>"});
+    addLog({message: "<em>salvēte amīcī!</em>"});
     await sleep(1000);
     addLog({message: "Booting environment..."});
     await sleep(1300);

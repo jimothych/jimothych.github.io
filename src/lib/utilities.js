@@ -4,7 +4,7 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-//returns @html for svelte to parse; function input has been sanitized
+//returns @html for svelte to parse; function input has been sanitized (doesn't matter tho cuz this is a static page)
 function determineCommandOutput(command) {
   command = command.trim(); //trimming extraneous whitespace
   if(!command || command === 'psh') { return null; } //checking for empty strings etc.
@@ -30,9 +30,9 @@ ${createPaddedString(`sudo reboot`, `makes the earth spin a bit faster`)}
 </p>`
   } else if(command === 'whoami') {
     return `<br>
-            &emsp;Hi! I'm James, a Computer Engineer, Latinist, and poet studying at Boston University.
+            &emsp;Hi! I'm James, a Computer Engineer and sometimes poet at Boston University.
             <br><br>
-            &emsp;I am a pragmatic engineer who values simplicity in design solutions.
+            &emsp;I am a pragmatic engineer who values simplicity in solutions.
             <br> 
             &emsp;At the moment my primary interest lies in embedded systems. 
             <br>
