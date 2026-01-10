@@ -32,8 +32,6 @@ ${createPaddedString(`sudo reboot`, `makes the earth spin a bit faster`)}
     return `<br>
             &emsp;Hi! I'm James, a Computer Engineer and sometimes poet at Boston University.
             <br><br>
-            &emsp;I am a pragmatic engineer who values simplicity in solutions.
-            <br> 
             &emsp;At the moment my primary interest lies in embedded systems. 
             <br>
             &emsp;Please feel free to contact me anytime at jameschang2005@icloud.com
@@ -42,19 +40,27 @@ ${createPaddedString(`sudo reboot`, `makes the earth spin a bit faster`)}
     return `<br>
             &emsp;<a><strong>C Compiler for Bare-Metal Arduino</strong></a>
             <br>
-            <span>&emsp;&emsp;minimal C99 compiler for the avr-gcc toolchain w/ custom avr-libc</span>
+            <span>&emsp;&emsp;minimal C99 compiler for the avr-gcc toolchain</span>
             <br><br>
+
             &emsp;<a href="https://github.com/SaveTubaTeam/saveTuba?tab=readme-ov-file#savetuba" target="_blank"><strong>Save Tuba</strong></a>
             <br>
             <span>&emsp;&emsp;a gamified educational platform for environmental sustainability education in Kazakhstan</span>
             <br><br>
+
+            &emsp;<a href="https://github.com/jimothych/inStock_frontend?tab=readme-ov-file#instock---inventory-management-for-small-businesses" target="_blank"><strong>Inventory Forecasting App for Small Businesses</strong></a>
+            <br>
+            <span>&emsp;&emsp;freelancer proof of concept for an MBA ops strat class</span>
+            <br><br>
+
             &emsp;<a href="https://github.com/jimothych/LineFollowingCar?tab=readme-ov-file#demo" target="_blank"><strong>Line Following Car</strong></a>
             <br>
-            <span>&emsp;&emsp;project w/ friends: PID-controlled line following car</span>
+            <span>&emsp;&emsp;project w/ friends</span>
             <br><br>
-            &emsp;<a href="https://github.com/jimothych/bRot_Flashcards?tab=readme-ov-file#design-decisions" target="_blank"><strong>bRot Flashcard App</strong></a>
+
+            &emsp;<a href="https://github.com/jimothych/bRot_Flashcards?tab=readme-ov-file#design-decisions" target="_blank"><strong>Flashcard App</strong></a>
             <br>
-            <span>&emsp;&emsp;group project: I did the UI and backend</span>
+            <span>&emsp;&emsp;EC327 group project</span>
             <br><br>
             `
   } else if(command === 'socials') {

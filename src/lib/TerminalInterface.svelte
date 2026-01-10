@@ -2,6 +2,7 @@
   import '@fortawesome/fontawesome-free/css/all.min.css'
   import DOMPurify from 'dompurify';
   import { sleep, determineCommandOutput } from "./utilities"
+  import { onMount } from 'svelte';
 
   let masterLog = []; //array of objects; each object is a message
   function addLog(messageObject) {
@@ -91,7 +92,10 @@
     } catch { } //do nothing w/ errors
   }
 
-  bootTerminal(); //called on initial mount
+  
+onMount(() => {
+  bootTerminal();
+});
 </script>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->

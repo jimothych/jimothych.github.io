@@ -41,7 +41,7 @@ export const poems = [
   Turn all the keys loose, set the machines a-drum!
   Sweetness is again within our gloves.
   But here is a squalid man with his apron untied
-  Dragging the flaps on the plaster floor —
+  Dragging his flaps on the plaster floor —
   Tie yourself up! Wear yourself with pride!
   Have you not heard, brother?
   Jim Carrey wants a new Ferrari!
