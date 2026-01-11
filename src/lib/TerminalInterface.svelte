@@ -92,10 +92,9 @@
     } catch { } //do nothing w/ errors
   }
 
-  
-onMount(() => {
-  bootTerminal();
-});
+  onMount(() => {
+    bootTerminal();
+  });
 </script>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
@@ -115,7 +114,7 @@ onMount(() => {
   <form on:submit|preventDefault={handleSubmit} autocomplete="off" name="mainForm">
     <p>
       <span style="color: #F28B50">user</span>@weewaa-land-352
-      <span style="color: #898989"> ~/jameschang </span>›
+      <span style="color: #898989"> ~/jameschang ›</span>
       <input 
         spellcheck="false" type="text" style="display: inline;" 
         bind:value={inputValue} 

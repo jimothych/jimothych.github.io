@@ -50,7 +50,7 @@ ${createPaddedString(`sudo reboot`, `makes the earth spin a bit faster`)}
 
             &emsp;<a href="https://github.com/jimothych/inStock_frontend?tab=readme-ov-file#instock---inventory-management-for-small-businesses" target="_blank"><strong>Inventory Forecasting App for Small Businesses</strong></a>
             <br>
-            <span>&emsp;&emsp;freelancer proof of concept for an MBA ops strat class</span>
+            <span>&emsp;&emsp;freelancer proof of concept for a customer</span>
             <br><br>
 
             &emsp;<a href="https://github.com/jimothych/LineFollowingCar?tab=readme-ov-file#demo" target="_blank"><strong>Line Following Car</strong></a>
