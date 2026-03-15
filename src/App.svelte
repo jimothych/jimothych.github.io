@@ -1,26 +1,20 @@
 <script>
-  import Header from "./lib/Header.svelte";
-  import TerminalInterface from "./lib/TerminalInterface.svelte";
+  import Window from "./lib/Window.svelte"
+  import TerminalHeader from "./Terminal/TerminalHeader.svelte";
+  import TerminalInterface from "./Terminal/TerminalInterface.svelte";
 </script>
 
 <main>
-  <div class="main-container">
-    <Header />
-    <TerminalInterface />
-  </div>
+  <Window 
+    header={TerminalHeader} 
+    content={TerminalInterface}
+  />
 </main>
 
 <style>
-  .main-container{
-    display: flex;
-    flex-direction: column;
-    width: 60vw;
-    min-width: 400px;
-    height: 500px;
-    overflow: hidden;
-    border-radius: 6px;
-    border: 2px solid #222222;
-    margin: 20px;
-    cursor: text;
+  main {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
   }
 </style>

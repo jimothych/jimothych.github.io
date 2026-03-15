@@ -3,8 +3,8 @@
   line-height: 1.2;
   font-weight: 400;
   color-scheme: light;
-  color: #d3b0c3;
-  background-color: #691935;
+  color: var(--white);
+  background-color: #691935; /* not visible */
 
   /* gradient taken from https://mycolor.space/gradient3?ori=to+left+top&hex=%23731D1D&hex2=%23731F2E&hex3=%2359163B&submit=submit */
   background-image: linear-gradient(to left top, 
@@ -14,31 +14,39 @@
                   #641737, #5f1739, #59163b);
 
   /* CSS HEX THEME */
-  --dark-grey: #222222
-  --med-grey: #2C2C2C
-  --light-grey: #898989
-  --red: #731F2E
-  --red-shade: #731D1D
-  --purple: #59163B
-  --dark-purple: #260119
-  --white: #d3b0c3
-  --yellow: #F28B50
-  --beige: #E7C2A3
+  --dark-grey: #222222;
+  --med-grey: #2C2C2C;
+  --hover: #353535;
+  --light-grey: #898989;
+  --red: #731F2E;
+  --red-shade: #731D1D;
+  --purple: #59163B;
+  --dark-purple: #260119;
+  --white: #d3b0c3;
+  --yellow: #F28B50;
+  --beige: #E7C2A3;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  scrollbar-width: none; /* Firefox hide scrollbar*/
-  -ms-overflow-style: none;  /* Internet Explorer 10+ hide scrollbar*/
 }
+
+* {
+  scrollbar-width: none; /* Firefox hide scrollbar */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ hide scrollbar */
+}
+
+*::-webkit-scrollbar {
+  display: none; /* WebKit browser hide scrollbar */
+}
+
 a {
-  color: #898989;
+  color: var(--light-grey);
   text-decoration: none;
 }
 a:hover {
-  color: #898989;
+  color: var(--light-grey);
   text-decoration: underline;
   cursor: pointer;
 }
@@ -48,10 +56,10 @@ body {
   padding: 0;
   min-width: 320px;
   min-height: 100vh;
-  /* overflow-x: hidden;
+  overflow-x: hidden;
   width: 100%;
   height: 100%;
-  overflow-y: hidden; */
+  overflow-y: hidden;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -76,16 +84,17 @@ form {
 
 input {
   font-family: Ubuntu Mono;
+  display: inline;
   border: none;
+  width: 180px;
   background-color: unset;
   color:rgb(238, 238, 238);
-  width: 15vw;
   padding: 0;
   margin: 0;
   margin-top: -1px;
   font-size: 16px;
-  color: #d3b0c3;
-  overflow: auto;
+  color: var(--white);
+  overflow: hidden;
 }
 input:focus{
   border:none;
@@ -94,29 +103,9 @@ input:focus{
   background-color: unset;
 }
 
-/* none of this scrollbar stuff is visible lol */
-
-::-webkit-scrollbar-track
-{
-    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #2C2C2C;
-  cursor: pointer;
-}
-
-::-webkit-scrollbar
-{
-	width: 10px;
-	background-color: #2C2C2C;
-  cursor: pointer;
-  display: none;
-}
-
-::-webkit-scrollbar-thumb
-{
-  border-radius: 10px;
-  box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: #222222;
-  cursor: pointer;
+svg {
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  cursor: default;
 }

@@ -2,7 +2,7 @@ export const poems = [
   {name: `poem1`, content: 
 `<span style="white-space: pre-wrap">
       <em>Nat——— made her lips into buds
-  And laid her mark on me as often as she cared,
+  And laid her mark on me as often as she cared
       So that I was mottled with purple bruises
   Like spring-stained sidewalks littered with berries. 
 
