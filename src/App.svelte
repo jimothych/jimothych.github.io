@@ -2,8 +2,10 @@
   import Window from "./lib/Window.svelte"
   import TerminalHeader from "./Terminal/TerminalHeader.svelte";
   import TerminalInterface from "./Terminal/TerminalInterface.svelte";
+  import MediaQueryModal from "./lib/MediaQueryModal.svelte";
 </script>
 
+<MediaQueryModal />
 <main>
   <Window 
     header={TerminalHeader} 

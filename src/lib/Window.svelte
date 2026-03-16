@@ -1,23 +1,29 @@
 <script>
   import { setContext } from 'svelte';
-  import { centerContainer, interactable, MIN_WINDOW_WIDTH, MIN_WINDOW_HEIGHT } from './utilities';
+  import { 
+    centerContainer, 
+    interactable, 
+    MIN_WINDOW_WIDTH, 
+    MIN_WINDOW_HEIGHT,
+    WINDOW_ACTION
+  } from './utilities';
 
   let { header, content } = $props();
 
-  //for min and max buttons in header
+  //for interactable buttons in header
   const windowContext = $state({ action: null });
   setContext('window', windowContext);
 
   let container = $state(); //component-bound to the Window wrapper
 
   $effect(() => {
-    if (windowContext.action === 'maximize') {
+    if (windowContext.action === WINDOW_ACTION.MAXIMIZE) {
       container.style.width = (window.innerWidth - 4) + 'px';
       container.style.height = (window.innerHeight - 4) + 'px';
       container.style.transform = 'translate(0px, 0px)';
       container.setAttribute('data-x', 0);
       container.setAttribute('data-y', 0);
-    } else if (windowContext.action === 'minimize') {
+    } else if (windowContext.action === WINDOW_ACTION.MINIMIZE) {
       container.style.width = MIN_WINDOW_WIDTH + 'px';
       container.style.height = MIN_WINDOW_HEIGHT + 'px';
     }

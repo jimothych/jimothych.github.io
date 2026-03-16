@@ -11,10 +11,12 @@
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^7.0.0",
     "svelte": "^5.53.12",
+    "typescript": "^5.9.3",
     "vite": "^8.0.0"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.2.0",
-    "interactjs": "^1.10.27"
+    "interactjs": "^1.10.27",
+    "svelte-check": "^4.4.5"
   }
 }

@@ -3,6 +3,7 @@
   import { getContext } from 'svelte';
   import MinimizeSVG from '../assets/MinimizeSVG.svelte';
   import MaximizeSVG from '../assets/MaximizeSVG.svelte';
+  import { WINDOW_ACTION } from '../lib/utilities';
 
   const windowContext = getContext('window');
 </script>
@@ -12,13 +13,13 @@
   <div class="icons-absolute">
     <button 
       class="icon-container" 
-      onclick={() => windowContext.action = 'minimize'}
+      onclick={() => windowContext.action = WINDOW_ACTION.MINIMIZE}
     >
       <MinimizeSVG color="var(--light-grey)" />
     </button>
     <button 
       class="icon-container"
-      onclick={() => windowContext.action = 'maximize'}
+      onclick={() => windowContext.action = WINDOW_ACTION.MAXIMIZE}
     >
       <MaximizeSVG color="var(--light-grey)" />
     </button>

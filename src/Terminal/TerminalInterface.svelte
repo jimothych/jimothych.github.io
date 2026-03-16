@@ -1,20 +1,21 @@
 <script>
-  import { determineCommandOutput } from "./shell.js";
-  import { sleep, focusOnMount } from "../lib/utilities.js";
+  import { determineOutput } from "./shell";
+  import { EMIT_COMMAND_ACTION } from "./commands/common"
+  import { sleep, focusOnMount } from "../lib/utilities";
   import { tick } from "svelte";
 
   let masterLog = $state([]);
   let inputValue = $state('');
   let inputElementVisible = $state(false);
 
-  let mainInput = $state(); //used as a component-binded handle for native dom window focus
+  let mainInput = $state(null); //component-binded handle for native dom input box refocus
 
-  function addLog(messageObject) {
-    masterLog = [...masterLog, messageObject];
+  function addLog(message) {
+    masterLog = [...masterLog, message];
   }
 
   async function bootTerminal() {
-    await tick();
+    await tick(); //https://svelte.dev/docs/svelte/lifecycle-hooks#tick
     addLog({ message: "<em>salvēte amīcī!</em>" });
     await sleep(700);
     addLog({ message: "booting environment..." });
@@ -37,30 +38,25 @@
     await handleSubmit();
   }
 
-  //force focus to input elem
-  async function handleAfterSubmitProcess() {
-    await tick(); //flush log entry to DOM
-    inputElementVisible = true;
-  }
-
   async function handleSubmit() {
-    const submittedValue = inputValue;
+    const commandLineArgs = inputValue.trim().split(' ');
+    let echoValue = inputValue;
     inputValue = ''; //resetting
     inputElementVisible = false; //force need to re-render input element to focus again after new logs are flushed to DOM
 
-    const output = determineCommandOutput(submittedValue);
+    const output = determineOutput(commandLineArgs);
 
     //echoing user input
     addLog({ message: 
       `<span style="color: var(--yellow)">user</span>@weewaa-land-352 
       <span style="color: var(--light-grey)"> ~/jameschang ›</span> 
-      <span style="color: var(--white); white-space: pre-wrap;">${submittedValue}</span>` 
+      <span style="color: var(--white); white-space: pre-wrap;">${echoValue}</span>` 
     });
 
     //printing cmd output
     if(output) {
-      if(output === 'reboot') { window.location.reload(); return; }
-      if(output === 'clear') { await handleClear(); return; }
+      if(output === EMIT_COMMAND_ACTION.REBOOT) { window.location.reload(); return; }
+      if(output === EMIT_COMMAND_ACTION.CLEAR) { await handleClear(); return; }
       addLog({ message: output });
     }
 
@@ -71,6 +67,12 @@
     masterLog = [];
     await handleAfterSubmitProcess();
   }
+
+  //force focus to input elem
+  async function handleAfterSubmitProcess() {
+    await tick(); //flush log entry to DOM
+    inputElementVisible = true;
+  }
 </script>
 
 <svelte:window onload={bootTerminal} />
@@ -80,7 +82,7 @@
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <div
   class="terminal-interface"
-  onclick={() => mainInput?.focus()}
+  onclick={() => {mainInput?.focus(); }}
 >
   {#each masterLog as obj}
     <p>{@html obj.message}</p>
@@ -88,7 +90,10 @@
 
   {#if inputElementVisible}
   <form 
-    onsubmit={(e) => { e.preventDefault(); handleSubmit(); }} //disabling form submission page reload
+    onsubmit={(e) => { 
+      e.preventDefault(); //disabling form submission page reload 
+      handleSubmit(); 
+    }}
     autocomplete="off" //disabling dropdown
   >
     <p>

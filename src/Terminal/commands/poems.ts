@@ -1,5 +1,12 @@
-export const poems = [
-  {name: `poem1`, content: 
+type Poem = {
+  name: string,
+  size: number,
+  content: string
+}
+const poems: Poem[] = [
+  {name: `poem1`, 
+  get size() { return this.content.length; },
+  content: 
 `<span style="white-space: pre-wrap">
       <em>Nat——— made her lips into buds
   And laid her mark on me as often as she cared
@@ -16,13 +23,15 @@ export const poems = [
 </em>
 </span>`},
 
-  {name: `poem2`, content: 
+  {name: `poem2`, 
+  get size() { return this.content.length; },
+  content: 
 `<span style="white-space: pre-wrap">
   After Pound's <em>Xenia</em> (<em>Personae</em>, 1909)
 
   <em>And unto your eyes my heart
   Does beat with its own song,
-  Does hear the rain that sings low melodies of you —
+  Does hear the rain that sings low melodies of you,
   Does hear the rain that loves to linger on your skin,
   Slow-dropping as the roses droop their dew-bowed petals
   To the dreams we’ve scattered o’er them passing by.
@@ -31,7 +40,9 @@ export const poems = [
 </em>
 </span>`},
 
-  {name: `poem3`, content: 
+  {name: `poem3`, 
+  get size() { return this.content.length; },
+  content: 
 `<span style="white-space: pre-wrap">
   <em>Turn on the lights! Roll up the doors!
   Let us go a-marching through the factory
@@ -50,7 +61,9 @@ export const poems = [
 </em>
 </span>`},
 
-{name: `poem4`, content: 
+  {name: `poem4`, 
+  get size() { return this.content.length; },
+  content: 
 `<span style="white-space: pre-wrap">
   <em>Take me to your hiding place 
   In the library of crooked shelves.
@@ -70,3 +83,23 @@ export const poems = [
 </em>
 </span>`}
 ]; 
+
+function getFileNames(poems: Poem[]): string[] {
+  let result = [];
+  for(const poem of poems) {
+    result.push(poem.name); //.txt not needed since unix doesnt have file extensions
+    result.push(`${poem.name}.txt`);
+  }
+  return result;
+}
+
+function getPoemContent(filename: string): string {
+  for (const poem of poems) {
+    if ((poem.name === filename) || (`${poem.name}.txt` === filename)) { 
+      return poem.content; 
+    }
+  }
+  return "";
+}
+
+export { poems, getFileNames, getPoemContent }
