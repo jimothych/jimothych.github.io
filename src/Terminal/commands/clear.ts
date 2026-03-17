@@ -19,4 +19,4 @@ function clear(args: string[], options: string[], isSuperUser: boolean): string 
   return EMIT_COMMAND_ACTION.CLEAR;
 }
 
-export const CLEAR: ShellCommandTuple = [COMMAND_NAME, clear, ALLOWED_ARGS];
+export const CLEAR: ShellCommandTuple = [COMMAND_NAME, clear, [...ALLOWED_ARGS, ...ALLOWED_OPTIONS]];

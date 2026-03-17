@@ -30,7 +30,7 @@ ${createPaddedString(`ls`, `list directory contents`)}
 ${createPaddedString(`cat`, `print file contents to output, e.g. &#96;cat poem1.txt&#96;`)}
 ${createPaddedString(`help`, `show this help message`)}
 ${createPaddedString(`clear`, `clear terminal`)}
-${createPaddedString(`sudo reboot`, `makes the earth spin a bit faster`)}
+${createPaddedString(`sudo reboot`, `make the earth spin a bit faster`)}
 
 </p>`); 
 }
@@ -40,4 +40,4 @@ function createPaddedString(word1: string, word2:string): string { //helper for 
   return `${paddedWord1} ${word2}`;
 }
 
-export const HELP: ShellCommandTuple = [COMMAND_NAME, help, ALLOWED_ARGS];
+export const HELP: ShellCommandTuple = [COMMAND_NAME, help, [...ALLOWED_ARGS, ...ALLOWED_OPTIONS]];

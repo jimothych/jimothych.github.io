@@ -33,7 +33,7 @@ function determineOutput(inputValue: string): string | EMIT_COMMAND_ACTION_TYPE 
   if(!inputValue) { return null } //nothing entered into input, go next
 
   const commandLineArgs = inputValue.trim().split(/\s+/);
-  console.log([...commandLineArgs]);
+  console.log(`determineOutput --> ${[...commandLineArgs]}`);
 
   let command: Command = parseArgs(commandLineArgs);
 
@@ -69,7 +69,7 @@ function parseArgs(commandLineArgs: string[]): Command {
   const options: string[] = [];
   const args: string[] = [];
   for(const arg of commandLineArgs) {
-    if (arg.startsWith('-')) options.push(arg);
+    if(arg.startsWith('-')) options.push(arg);
     else args.push(arg);
   }
 

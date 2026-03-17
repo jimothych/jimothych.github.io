@@ -23,4 +23,4 @@ function psh(args: string[], options: string[], isSuperUser: boolean): string {
   return "";
 }
 
-export const PSH: ShellCommandTuple = [COMMAND_NAME, psh, ALLOWED_ARGS];
+export const PSH: ShellCommandTuple = [COMMAND_NAME, psh, [...ALLOWED_ARGS, ...ALLOWED_OPTIONS]];

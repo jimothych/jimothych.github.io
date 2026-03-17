@@ -36,4 +36,4 @@ function projects(args: string[], options: string[], isSuperUser: boolean): stri
 </p>`); 
 }
 
-export const PROJECTS: ShellCommandTuple = [COMMAND_NAME, projects, ALLOWED_ARGS];
+export const PROJECTS: ShellCommandTuple = [COMMAND_NAME, projects, [...ALLOWED_ARGS, ...ALLOWED_OPTIONS]];

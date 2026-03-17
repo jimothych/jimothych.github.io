@@ -111,7 +111,7 @@ function removeFileExtensions(args: string[]): void {
 
 function getPoemContent(poemName: string): string {
   for (const poem of poems) {
-    if ((poem.name === poemName) || (`${poem.name}.txt` === poemName)) { return poem.content; }
+    if((poem.name === poemName) || (`${poem.name}.txt` === poemName)) { return poem.content; }
   }
   return "";
 }

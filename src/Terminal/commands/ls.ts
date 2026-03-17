@@ -56,4 +56,4 @@ function listLongFormat(
   ].join(" ");
 }
 
-export const LS: ShellCommandTuple = [COMMAND_NAME, projects, ALLOWED_ARGS];
+export const LS: ShellCommandTuple = [COMMAND_NAME, projects, [...ALLOWED_ARGS, ...ALLOWED_OPTIONS]];

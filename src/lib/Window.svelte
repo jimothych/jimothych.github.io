@@ -18,9 +18,9 @@
   let container = $state(); //component-bound to the Window wrapper
 
   $effect(() => {
-    if (windowContext.action === WINDOW_ACTION.MAXIMIZE) {
+    if(windowContext.action === WINDOW_ACTION.MAXIMIZE) {
       maximizeContainer(container);
-    } else if (windowContext.action === WINDOW_ACTION.MINIMIZE) {
+    } else if(windowContext.action === WINDOW_ACTION.MINIMIZE) {
       minimizeContainer(container);
     }
     windowContext.action = null;

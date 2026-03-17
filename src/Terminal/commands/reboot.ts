@@ -19,4 +19,4 @@ function reboot(args: string[], options: string[], isSuperUser: boolean): string
   return EMIT_COMMAND_ACTION.REBOOT;
 }
 
-export const REBOOT: ShellCommandTuple = [COMMAND_NAME, reboot, ALLOWED_ARGS];
+export const REBOOT: ShellCommandTuple = [COMMAND_NAME, reboot, [...ALLOWED_ARGS, ...ALLOWED_OPTIONS]];

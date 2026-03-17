@@ -19,4 +19,4 @@ function pwd(args: string[], options: string[], isSuperUser: boolean): string {
   return (`<p style="white-space:pre-wrap">/users/jimothych/jameschang</p>`); 
 }
 
-export const PWD: ShellCommandTuple = [COMMAND_NAME, pwd, ALLOWED_ARGS];
+export const PWD: ShellCommandTuple = [COMMAND_NAME, pwd, [...ALLOWED_ARGS, ...ALLOWED_OPTIONS]];

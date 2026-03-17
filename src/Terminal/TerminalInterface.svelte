@@ -99,25 +99,27 @@
 
   async function handleTabComplete(event) {
     event.preventDefault();
-    const dirtyArgs = inputValue.trim().split(/(\s+)/); //preserves groups of spaces as tokens
+    const dirtyArgs = inputValue.split(/(\s+)/); //preserves groups of spaces as tokens
+    console.log(`handleTabComplete --> ${dirtyArgs}`);
     const args = dirtyArgs.filter((token) => { return !/^\s+$/.test(token); });
     if(args.length === 1) {
       if(args[0] === "") { return; }
       let matches = [...SHELL_AUTOCOMPLETE_OPTIONS.keys()].filter(k => k.startsWith(args[0]));
-      if(matches.length === 0) { return; }
-      if(matches.length === 1) {
+      if(matches.length === 0) { return; } //no matches
+      if(matches.length === 1) { //single match, autocomplete
         dirtyArgs[dirtyArgs.lastIndexOf(args[0])] = matches[0]; //reconstruct
-        inputValue = dirtyArgs.join('');
-      } else {
+        inputValue = dirtyArgs.join('') + " "; //extra space is unix behaviour
+      } else { //show options
         tabCompletionOptions = matches.join('   ');
       }
     } else if(args.length > 1) {
-      let matches = [...SHELL_AUTOCOMPLETE_OPTIONS.values()].flat().filter(v => v.startsWith(args[args.length-1]));
-      if(matches.length === 0) { return; }
-      if(matches.length === 1) {
+      const options = SHELL_AUTOCOMPLETE_OPTIONS.get(args[0]);
+      let matches = options.filter(v => v.startsWith(args[args.length-1]));
+      if(matches.length === 0) { return; } //no matches
+      if(matches.length === 1) { //single match, autocomplete
         dirtyArgs[dirtyArgs.lastIndexOf(args[args.length-1])] = matches[0]; //reconstruct
-        inputValue = dirtyArgs.join('');
-      } else {
+        inputValue = dirtyArgs.join('') + " "; //extra space is unix behaviour
+      } else { //show options
         tabCompletionOptions = matches.join('   ');
       }
     }
@@ -125,8 +127,9 @@
   }
 
   async function focusBottomOfTerminal() {
-    await tick();
-    document.querySelector('.terminal-interface')?.scrollTo(0, Number.MAX_SAFE_INTEGER);
+    await tick(); //finish microtask queue
+    const terminal = document.getElementById('terminal-interface');
+    if(terminal) { terminal.scrollTop = terminal.scrollHeight; }
   }
 </script>
 
@@ -136,6 +139,7 @@
 <!-- svelte-ignore a11y_mouse_events_have_key_events -->
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <div
+  id="terminal-interface"
   class="terminal-interface"
   onclick={async () => {
     mainInput?.focus();
@@ -164,9 +168,9 @@
         bind:this={mainInput}
         {@attach focusOnMount}
         onkeydown={(event) => {
-          if (event.key === 'Tab') handleTabComplete(event);
-          if (event.key === 'ArrowUp') useInputPrevious(event);
-          if (event.key === 'ArrowDown') useInputNext(event);
+          if(event.key === 'Tab') handleTabComplete(event);
+          if(event.key === 'ArrowUp') useInputPrevious(event);
+          if(event.key === 'ArrowDown') useInputNext(event);
         }}
       >
     </p>
@@ -186,7 +190,8 @@
     flex-direction: column;
     background-color: var(--dark-purple);
     width: 100%;
-    height: 100%;
+    flex: 1; /* fill inside parent */
+    min-height: 0; /* prevents flex overflow */
     padding: 8px;
     margin: 0;
     overflow-y: scroll;
