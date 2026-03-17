@@ -5,7 +5,7 @@ const ALLOWED_ARGS: string[] = [];
 const ALLOWED_ARGS_DESCRIPTION: string[] = [];
 const ALLOWED_OPTIONS: string[] = [];
 
-function _help(args: string[], options: string[]): string {
+function help(args: string[], options: string[], isSuperUser: boolean): string {
   if(options.length > 0) {
     let result = "";
     result += invalidOption(COMMAND_NAME, options[0]);
@@ -20,7 +20,7 @@ function _help(args: string[], options: string[]): string {
 pseudo-shell (psh), version 0.1.6
 
 hi friend! if you'd like to read some of my poems you can &#96;ls&#96; to find my poems stored in this directory.
-use &#96;cat [FILENAME]&#96; to read the poems, e.g. &#96;cat poem2.txt&#96;. 
+use &#96;cat [file]&#96; to read the poems, e.g. &#96;cat poem2.txt&#96;. 
 below are a few other commands you can run to learn more about me!
 
 commands:
@@ -32,11 +32,12 @@ ${createPaddedString(`help`, `show this help message`)}
 ${createPaddedString(`clear`, `clear terminal`)}
 ${createPaddedString(`sudo reboot`, `makes the earth spin a bit faster`)}
 
-</p>`); }
+</p>`); 
+}
 
 function createPaddedString(word1: string, word2:string): string { //helper for the above
   const paddedWord1 = `  ${word1.padEnd(20)}`;
   return `${paddedWord1} ${word2}`;
 }
 
-export const HELP: ShellCommandTuple = [COMMAND_NAME, _help];
+export const HELP: ShellCommandTuple = [COMMAND_NAME, help, ALLOWED_ARGS];

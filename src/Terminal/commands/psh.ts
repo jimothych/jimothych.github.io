@@ -5,7 +5,7 @@ const ALLOWED_ARGS: string[] = [];
 const ALLOWED_ARGS_DESCRIPTION: string[] = [];
 const ALLOWED_OPTIONS: string[] = ["--version"];
 
-function _psh(args: string[], options: string[]): string {
+function psh(args: string[], options: string[], isSuperUser: boolean): string {
   if(args.length > 0) {
     let result = "";
     result += notYetSupported(COMMAND_NAME, args[0]);
@@ -23,4 +23,4 @@ function _psh(args: string[], options: string[]): string {
   return "";
 }
 
-export const PSH: ShellCommandTuple = [COMMAND_NAME, _psh];
+export const PSH: ShellCommandTuple = [COMMAND_NAME, psh, ALLOWED_ARGS];

@@ -1,11 +1,12 @@
 <script>
   import { setContext } from 'svelte';
   import { 
-    centerContainer, 
     interactable, 
-    MIN_WINDOW_WIDTH, 
-    MIN_WINDOW_HEIGHT,
-    WINDOW_ACTION
+    WINDOW_ACTION,
+    maximizeContainer,
+    minimizeContainer,
+    MIN_WINDOW_WIDTH,
+    MIN_WINDOW_HEIGHT
   } from './utilities';
 
   let { header, content } = $props();
@@ -18,21 +19,23 @@
 
   $effect(() => {
     if (windowContext.action === WINDOW_ACTION.MAXIMIZE) {
-      container.style.width = (window.innerWidth - 4) + 'px';
-      container.style.height = (window.innerHeight - 4) + 'px';
-      container.style.transform = 'translate(0px, 0px)';
-      container.setAttribute('data-x', 0);
-      container.setAttribute('data-y', 0);
+      maximizeContainer(container);
     } else if (windowContext.action === WINDOW_ACTION.MINIMIZE) {
-      container.style.width = MIN_WINDOW_WIDTH + 'px';
-      container.style.height = MIN_WINDOW_HEIGHT + 'px';
+      minimizeContainer(container);
     }
-    centerContainer(container);
     windowContext.action = null;
   });
 </script>
 
-<div class="window-container" bind:this={container} {@attach interactable}>
+<div
+  class="window-container"
+  bind:this={container}
+  style={`
+    width: max(60vw, ${MIN_WINDOW_WIDTH}px); 
+    height: max(70vh, ${MIN_WINDOW_HEIGHT}px);
+  `}
+  {@attach interactable}
+>
   {@render header()}
   {@render content()}
 </div>
@@ -42,8 +45,6 @@
     position: absolute;
     display: flex;
     flex-direction: column;
-    width: 60vw;
-    height: 70vh;
     overflow: hidden;
     border-radius: 6px;
     border: 2px solid var(--dark-grey);

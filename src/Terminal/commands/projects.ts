@@ -5,7 +5,7 @@ const ALLOWED_ARGS: string[] = [];
 const ALLOWED_ARGS_DESCRIPTION: string[] = [];
 const ALLOWED_OPTIONS: string[] = [];
 
-function _projects(args: string[], options: string[]): string {
+function projects(args: string[], options: string[], isSuperUser: boolean): string {
   if(options.length > 0) {
     let result = "";
     result += invalidOption(COMMAND_NAME, options[0]);
@@ -33,6 +33,7 @@ function _projects(args: string[], options: string[]): string {
   <a href="https://github.com/jimothych/bRot_Flashcards?tab=readme-ov-file#design-decisions" target="_blank"><strong>Flashcard App</strong></a>
     <span>EC327 group project</span>
 
-</p>`); }
+</p>`); 
+}
 
-export const PROJECTS: ShellCommandTuple = [COMMAND_NAME, _projects];
+export const PROJECTS: ShellCommandTuple = [COMMAND_NAME, projects, ALLOWED_ARGS];

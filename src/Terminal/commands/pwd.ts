@@ -5,7 +5,7 @@ const ALLOWED_ARGS: string[] = [];
 const ALLOWED_ARGS_DESCRIPTION: string[] = [];
 const ALLOWED_OPTIONS: string[] = [];
 
-function _pwd(args: string[], options: string[]): string {
+function pwd(args: string[], options: string[], isSuperUser: boolean): string {
   if(options.length > 0) {
     let result = "";
     result += invalidOption(COMMAND_NAME, options[0]);
@@ -16,6 +16,7 @@ function _pwd(args: string[], options: string[]): string {
     return usage(COMMAND_NAME, ALLOWED_ARGS_DESCRIPTION, ALLOWED_OPTIONS);
   }
   
-  return (`<p style="white-space:pre-wrap">/users/jimothych/jameschang</p>`); }
+  return (`<p style="white-space:pre-wrap">/users/jimothych/jameschang</p>`); 
+}
 
-export const PWD: ShellCommandTuple = [COMMAND_NAME, _pwd];
+export const PWD: ShellCommandTuple = [COMMAND_NAME, pwd, ALLOWED_ARGS];

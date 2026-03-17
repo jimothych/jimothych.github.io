@@ -1,11 +1,13 @@
 type Poem = {
   name: string,
   size: number,
+  date: string,
   content: string
 }
 const poems: Poem[] = [
   {name: `poem1`, 
   get size() { return this.content.length; },
+  date: "Oct  5 21:25",
   content: 
 `<span style="white-space: pre-wrap">
       <em>Nat——— made her lips into buds
@@ -25,6 +27,7 @@ const poems: Poem[] = [
 
   {name: `poem2`, 
   get size() { return this.content.length; },
+  date: "Apr  9 14:52",
   content: 
 `<span style="white-space: pre-wrap">
   After Pound's <em>Xenia</em> (<em>Personae</em>, 1909)
@@ -42,6 +45,7 @@ const poems: Poem[] = [
 
   {name: `poem3`, 
   get size() { return this.content.length; },
+  date: "Dec 11 15:09",
   content: 
 `<span style="white-space: pre-wrap">
   <em>Turn on the lights! Roll up the doors!
@@ -63,6 +67,7 @@ const poems: Poem[] = [
 
   {name: `poem4`, 
   get size() { return this.content.length; },
+  date: "Dec  7 20:54",
   content: 
 `<span style="white-space: pre-wrap">
   <em>Take me to your hiding place 
@@ -84,22 +89,31 @@ const poems: Poem[] = [
 </span>`}
 ]; 
 
-function getFileNames(poems: Poem[]): string[] {
+function getPoemNames(): string[] {
   let result = [];
-  for(const poem of poems) {
-    result.push(poem.name); //.txt not needed since unix doesnt have file extensions
-    result.push(`${poem.name}.txt`);
-  }
+  for(const poem of poems) { result.push(poem.name); }
   return result;
 }
 
-function getPoemContent(filename: string): string {
+function getPoemNamesWithFileExtensions(): string[] {
+  let result = [];
+  for(const poem of poems) { result.push(`${poem.name}.txt`); }
+  return result;
+}
+
+//in-place mutation
+function removeFileExtensions(args: string[]): void {
+  for (let i = 0; i < args.length; i++) {
+    const j = args[i].lastIndexOf(".");
+    if(j !== -1) { args[i] = args[i].slice(0, j); }
+  }
+}
+
+function getPoemContent(poemName: string): string {
   for (const poem of poems) {
-    if ((poem.name === filename) || (`${poem.name}.txt` === filename)) { 
-      return poem.content; 
-    }
+    if ((poem.name === poemName) || (`${poem.name}.txt` === poemName)) { return poem.content; }
   }
   return "";
 }
 
-export { poems, getFileNames, getPoemContent }
+export { poems, getPoemNames, getPoemNamesWithFileExtensions, getPoemContent, removeFileExtensions }

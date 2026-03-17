@@ -1,5 +1,5 @@
 <script>
-  import { determineOutput } from "./shell";
+  import { determineOutput, SHELL_AUTOCOMPLETE_OPTIONS } from "./shell";
   import { EMIT_COMMAND_ACTION } from "./commands/common"
   import { sleep, focusOnMount } from "../lib/utilities";
   import { tick } from "svelte";
@@ -7,6 +7,13 @@
   let masterLog = $state([]);
   let inputValue = $state('');
   let inputElementVisible = $state(false);
+
+  //for arrow up & down behaviour
+  let inputHistory = $state([]);
+  let currentPositionInInputHistory = $state(-1);
+
+  //for tab completion
+  let tabCompletionOptions = $state("");
 
   let mainInput = $state(null); //component-binded handle for native dom input box refocus
 
@@ -39,12 +46,15 @@
   }
 
   async function handleSubmit() {
-    const commandLineArgs = inputValue.trim().split(' ');
+    tabCompletionOptions = ""; //reset
+    const output = determineOutput(inputValue);
     let echoValue = inputValue;
-    inputValue = ''; //resetting
+    inputValue = ''; //reset
     inputElementVisible = false; //force need to re-render input element to focus again after new logs are flushed to DOM
 
-    const output = determineOutput(commandLineArgs);
+    //adding input to cmd history
+    inputHistory.unshift(echoValue);
+    currentPositionInInputHistory = -1; //reset
 
     //echoing user input
     addLog({ message: 
@@ -72,6 +82,51 @@
   async function handleAfterSubmitProcess() {
     await tick(); //flush log entry to DOM
     inputElementVisible = true;
+    await focusBottomOfTerminal();
+  }
+
+  function useInputPrevious(event) {
+    event.preventDefault();
+    if(currentPositionInInputHistory < (inputHistory.length-1)) { currentPositionInInputHistory += 1; }
+    inputValue = inputHistory[currentPositionInInputHistory];
+  }
+
+  function useInputNext(event) {
+    event.preventDefault();
+    if(currentPositionInInputHistory > -1) { currentPositionInInputHistory -= 1; }
+    inputValue = inputHistory[currentPositionInInputHistory];
+  }
+
+  async function handleTabComplete(event) {
+    event.preventDefault();
+    const dirtyArgs = inputValue.trim().split(/(\s+)/); //preserves groups of spaces as tokens
+    const args = dirtyArgs.filter((token) => { return !/^\s+$/.test(token); });
+    if(args.length === 1) {
+      if(args[0] === "") { return; }
+      let matches = [...SHELL_AUTOCOMPLETE_OPTIONS.keys()].filter(k => k.startsWith(args[0]));
+      if(matches.length === 0) { return; }
+      if(matches.length === 1) {
+        dirtyArgs[dirtyArgs.lastIndexOf(args[0])] = matches[0]; //reconstruct
+        inputValue = dirtyArgs.join('');
+      } else {
+        tabCompletionOptions = matches.join('   ');
+      }
+    } else if(args.length > 1) {
+      let matches = [...SHELL_AUTOCOMPLETE_OPTIONS.values()].flat().filter(v => v.startsWith(args[args.length-1]));
+      if(matches.length === 0) { return; }
+      if(matches.length === 1) {
+        dirtyArgs[dirtyArgs.lastIndexOf(args[args.length-1])] = matches[0]; //reconstruct
+        inputValue = dirtyArgs.join('');
+      } else {
+        tabCompletionOptions = matches.join('   ');
+      }
+    }
+    await focusBottomOfTerminal();
+  }
+
+  async function focusBottomOfTerminal() {
+    await tick();
+    document.querySelector('.terminal-interface')?.scrollTo(0, Number.MAX_SAFE_INTEGER);
   }
 </script>
 
@@ -82,7 +137,10 @@
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <div
   class="terminal-interface"
-  onclick={() => {mainInput?.focus(); }}
+  onclick={async () => {
+    mainInput?.focus();
+    await focusBottomOfTerminal(); 
+  }}
 >
   {#each masterLog as obj}
     <p>{@html obj.message}</p>
@@ -105,9 +163,18 @@
         bind:value={inputValue}
         bind:this={mainInput}
         {@attach focusOnMount}
+        onkeydown={(event) => {
+          if (event.key === 'Tab') handleTabComplete(event);
+          if (event.key === 'ArrowUp') useInputPrevious(event);
+          if (event.key === 'ArrowDown') useInputNext(event);
+        }}
       >
     </p>
   </form>
+  {/if}
+
+  {#if tabCompletionOptions}
+  <p style="white-space:pre-wrap">{tabCompletionOptions}</p>
   {/if}
 </div>
 

@@ -21,8 +21,11 @@ function sleep(ms: number): Promise<void> {
 }
 
 function centerContainer(element: HTMLElement): void {
-  element.style.left = r(window.innerWidth / 2 - element.offsetWidth / 2) + 'px';
-  element.style.top = r(window.innerHeight / 2 - element.offsetHeight / 2) + 'px';
+  element.style.left = r((window.innerWidth / 2) - (element.offsetWidth / 2)) + 'px';
+  element.style.top = r((window.innerHeight / 2) - (element.offsetHeight / 2)) + 'px';
+  element.style.transform = 'translate(0px, 0px)';
+  element.setAttribute('data-x', String(0));
+  element.setAttribute('data-y', String(0));
 }
 
 function interactable(element: HTMLElement): () => void {
@@ -78,6 +81,18 @@ function interactable(element: HTMLElement): () => void {
   return () => interact(element).unset();
 }
 
+function maximizeContainer(container: HTMLElement): void {
+  container.style.width = (window.innerWidth - 4) + 'px';
+  container.style.height = (window.innerHeight - 4) + 'px';
+  centerContainer(container);
+}
+
+function minimizeContainer(container: HTMLElement): void {
+  container.style.width = MIN_WINDOW_WIDTH + 'px';
+  container.style.height = MIN_WINDOW_HEIGHT + 'px';
+  centerContainer(container);
+}
+
 function r(n: number): number {
   return Math.round(n);
 }
@@ -93,5 +108,7 @@ export {
   MIN_WINDOW_WIDTH, 
   MIN_WINDOW_HEIGHT,
   WINDOW_ACTION,
-  focusOnMount
+  focusOnMount,
+  maximizeContainer,
+  minimizeContainer
 }

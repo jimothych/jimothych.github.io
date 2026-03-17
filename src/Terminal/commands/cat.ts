@@ -1,21 +1,15 @@
-import { ShellCommandTuple, invalidOption, usage, tooManyArgs, hasInvalidArg } from "./common";
-import { poems, getFileNames, getPoemContent } from "./poems";
+import { ShellCommandTuple, invalidOption, usage, hasInvalidArg } from "./common";
+import { poems, getPoemNames, getPoemContent, removeFileExtensions, getPoemNamesWithFileExtensions } from "./poems";
 
 const COMMAND_NAME: string = "cat";
-const ALLOWED_ARGS: string[] = getFileNames(poems);
-const ALLOWED_ARGS_DESCRIPTION: string[] = ["file"];
+const ALLOWED_ARGS: string[] = getPoemNames();
+const ALLOWED_ARGS_DESCRIPTION: string[] = ["file ..."];
 const ALLOWED_OPTIONS: string[] = [];
 
-function _cat(args: string[], options: string[]): string {
+function cat(args: string[], options: string[], isSuperUser: boolean): string {
   if(options.length > 0) {
     let result = "";
     result += invalidOption(COMMAND_NAME, options[0]);
-    result += usage(COMMAND_NAME, ALLOWED_ARGS_DESCRIPTION, ALLOWED_OPTIONS);
-    return result;
-  }
-  if(args.length > 1) {
-    let result = "";
-    result += tooManyArgs(COMMAND_NAME);
     result += usage(COMMAND_NAME, ALLOWED_ARGS_DESCRIPTION, ALLOWED_OPTIONS);
     return result;
   }
@@ -23,11 +17,15 @@ function _cat(args: string[], options: string[]): string {
     return usage(COMMAND_NAME, ALLOWED_ARGS_DESCRIPTION, ALLOWED_OPTIONS);
   }
 
+  removeFileExtensions(args); //for unix-like behaviour
+
   const invalidArgDetected: string | null = (
-    hasInvalidArg(COMMAND_NAME, args, ALLOWED_ARGS, ALLOWED_ARGS_DESCRIPTION, ALLOWED_OPTIONS));
+    hasInvalidArg(COMMAND_NAME, args, ALLOWED_ARGS, "no such file or directory"));
   if(invalidArgDetected) return invalidArgDetected; 
 
-  return getPoemContent(args[0]);
+  let result = "";
+  for(const arg of args){ result += getPoemContent(arg); }
+  return result;
 }
 
-export const CAT: ShellCommandTuple = [COMMAND_NAME, _cat];
+export const CAT: ShellCommandTuple = [COMMAND_NAME, cat, getPoemNamesWithFileExtensions()];

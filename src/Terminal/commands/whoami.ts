@@ -5,7 +5,7 @@ const ALLOWED_ARGS: string[] = [];
 const ALLOWED_ARGS_DESCRIPTION: string[] = [];
 const ALLOWED_OPTIONS: string[] = [];
 
-function _whoami(args: string[], options: string[]): string {
+function whoami(args: string[], options: string[], isSuperUser: boolean): string {
   if(options.length > 0) {
     let result = "";
     result += invalidOption(COMMAND_NAME, options[0]);
@@ -23,6 +23,7 @@ function _whoami(args: string[], options: string[]): string {
   At the moment my primary interest lies in embedded systems. 
   Please feel free to contact me anytime at jameschang2005@icloud.com
 
-</p>`); }
+</p>`); 
+}
 
-export const WHOAMI: ShellCommandTuple = [COMMAND_NAME, _whoami];
+export const WHOAMI: ShellCommandTuple = [COMMAND_NAME, whoami, ALLOWED_ARGS];
