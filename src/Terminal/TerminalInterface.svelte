@@ -101,7 +101,9 @@
     event.preventDefault();
     const dirtyArgs = inputValue.split(/(\s+)/); //preserves groups of spaces as tokens
     console.log(`handleTabComplete --> ${dirtyArgs}`);
-    const args = dirtyArgs.filter((token) => { return !/^\s+$/.test(token); });
+    const args = dirtyArgs.filter((token) => { 
+      return token !== "" && !/^\s+$/.test(token); 
+    });
     if(args.length === 1) {
       if(args[0] === "") { return; }
       let matches = [...SHELL_AUTOCOMPLETE_OPTIONS.keys()].filter(k => k.startsWith(args[0]));
