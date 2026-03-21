@@ -1,4 +1,5 @@
-import { ShellCommand, EMIT_COMMAND_ACTION_TYPE } from "./commands/common";
+import { _beepSound } from "../assets/beep";
+import { ShellCommand, EMIT_COMMAND_ACTION } from "./commands/common";
 import { WHOAMI } from "./commands/whoami";
 import { PROJECTS } from "./commands/projects";
 import { LS } from "./commands/ls";
@@ -29,7 +30,7 @@ for (const [name, shellCommand, autocompleteOptions] of [
 }
 
 //tries to return @html for svelte to parse
-function determineOutput(inputValue: string): string | EMIT_COMMAND_ACTION_TYPE | null {
+function determineOutput(inputValue: string): string | EMIT_COMMAND_ACTION | null {
   if(!inputValue) { return null } //nothing entered into input, go next
 
   const commandLineArgs = inputValue.trim().split(/\s+/);
@@ -83,4 +84,6 @@ function commandNotFound(commandName: string, isSuperUser: boolean): string {
   return(`<p style="white-space:pre-wrap">psh: command not found: ${commandName}</p>`)
 }
 
-export { determineOutput, SHELL_AUTOCOMPLETE_OPTIONS }
+function beep() { _beepSound.play(); }
+
+export { determineOutput, SHELL_AUTOCOMPLETE_OPTIONS, beep }

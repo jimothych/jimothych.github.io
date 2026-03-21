@@ -3,16 +3,20 @@ import interact from "interactjs"
 const MIN_WINDOW_WIDTH: number = 500;
 const MIN_WINDOW_HEIGHT: number = 300;
 
-type WINDOW_ACTION_TYPE = {
-  MINIMIZE: string,
-  MAXIMIZE: string,
-  EXIT: string
-}
-const WINDOW_ACTION: WINDOW_ACTION_TYPE = {
+const WINDOW_ACTION_ENUM = {
   MINIMIZE: "MINIMIZE",
   MAXIMIZE: "MAXIMIZE",
   EXIT: "EXIT"
 } as const;
+type WINDOW_ACTION = typeof WINDOW_ACTION_ENUM[keyof typeof WINDOW_ACTION_ENUM];
+
+const WINDOW_ID_ENUM = { 
+  NONE: "NONE",
+  TERMINAL: "TERMINAL",
+  BLOG: "BLOG", 
+  VICTIONARIUM: "VICTIONARIUM"
+} as const;
+type WINDOW_ID = typeof WINDOW_ID_ENUM[keyof typeof WINDOW_ID_ENUM];
 
 function sleep(ms: number): Promise<void> {
   return new Promise<void>((resolve: () => void) => {
@@ -78,7 +82,7 @@ function interactable(element: HTMLElement): () => void {
       }
     });
 
-  return () => interact(element).unset();
+  return () => interact(element).unset(); //cleanup
 }
 
 function maximizeContainer(container: HTMLElement): void {
@@ -107,7 +111,10 @@ export {
   interactable, 
   MIN_WINDOW_WIDTH, 
   MIN_WINDOW_HEIGHT,
+  WINDOW_ACTION_ENUM,
   WINDOW_ACTION,
+  WINDOW_ID_ENUM,
+  WINDOW_ID,
   focusOnMount,
   maximizeContainer,
   minimizeContainer

@@ -16,7 +16,6 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.2.0",
-    "interactjs": "^1.10.27",
-    "svelte-check": "^4.4.5"
+    "interactjs": "^1.10.27"
   }
 }

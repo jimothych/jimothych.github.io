@@ -1,18 +1,17 @@
-type ShellCommand = (args: string[], options: string[], isSuperUser: boolean) => string | EMIT_COMMAND_ACTION_TYPE;
+import { WINDOW_ID_ENUM } from "../../lib/utilities";
+
+type ShellCommand = (args: string[], options: string[], isSuperUser: boolean) => string | EMIT_COMMAND_ACTION;
 type ShellCommandTuple = [string, ShellCommand, string[]];
 
-type EMIT_COMMAND_ACTION_TYPE = {
-  CLEAR: string,
-  REBOOT: string,
-  BLOG: string,
-  VICTIONARIUS: string,
-}
-const EMIT_COMMAND_ACTION: EMIT_COMMAND_ACTION_TYPE = {
+const EMIT_COMMAND_ACTION_ENUM = {
   CLEAR: "CLEAR",
   REBOOT: "REBOOT",
-  BLOG: "BLOG",
-  VICTIONARIUS: "VICTIONARIUS",
+  OPEN_BLOG: WINDOW_ID_ENUM.BLOG,
+  OPEN_VICTIONARIUM: WINDOW_ID_ENUM.VICTIONARIUM
 } as const;
+type EMIT_COMMAND_ACTION = typeof EMIT_COMMAND_ACTION_ENUM[keyof typeof EMIT_COMMAND_ACTION_ENUM];
+
+const PATH = "/users/jimothych/jameschang";
 
 function notYetSupported(commandName: string, value: string): string {
   return(`<p style="white-space:pre-wrap">${commandName}: ${value}: not yet supported</p>`)
@@ -25,7 +24,7 @@ function tooManyArgs(commandName: string): string {
 function usage(commandName: string, ALLOWED_ARGS_DESCRIPTION: string[], ALLOWED_OPTIONS: string[]): string {
   let argShowcase = ALLOWED_ARGS_DESCRIPTION.map((arg) => {return `[${arg}]`}).join(" "); 
   let optionShowcase = ALLOWED_OPTIONS.map((option) => {return `[${option}]`}).join(" "); 
-  return(`<p style="white-space:pre-wrap">usage: ${commandName} ${argShowcase}${optionShowcase}</p>`)
+  return(`<p style="white-space:pre-wrap">usage: ${commandName} ${optionShowcase} ${argShowcase}</p>`)
 }
 
 function invalidOption(commandName: string, invalidOption: string): string {
@@ -69,12 +68,14 @@ function hasInvalidOption(commandName: string, options: string[],
 export { 
   ShellCommand, 
   ShellCommandTuple, 
+  PATH,
   usage, 
   invalidOption,
   tooManyArgs,
   hasInvalidArg,
   hasInvalidOption,
   notYetSupported,
-  EMIT_COMMAND_ACTION,
-  EMIT_COMMAND_ACTION_TYPE
+  notFound,
+  EMIT_COMMAND_ACTION_ENUM,
+  EMIT_COMMAND_ACTION
 }

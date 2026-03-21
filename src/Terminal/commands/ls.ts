@@ -1,19 +1,24 @@
-import { ShellCommandTuple, notYetSupported, hasInvalidOption, usage } from "./common";
+import { ShellCommandTuple, tooManyArgs, hasInvalidOption, usage, notFound, PATH } from "./common";
 import { poems } from "./poems";
 
 const COMMAND_NAME: string = "ls";
-const ALLOWED_ARGS: string[] = [];
-const ALLOWED_ARGS_DESCRIPTION: string[] = [];
-const ALLOWED_OPTIONS: string[] = ["-l", "-d", "--directory", "-a", "--all"];
+const ALLOWED_ARGS: string[] = [".", PATH];
+const ALLOWED_ARGS_DESCRIPTION: string[] = ["directory"];
+const ALLOWED_OPTIONS: string[] = ["-l", "-d", "-a"];
 
 function projects(args: string[], options: string[], isSuperUser: boolean): string {
   const invalidOptionDetected: string | null = (
     hasInvalidOption(COMMAND_NAME, options, ALLOWED_ARGS, ALLOWED_ARGS_DESCRIPTION, ALLOWED_OPTIONS));
   if(invalidOptionDetected) return invalidOptionDetected;
+  if(args.length == 1) {
+    if(!ALLOWED_ARGS.includes(args[0])){ 
+      return notFound(COMMAND_NAME, args[0], "no such directory");
+    }
+  }
 
-  if(args.length > 0) {
+  if(args.length > 1) {
     let result = "";
-    result += notYetSupported(COMMAND_NAME, args[0]);
+    result += tooManyArgs(COMMAND_NAME);
     result += usage(COMMAND_NAME, ALLOWED_ARGS_DESCRIPTION, ALLOWED_OPTIONS);
     return result;
   }
@@ -56,4 +61,4 @@ function listLongFormat(
   ].join(" ");
 }
 
-export const LS: ShellCommandTuple = [COMMAND_NAME, projects, [...ALLOWED_ARGS, ...ALLOWED_OPTIONS]];
+export const LS: ShellCommandTuple = [COMMAND_NAME, projects, [...ALLOWED_OPTIONS]];

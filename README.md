@@ -5,9 +5,9 @@ https://jimothych.github.io/
 `whoami`  
 `projects`  
 `blog`  
-`ls [-l] [-d] [--directory] [-a] [--all]`  
+`ls [-l] [-d] [-a] [directory]`  
 `cat [file ...]`  
-`victionarius`  
+`victionarium`  
 `help`  
 `clear`  
 `sudo [command [arg ...]]`  
@@ -20,7 +20,7 @@ https://jimothych.github.io/
 – command history  
 – web url permalinks (shareable urls)  
 
-*_advanced features like bash scripting, man pages, short option bundling, and globbing are not supported as of yet_   
+*_advanced features like bash scripting, man pages, short option bundling, and globbing are not supported_ 
 
 ## sources   
 – Heber Leonard's [terminal-style-portfolio-page](https://github.com/heberleonard2/terminal-style-portfolio-page)  

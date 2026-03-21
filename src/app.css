@@ -16,7 +16,6 @@
   /* CSS HEX THEME */
   --dark-grey: #222222;
   --med-grey: #2C2C2C;
-  --hover: #353535;
   --light-grey: #898989;
   --red: #731F2E;
   --red-shade: #731D1D;
@@ -25,6 +24,9 @@
   --white: #d3b0c3;
   --yellow: #F28B50;
   --beige: #E7C2A3;
+
+  --terminal-inactive: #4d4d4d;
+  --terminal-hover: #353535;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "strict": true, //includes noImplicitAny & strictNullChecks
+    "skipLibCheck": true,
     "lib": ["ES2023", "DOM"]
   }
 }
