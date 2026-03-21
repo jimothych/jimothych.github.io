@@ -1,4 +1,4 @@
-import tink from './tink.wav';
+import tink from './Tink.wav';
 
 const _audioContext = new AudioContext();
 let _tinkBuffer: AudioBuffer | null = null;
