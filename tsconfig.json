@@ -2,6 +2,8 @@
   "compilerOptions": {
     "strict": true, //includes noImplicitAny & strictNullChecks
     "skipLibCheck": true,
-    "lib": ["ES2023", "DOM"]
+    "lib": ["ES2023", "DOM"],
+    "target": "ES2023",
+    "moduleResolution": "bundler"
   }
 }

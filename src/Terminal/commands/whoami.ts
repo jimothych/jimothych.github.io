@@ -26,4 +26,8 @@ function whoami(args: string[], options: string[], isSuperUser: boolean): string
 </p>`); 
 }
 
-export const WHOAMI: ShellCommandTuple = [COMMAND_NAME, whoami, [...ALLOWED_ARGS, ...ALLOWED_OPTIONS]];
+export const WHOAMI: ShellCommandTuple = {
+  name: COMMAND_NAME, 
+  shellCommand: whoami, 
+  autocompleteOptions: [...ALLOWED_ARGS, ...ALLOWED_OPTIONS]
+};

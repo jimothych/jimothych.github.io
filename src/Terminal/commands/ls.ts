@@ -1,8 +1,8 @@
-import { ShellCommandTuple, tooManyArgs, hasInvalidOption, usage, notFound, PATH } from "./common";
+import { ShellCommandTuple, tooManyArgs, hasInvalidOption, usage, notFound } from "./common";
 import { poems } from "./poems";
 
 const COMMAND_NAME: string = "ls";
-const ALLOWED_ARGS: string[] = [".", PATH];
+const ALLOWED_ARGS: string[] = [".", "/users/jimothych/jameschang"];
 const ALLOWED_ARGS_DESCRIPTION: string[] = ["directory"];
 const ALLOWED_OPTIONS: string[] = ["-l", "-d", "-a"];
 
@@ -61,4 +61,8 @@ function listLongFormat(
   ].join(" ");
 }
 
-export const LS: ShellCommandTuple = [COMMAND_NAME, projects, [...ALLOWED_OPTIONS]];
+export const LS: ShellCommandTuple = {
+  name: COMMAND_NAME, 
+  shellCommand: projects, 
+  autocompleteOptions: [...ALLOWED_OPTIONS]
+};

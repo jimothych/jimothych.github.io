@@ -1,17 +1,11 @@
-import { WINDOW_ID_ENUM } from "../../lib/utilities";
+type EMIT_COMMAND_ACTION = () => void;
 
 type ShellCommand = (args: string[], options: string[], isSuperUser: boolean) => string | EMIT_COMMAND_ACTION;
-type ShellCommandTuple = [string, ShellCommand, string[]];
-
-const EMIT_COMMAND_ACTION_ENUM = {
-  CLEAR: "CLEAR",
-  REBOOT: "REBOOT",
-  OPEN_BLOG: WINDOW_ID_ENUM.BLOG,
-  OPEN_VICTIONARIUM: WINDOW_ID_ENUM.VICTIONARIUM
-} as const;
-type EMIT_COMMAND_ACTION = typeof EMIT_COMMAND_ACTION_ENUM[keyof typeof EMIT_COMMAND_ACTION_ENUM];
-
-const PATH = "/users/jimothych/jameschang";
+type ShellCommandTuple = {
+  name: string, 
+  shellCommand: ShellCommand, 
+  autocompleteOptions: string[]
+};
 
 function notYetSupported(commandName: string, value: string): string {
   return(`<p style="white-space:pre-wrap">${commandName}: ${value}: not yet supported</p>`)
@@ -68,7 +62,6 @@ function hasInvalidOption(commandName: string, options: string[],
 export { 
   ShellCommand, 
   ShellCommandTuple, 
-  PATH,
   usage, 
   invalidOption,
   tooManyArgs,
@@ -76,6 +69,5 @@ export {
   hasInvalidOption,
   notYetSupported,
   notFound,
-  EMIT_COMMAND_ACTION_ENUM,
   EMIT_COMMAND_ACTION
 }

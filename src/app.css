@@ -1,9 +1,9 @@
 :root {
-  font-family: Ubuntu Mono, system-ui, sans-serif;
+  font-family: "Ubuntu Mono", "Ubuntu", sans-serif;
   line-height: 1.2;
   font-weight: 400;
   color-scheme: light;
-  color: var(--white);
+  color: var(--pink);
   background-color: #691935; /* not visible */
 
   /* gradient taken from https://mycolor.space/gradient3?ori=to+left+top&hex=%23731D1D&hex2=%23731F2E&hex3=%2359163B&submit=submit */
@@ -14,6 +14,7 @@
                   #641737, #5f1739, #59163b);
 
   /* CSS HEX THEME */
+  --black: #191919;
   --dark-grey: #222222;
   --med-grey: #2C2C2C;
   --light-grey: #898989;
@@ -21,13 +22,16 @@
   --red-shade: #731D1D;
   --purple: #59163B;
   --dark-purple: #260119;
-  --white: #d3b0c3;
+  --white: #bcbcbc;
+  --pink: #d3b0c3;
   --yellow: #F28B50;
   --beige: #E7C2A3;
 
   --terminal-inactive: #4d4d4d;
   --terminal-hover: #353535;
 
+  --app-inactive: #5e5e5e;
+  --app-hover: #282828;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -95,7 +99,7 @@ input {
   margin: 0;
   margin-top: -1px;
   font-size: 16px;
-  color: var(--white);
+  color: var(--pink);
   overflow: hidden;
 }
 input:focus{

@@ -28,6 +28,7 @@ ${createPaddedString(`whoami`, `who i am and what i do`)}
 ${createPaddedString(`projects`, `what i've been up to`)}
 ${createPaddedString(`ls`, `list directory contents`)}
 ${createPaddedString(`cat`, `print file contents to output, e.g. &#96;cat poem1.txt&#96;`)}
+${createPaddedString(`victionarium`, `id quod me iuvat`)}
 ${createPaddedString(`help`, `show this help message`)}
 ${createPaddedString(`clear`, `clear terminal`)}
 ${createPaddedString(`sudo reboot`, `make the earth spin a bit faster`)}
@@ -40,4 +41,8 @@ function createPaddedString(word1: string, word2:string): string { //helper for 
   return `${paddedWord1} ${word2}`;
 }
 
-export const HELP: ShellCommandTuple = [COMMAND_NAME, help, [...ALLOWED_ARGS, ...ALLOWED_OPTIONS]];
+export const HELP: ShellCommandTuple = {
+  name: COMMAND_NAME, 
+  shellCommand: help, 
+  autocompleteOptions: [...ALLOWED_ARGS, ...ALLOWED_OPTIONS]
+};

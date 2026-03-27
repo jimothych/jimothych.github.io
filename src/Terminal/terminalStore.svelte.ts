@@ -1,5 +1,6 @@
+import { sleep } from "../lib/utilities.svelte";
 
-class TerminalLog {
+class Log {
   entries = $state<string[]>([]);
 
   add(message: string): void { 
@@ -9,13 +10,21 @@ class TerminalLog {
   clear(): void { this.entries = []; }
 }
 
-class TerminalInput {
+class InputElementStore {
   value = $state<string>('');
   visible = $state<boolean>(false);
-  width = $derived<string>(`${this.value.length}ch`);
+  width = $derived<string>(`${(this.value ?? '').length}ch`);
 
   hasTrailingWhitespace(): boolean { 
     return /\s$/.test(this.value); 
+  }
+
+  async simulateTyping(text: string): Promise<void> {
+    await sleep(100);
+    for(const char of text) {
+      this.value += char;
+      await sleep(75 + (Math.random() * 75)); //75ms-150ms
+    }
   }
 
   reset(): void {
@@ -47,7 +56,7 @@ class InputHistory {
 }
 
 //for tab completion — mirrors readline menu-complete (see pymotw.com/2/readline)
-class TabCompletion {
+class TabCompletionStore {
   originalText = $state<string | null>(null); //full inputValue snapshot before cycling began
   originalWord = $state<string | null>(null); //the word being completed at cycle start
   matches = $state<string[] | null>(null); //locked match list
@@ -77,4 +86,8 @@ class TabCompletion {
   }
 }
 
-export { TerminalLog, TerminalInput, InputHistory, TabCompletion };
+let log = new Log();
+let inputElementStore = new InputElementStore();
+let inputHistory = new InputHistory();
+let tabCompletionStore = new TabCompletionStore();
+export { log, inputElementStore, inputHistory, tabCompletionStore };

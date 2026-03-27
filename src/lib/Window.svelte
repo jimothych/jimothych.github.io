@@ -1,28 +1,40 @@
 <script>
-  import { setContext } from 'svelte';
+  import { setContext, untrack } from 'svelte';
   import { windowManager } from './windowManager.svelte';
   import { 
     interactable, 
+    centerContainer,
     WINDOW_ACTION_ENUM,
     maximizeContainer,
     minimizeContainer,
     MIN_WINDOW_WIDTH,
-    MIN_WINDOW_HEIGHT
-  } from './utilities';
+    MIN_WINDOW_HEIGHT,
+    focusWindowViaCapture
+  } from './utilities.svelte';
 
-  let { id, Header, Content } = $props();
+  //choosing to spread props because I've decided not to use ts in .svelte files so no type hints
+  let { id, Header, Content, offsetX, offsetY, initialWidth, initialHeight, 
+    fontFamily, textColor, borderColor } = $props();
 
   //for interactable buttons in header
   const windowContext = $state({ action: null });
-  setContext('window', windowContext);
+  setContext('windowContext', windowContext);
 
   let container = $state(); //component-bound to the Window wrapper
+
+  $effect(() => {
+    untrack(() => {//basically an onMount
+      if(container) { centerContainer(container, offsetX, offsetY); }
+    });
+  });
 
   $effect(() => {
     if(windowContext.action === WINDOW_ACTION_ENUM.MAXIMIZE) {
       maximizeContainer(container);
     } else if(windowContext.action === WINDOW_ACTION_ENUM.MINIMIZE) {
-      minimizeContainer(container);
+      minimizeContainer(container, offsetX, offsetY);
+    } else if(windowContext.action === WINDOW_ACTION_ENUM.EXIT) { 
+      windowManager.close(); //closes everything except terminal
     }
     windowContext.action = null;
   });
@@ -31,23 +43,21 @@
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <div
-  class={[ //https://svelte.dev/docs/svelte/class
-    'window-container', 
-    { focused: windowManager.currentlyFocusedWindow === id } //z-index hack
-  ]}
+  class="window-container"
   bind:this={container}
-  onclick={(event) => { 
-    event.stopPropagation(); //stop click bubbling to main
-    windowManager.setCurrentlyFocusedWindow(id);
-  }}
   style={`
-    width: max(60vw, ${MIN_WINDOW_WIDTH}px); 
-    height: max(70vh, ${MIN_WINDOW_HEIGHT}px);
+    font-family: ${fontFamily};
+    color: var(${textColor});
+    width: max(${initialWidth}, ${MIN_WINDOW_WIDTH}px); 
+    height: max(${initialHeight}, ${MIN_WINDOW_HEIGHT}px);
+    border: 2px solid var(${borderColor});
   `}
+  style:z-index={windowManager.getZIndex(id)} //sets property reactively without messing up interact.js
   {@attach interactable}
+  {@attach focusWindowViaCapture(id)}
 >
-  <Header {id}></Header>
-  <Content {id}></Content>
+  <Header id={id}></Header>
+  <Content id={id}></Content>
 </div>
 
 <style>
@@ -57,11 +67,6 @@
     flex-direction: column;
     overflow: hidden;
     border-radius: 6px;
-    border: 2px solid var(--dark-grey);
     cursor: default;
-  }
-
-  .window-container.focused {
-    z-index: 1;
   }
 </style>

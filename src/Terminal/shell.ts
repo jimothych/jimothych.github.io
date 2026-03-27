@@ -1,9 +1,9 @@
-import { _beepSound } from "../assets/beep";
-import { ShellCommand, EMIT_COMMAND_ACTION } from "./commands/common";
+import { EMIT_COMMAND_ACTION, ShellCommand } from "./commands/common";
 import { WHOAMI } from "./commands/whoami";
 import { PROJECTS } from "./commands/projects";
 import { LS } from "./commands/ls";
 import { CAT } from "./commands/cat";
+import { VICTIONARIUM } from "./commands/victionarium";
 import { HELP } from "./commands/help";
 import { CLEAR } from "./commands/clear";
 import { SUDO } from "./commands/sudo";
@@ -14,13 +14,15 @@ import { REBOOT } from "./commands/reboot";
 const SHELL_COMMANDS = new Map<string, ShellCommand>();
 const SHELL_AUTOCOMPLETE_OPTIONS = new Map<string, string[]>();
 
-for (const [name, shellCommand, autocompleteOptions] of [
+for (const { name, shellCommand, autocompleteOptions } of [
   WHOAMI,
   PROJECTS,
   LS,
   CAT,
+  VICTIONARIUM,
   HELP,
   CLEAR,
+  SUDO,
   PWD,
   PSH,
   REBOOT
@@ -40,10 +42,10 @@ function determineOutput(inputValue: string): string | EMIT_COMMAND_ACTION | nul
 
   //handling sudo
   let isSuperUser = false;
-  if(command.command === SUDO[0]) { //COMMAND_NAME at index 0 of tuple
+  if(command.command === SUDO.name) {
     isSuperUser = true; 
     if(command.args.length === 0) { //sudo has a specific no args behaviour
-      return SUDO[1](command.args, command.options, isSuperUser);
+      return SUDO.shellCommand(command.args, command.options, isSuperUser);
     }
     //otherwise slice sudo off and continue
     command.command = command.args[0];
@@ -84,6 +86,4 @@ function commandNotFound(commandName: string, isSuperUser: boolean): string {
   return(`<p style="white-space:pre-wrap">psh: command not found: ${commandName}</p>`)
 }
 
-function beep() { _beepSound.play(); }
-
-export { determineOutput, SHELL_AUTOCOMPLETE_OPTIONS, beep }
+export { determineOutput, SHELL_AUTOCOMPLETE_OPTIONS }

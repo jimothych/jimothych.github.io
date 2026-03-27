@@ -1,4 +1,5 @@
-import { EMIT_COMMAND_ACTION_ENUM, EMIT_COMMAND_ACTION, ShellCommandTuple, invalidOption, usage } from "./common";
+import { ShellCommandTuple, invalidOption, usage, EMIT_COMMAND_ACTION } from "./common";
+import { urlManager } from "../../lib/urlManager.svelte";
 
 const COMMAND_NAME: string = "reboot";
 const ALLOWED_ARGS: string[] = [];
@@ -16,7 +17,11 @@ function reboot(args: string[], options: string[], isSuperUser: boolean): string
     return (`<p style="white-space:pre-wrap">${COMMAND_NAME}: operation not permitted</p>`);
   }
   
-  return EMIT_COMMAND_ACTION_ENUM.REBOOT;
+  return () => { urlManager.reload(); }
 }
 
-export const REBOOT: ShellCommandTuple = [COMMAND_NAME, reboot, [...ALLOWED_ARGS, ...ALLOWED_OPTIONS]];
+export const REBOOT: ShellCommandTuple = {
+  name: COMMAND_NAME, 
+  shellCommand: reboot, 
+  autocompleteOptions: [...ALLOWED_ARGS, ...ALLOWED_OPTIONS]
+};

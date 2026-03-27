@@ -1,8 +1,8 @@
 <script>
-  import '@fortawesome/fontawesome-free/css/all.min.css'
   import { getContext } from 'svelte';
   import MinimizeSVG from '../assets/MinimizeSVG.svelte';
   import MaximizeSVG from '../assets/MaximizeSVG.svelte';
+  import ExitSVG from '../assets/ExitSVG.svelte';
   import { WINDOW_ACTION_ENUM } from '../lib/utilities.svelte';
   import { windowManager } from '../lib/windowManager.svelte';
 
@@ -10,7 +10,7 @@
   let { id } = $props();
 
   let focusColor = $derived(
-    (windowManager.currentlyFocusedWindow === id) ? "--light-grey" : "--terminal-inactive"
+    (windowManager.currentlyFocusedWindow === id) ? "--white" : "--app-inactive"
   );
 </script>
 
@@ -29,17 +29,17 @@
     >
       <MaximizeSVG color={`var(${focusColor})`} />
     </button>
+    <button 
+      class="icon-container"
+      onclick={() => windowContext.action = WINDOW_ACTION_ENUM.EXIT}
+    >
+      <ExitSVG color={`var(${focusColor})`} />
+    </button>
   </div>
 
-  <div class="github-link" style={`color: var(${focusColor})`}>
-    <a 
-      href="https://github.com/jimothych" 
-      target="_blank" 
-      style={`text-decoration: none; color: var(${focusColor})`}
-    >
-      <i class="fa-brands fa-github" style={`color: var(${focusColor})`}></i> github.com/jimothych
-    </a>
-  </div>
+  <p style={`color: var(${focusColor})`}>
+    victionarium
+  </p>
 
 </div>
 
@@ -51,8 +51,8 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 24px;
-    background-color: var(--med-grey);
+    height: 34px;
+    background-color: var(--black);
     cursor: default;
     user-select: none; /* prevents user selection of text */
   }
@@ -79,7 +79,7 @@
     padding: 0;
   }
   .icon-container:hover {
-    background-color: var(--terminal-hover);
+    background-color: var(--app-hover);
   }
 
 </style>

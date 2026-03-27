@@ -28,4 +28,8 @@ function cat(args: string[], options: string[], isSuperUser: boolean): string {
   return result;
 }
 
-export const CAT: ShellCommandTuple = [COMMAND_NAME, cat, [...getPoemNamesWithFileExtensions(), ...ALLOWED_OPTIONS]];
+export const CAT: ShellCommandTuple = {
+  name: COMMAND_NAME, 
+  shellCommand: cat, 
+  autocompleteOptions: [...getPoemNamesWithFileExtensions(), ...ALLOWED_OPTIONS]
+};

@@ -1,3 +1,4 @@
+import { windowManager } from "./windowManager.svelte";
 import interact from "interactjs"
 
 const MIN_WINDOW_WIDTH: number = 500;
@@ -24,16 +25,15 @@ function sleep(ms: number): Promise<void> {
   });
 }
 
-function centerContainer(element: HTMLElement): void {
-  element.style.left = r((window.innerWidth / 2) - (element.offsetWidth / 2)) + 'px';
-  element.style.top = r((window.innerHeight / 2) - (element.offsetHeight / 2)) + 'px';
+function centerContainer(element: HTMLElement, offsetX: number = 0, offsetY: number = 0): void {
+  element.style.left = r((window.innerWidth / 2) - (element.offsetWidth / 2) + (window.innerWidth * offsetX)) + 'px';
+  element.style.top = r((window.innerHeight / 2) - (element.offsetHeight / 2) + (window.innerHeight * offsetY)) + 'px';
   element.style.transform = 'translate(0px, 0px)';
   element.setAttribute('data-x', String(0));
   element.setAttribute('data-y', String(0));
 }
 
 function interactable(element: HTMLElement): () => void {
-  centerContainer(element);
   interact(element)
     .resizable({
       edges: { left: true, right: true, bottom: true, top: true },
@@ -91,10 +91,10 @@ function maximizeContainer(container: HTMLElement): void {
   centerContainer(container);
 }
 
-function minimizeContainer(container: HTMLElement): void {
+function minimizeContainer(container: HTMLElement, offsetX: number = 0, offsetY: number = 0): void {
   container.style.width = MIN_WINDOW_WIDTH + 'px';
   container.style.height = MIN_WINDOW_HEIGHT + 'px';
-  centerContainer(container);
+  centerContainer(container, offsetX, offsetY);
 }
 
 function r(n: number): number {
@@ -105,10 +105,31 @@ function focusOnMount(element: HTMLElement): void {
   element.focus();
 }
 
+//https://javascript.info/bubbling-and-capturing
+function focusWindowViaCapture(id: WINDOW_ID) {
+  return (element: HTMLElement) => {
+    const handler = () => { 
+      windowManager.setCurrentlyFocusedWindow(id); 
+    };
+    element.addEventListener('pointerdown', handler, { capture: true });
+    return () => element.removeEventListener('pointerdown', handler, { capture: true });
+  }
+}
+function focusWindowViaBubble(id: WINDOW_ID) {
+  return (element: HTMLElement) => {
+    const handler = (event: PointerEvent) => { 
+      if((event.target as HTMLElement).closest('.window-container')) { return; }
+      windowManager.setCurrentlyFocusedWindow(id); 
+    };
+    element.addEventListener('pointerdown', handler, { capture: false });
+    return () => element.removeEventListener('pointerdown', handler, { capture: false });
+  }
+}
+
 export { 
   sleep, 
-  centerContainer, 
-  interactable, 
+  interactable,
+  centerContainer,
   MIN_WINDOW_WIDTH, 
   MIN_WINDOW_HEIGHT,
   WINDOW_ACTION_ENUM,
@@ -116,6 +137,8 @@ export {
   WINDOW_ID_ENUM,
   WINDOW_ID,
   focusOnMount,
+  focusWindowViaCapture,
+  focusWindowViaBubble,
   maximizeContainer,
   minimizeContainer
 }

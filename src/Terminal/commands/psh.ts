@@ -18,9 +18,13 @@ function psh(args: string[], options: string[], isSuperUser: boolean): string {
       return (`<pseudo-shell style="white-space:pre-wrap">psh, version 0.1.6</p>`);
     }
   }
-  //ignoring all other options
+  //ignoring all other options per bash behaviour
   
   return "";
 }
 
-export const PSH: ShellCommandTuple = [COMMAND_NAME, psh, [...ALLOWED_ARGS, ...ALLOWED_OPTIONS]];
+export const PSH: ShellCommandTuple = {
+  name: COMMAND_NAME, 
+  shellCommand: psh, 
+  autocompleteOptions: [...ALLOWED_ARGS, ...ALLOWED_OPTIONS]
+};
