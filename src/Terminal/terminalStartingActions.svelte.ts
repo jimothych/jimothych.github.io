@@ -6,7 +6,7 @@ import { HELP } from "./commands/help";
 
 async function bootTerminal(): Promise<void> {
   await tick();
-  windowManager.setCurrentlyFocusedWindow(WINDOW_ID_ENUM.TERMINAL);
+  windowManager.setActiveWindow(WINDOW_ID_ENUM.TERMINAL);
   log.add("<em>salvēte amīcī!</em>");
   await sleep(700);
   log.add("booting environment...");
@@ -17,7 +17,7 @@ async function bootTerminal(): Promise<void> {
 
 async function instantlyBootTerminalAndOpenApp(command: string): Promise<void> {
   await tick();
-  windowManager.setCurrentlyFocusedWindow(WINDOW_ID_ENUM.TERMINAL);
+  windowManager.setActiveWindow(WINDOW_ID_ENUM.TERMINAL);
   log.add("<em>salvēte amīcī!</em>");
   log.add("booting environment...");
   log.add( 
@@ -25,7 +25,7 @@ async function instantlyBootTerminalAndOpenApp(command: string): Promise<void> {
     <span style="color: var(--light-grey)"> ~/jameschang ›</span> 
     <span style="color: var(--pink); white-space: pre-wrap;">help</span>` 
   );
-  let help = HELP.shellCommand([], [], false) as string;
+  let help = HELP.shellCommand([], [], false) as string; //mocking help output
   log.add(help);
   inputElementStore.visible = true;
   inputElementStore.value = command;

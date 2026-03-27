@@ -10,7 +10,7 @@
   let { id } = $props();
 
   let focusColor = $derived(
-    (windowManager.currentlyFocusedWindow === id) ? "--light-grey" : "--terminal-inactive"
+    (windowManager.activeWindow === id) ? "--light-grey" : "--terminal-inactive"
   );
 </script>
 

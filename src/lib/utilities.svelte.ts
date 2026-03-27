@@ -106,20 +106,20 @@ function focusOnMount(element: HTMLElement): void {
 }
 
 //https://javascript.info/bubbling-and-capturing
-function focusWindowViaCapture(id: WINDOW_ID) {
+function activateWindowViaCapture(id: WINDOW_ID) {
   return (element: HTMLElement) => {
     const handler = () => { 
-      windowManager.setCurrentlyFocusedWindow(id); 
+      windowManager.setActiveWindow(id); 
     };
     element.addEventListener('pointerdown', handler, { capture: true });
     return () => element.removeEventListener('pointerdown', handler, { capture: true });
   }
 }
-function focusWindowViaBubble(id: WINDOW_ID) {
+function activateWindowViaBubble(id: WINDOW_ID) {
   return (element: HTMLElement) => {
     const handler = (event: PointerEvent) => { 
       if((event.target as HTMLElement).closest('.window-container')) { return; }
-      windowManager.setCurrentlyFocusedWindow(id); 
+      windowManager.setActiveWindow(id); 
     };
     element.addEventListener('pointerdown', handler, { capture: false });
     return () => element.removeEventListener('pointerdown', handler, { capture: false });
@@ -137,8 +137,8 @@ export {
   WINDOW_ID_ENUM,
   WINDOW_ID,
   focusOnMount,
-  focusWindowViaCapture,
-  focusWindowViaBubble,
+  activateWindowViaCapture,
+  activateWindowViaBubble,
   maximizeContainer,
   minimizeContainer
 }

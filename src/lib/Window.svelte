@@ -9,7 +9,7 @@
     minimizeContainer,
     MIN_WINDOW_WIDTH,
     MIN_WINDOW_HEIGHT,
-    focusWindowViaCapture
+    activateWindowViaCapture
   } from './utilities.svelte';
 
   //choosing to spread props because I've decided not to use ts in .svelte files so no type hints
@@ -34,7 +34,7 @@
     } else if(windowContext.action === WINDOW_ACTION_ENUM.MINIMIZE) {
       minimizeContainer(container, offsetX, offsetY);
     } else if(windowContext.action === WINDOW_ACTION_ENUM.EXIT) { 
-      windowManager.close(); //closes everything except terminal
+      windowManager.closeApp();
     }
     windowContext.action = null;
   });
@@ -54,7 +54,7 @@
   `}
   style:z-index={windowManager.getZIndex(id)} //sets property reactively without messing up interact.js
   {@attach interactable}
-  {@attach focusWindowViaCapture(id)}
+  {@attach activateWindowViaCapture(id)}
 >
   <Header id={id}></Header>
   <Content id={id}></Content>

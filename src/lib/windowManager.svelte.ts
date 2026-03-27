@@ -44,46 +44,52 @@ const VICTIONARIUM_APPLICATION: APPLICATION = {
 } as const;
 const APPLICATIONS: APPLICATION[] = [TERMINAL_APPLICATION, VICTIONARIUM_APPLICATION];
 
+//decided that only one app can be open at a time besides the terminal (kinda like a process) such that shareable urls can work
+type ActiveWindowPair = {
+  terminal: APPLICATION;
+  app: APPLICATION | null;
+};
+type WindowZOrder = {
+  bottom: WINDOW_ID;
+  top: WINDOW_ID;
+}
+
 class WindowManager {
-  activeWindows = $state<APPLICATION[]>([TERMINAL_APPLICATION]);
-  //decided that only one app can be open at a time besides the terminal (kinda like a process) such that reactive state based on urls can work
-  hasActiveApp = $derived<boolean>((this.activeWindows.length > 1) ? true : false);
+  activeWindows = $state<ActiveWindowPair>({ terminal: TERMINAL_APPLICATION, app: null });
+  hasActiveApp = $derived<boolean>(this.activeWindows.app ? true : false);
 
-  windowZOrder = $state<WINDOW_ID[]>([WINDOW_ID_ENUM.TERMINAL]);
-  currentlyFocusedWindow = $derived<WINDOW_ID>(
-    this.windowZOrder.at(-1) ?? WINDOW_ID_ENUM.NONE //either last elem or none
-  );
+  windowZOrder = $state<WindowZOrder>({ bottom: WINDOW_ID_ENUM.TERMINAL, top: WINDOW_ID_ENUM.TERMINAL });
+  activeWindow = $derived<WINDOW_ID>(this.windowZOrder.top);
 
-  close(): void { //reset back to just terminal
-    this.activeWindows = [TERMINAL_APPLICATION];
-    this.windowZOrder = [WINDOW_ID_ENUM.TERMINAL];
+  closeApp(): void { //reset back to just terminal
+    this.activeWindows = { terminal: TERMINAL_APPLICATION, app: null };
+    this.windowZOrder = { bottom: WINDOW_ID_ENUM.TERMINAL, top: WINDOW_ID_ENUM.TERMINAL };
     urlManager.navigate("/");
   }
 
-  open(id: WINDOW_ID): void {
+  openApp(id: WINDOW_ID): void {
     const app = APPLICATIONS.find((app) => { return app.ID === id; });
     if(!app) { return; }
     if(this.hasActiveApp) { return; } //only one app at a time (not including terminal) can be opened
-
-    if(!this.activeWindows.some((activeWindow) => activeWindow.ID === id)) { 
-      this.activeWindows.push(app); 
+    if(this.activeWindows.app?.ID !== id) { 
+      this.activeWindows.app = app; 
     }
-    this.setCurrentlyFocusedWindow(id);
+    this.setActiveWindow(id);
   } 
 
-  setCurrentlyFocusedWindow(id: WINDOW_ID): void { 
-    if(this.currentlyFocusedWindow == id) { return; } 
-
-    const targetRemoved = this.windowZOrder.filter((windowID) => windowID !== id);
-    const targetReplacedOnTop = [...targetRemoved, id];
-    this.windowZOrder = targetReplacedOnTop;
+  setActiveWindow(id: WINDOW_ID): void { 
+    if(this.activeWindow === id) { return; } 
+    const other = this.windowZOrder.top === id ? this.windowZOrder.bottom : this.windowZOrder.top;
+    this.windowZOrder = { bottom: other, top: id };
     console.log(`currently focused window: ${id}`);
   }
 
   getZIndex(id: WINDOW_ID): number {
-    return this.windowZOrder.indexOf(id); // -1 for unknown, 0...n otherwise
+    if(this.windowZOrder.top === id) { return 1; }
+    if(this.windowZOrder.bottom === id) { return 0; }
+    return -1;
   }
 }
 
-const windowManager = new WindowManager(); //singleton
+const windowManager = new WindowManager();
 export { windowManager }

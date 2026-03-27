@@ -14,7 +14,7 @@
     //handle if an app is open
     if(windowManager.hasActiveApp) { 
       beep();
-      log.add(inputElementStore.value || `&nbsp`); //echo (ignores empty string cuz empty <p> doesnt render)
+      log.add(inputElementStore.value || `&nbsp`); //echo (without nbsp it will ignore empty string cuz empty <p> doesnt render)
       inputElementStore.value = ''; //clear without hiding
       await focusBottomOfTerminal();
       return;
@@ -190,7 +190,7 @@
               log.add(inputElementStore.value + "^C");
               inputElementStore.value = '';
               focusBottomOfTerminal();
-              windowManager.close(); 
+              windowManager.closeApp(); 
             } else {
               handleSubmit();
             }

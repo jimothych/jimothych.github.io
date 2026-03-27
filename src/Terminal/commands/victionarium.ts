@@ -20,7 +20,7 @@ function victionarium(args: string[], options: string[], isSuperUser: boolean): 
   }
   
   return () => { 
-    windowManager.open(WINDOW_ID_ENUM.VICTIONARIUM); 
+    windowManager.openApp(WINDOW_ID_ENUM.VICTIONARIUM); 
     urlManager.navigate(`/${VICTIONARIUM.name}`);
   }
 }

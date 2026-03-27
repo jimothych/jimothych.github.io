@@ -2,7 +2,7 @@
   import Window from "./lib/Window.svelte"
   import MediaQueryModal from "./lib/MediaQueryModal.svelte";
   import { windowManager } from "./lib/windowManager.svelte";
-  import { WINDOW_ID_ENUM, focusWindowViaBubble } from "./lib/utilities.svelte";
+  import { WINDOW_ID_ENUM, activateWindowViaBubble } from "./lib/utilities.svelte";
 </script>
 
 <MediaQueryModal />
@@ -10,22 +10,35 @@
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <main
-  {@attach focusWindowViaBubble(WINDOW_ID_ENUM.NONE)}
+  {@attach activateWindowViaBubble(WINDOW_ID_ENUM.NONE)}
 >
-  {#each windowManager.activeWindows as activeWindow}
+  <Window
+    id={windowManager.activeWindows.terminal.ID}
+    Header={windowManager.activeWindows.terminal.HEADER} 
+    Content={windowManager.activeWindows.terminal.CONTENT}
+    offsetX={windowManager.activeWindows.terminal.OFFSET_X}
+    offsetY={windowManager.activeWindows.terminal.OFFSET_Y}
+    initialWidth={windowManager.activeWindows.terminal.INITIAL_WIDTH}
+    initialHeight={windowManager.activeWindows.terminal.INITIAL_HEIGHT}
+    fontFamily={windowManager.activeWindows.terminal.FONT_FAMILY}
+    textColor={windowManager.activeWindows.terminal.TEXT_COLOR}
+    borderColor={windowManager.activeWindows.terminal.BORDER_COLOR}>
+  </Window>
+
+  {#if windowManager.activeWindows.app}
     <Window 
-      id={activeWindow.ID}
-      Header={activeWindow.HEADER} 
-      Content={activeWindow.CONTENT}
-      offsetX={activeWindow.OFFSET_X}
-      offsetY={activeWindow.OFFSET_Y}
-      initialWidth={activeWindow.INITIAL_WIDTH}
-      initialHeight={activeWindow.INITIAL_HEIGHT}
-      fontFamily={activeWindow.FONT_FAMILY}
-      textColor={activeWindow.TEXT_COLOR}
-      borderColor={activeWindow.BORDER_COLOR}
+      id={windowManager.activeWindows.app.ID}
+      Header={windowManager.activeWindows.app.HEADER} 
+      Content={windowManager.activeWindows.app.CONTENT}
+      offsetX={windowManager.activeWindows.app.OFFSET_X}
+      offsetY={windowManager.activeWindows.app.OFFSET_Y}
+      initialWidth={windowManager.activeWindows.app.INITIAL_WIDTH}
+      initialHeight={windowManager.activeWindows.app.INITIAL_HEIGHT}
+      fontFamily={windowManager.activeWindows.app.FONT_FAMILY}
+      textColor={windowManager.activeWindows.app.TEXT_COLOR}
+      borderColor={windowManager.activeWindows.app.BORDER_COLOR}
     />
-  {/each}
+  {/if}
 </main>
 
 <style>
