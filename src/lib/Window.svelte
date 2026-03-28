@@ -9,7 +9,7 @@
     minimizeContainer,
     MIN_WINDOW_WIDTH,
     MIN_WINDOW_HEIGHT,
-    activateWindowViaDOMCapture
+    activateWindowViaDOMCapture,
   } from './utilities.svelte';
 
   //choosing to spread props because I've decided not to use ts in .svelte files so no type hints
@@ -67,5 +67,6 @@
     overflow: hidden;
     border-radius: 6px;
     cursor: default;
+    box-shadow: rgba(0, 0, 0, 0.18) 0.5px 1.5px 4px;
   }
 </style>

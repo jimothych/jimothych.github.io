@@ -31,15 +31,14 @@
     </button>
   </div>
 
-  <div class="github-link" style={`color: var(${focusColor})`}>
-    <a 
-      href="https://github.com/jimothych" 
-      target="_blank" 
-      style={`text-decoration: none; color: var(${focusColor})`}
-    >
-      <i class="fa-brands fa-github" style={`color: var(${focusColor})`}></i> github.com/jimothych
-    </a>
-  </div>
+  <a 
+    class="github-link"
+    href="https://github.com/jimothych" 
+    target="_blank" 
+    style={`text-decoration: none; color: var(${focusColor})`}
+  >
+    <i class="fa-brands fa-github" style={`color: var(${focusColor})`}></i> github.com/jimothych
+  </a>
 
 </div>
 
@@ -53,7 +52,7 @@
     width: 100%;
     height: 24px;
     background-color: var(--med-grey);
-    cursor: default;
+    cursor: grab;
     user-select: none; /* prevents user selection of text */
   }
 
@@ -82,4 +81,10 @@
     background-color: var(--terminal-hover);
   }
 
+  .github-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
 </style>

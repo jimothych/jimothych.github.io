@@ -1,7 +1,7 @@
 <script>
   import { determineOutput, SHELL_AUTOCOMPLETE_OPTIONS } from "./shell";
   import beep from "../assets/beep";
-  import { focusOnMount } from "../lib/utilities.svelte";
+  import { focusElement } from "../lib/utilities.svelte";
   import { tick } from "svelte"; //https://svelte.dev/docs/svelte/lifecycle-hooks#tick
   import { log, inputElementStore, inputHistory, tabCompletionStore } from "./terminalStore.svelte";
   import { windowManager } from "../lib/windowManager.svelte";
@@ -9,6 +9,7 @@
   import { urlManager } from "../lib/urlManager.svelte";
 
   let mainInput = $state(null); //component-binded handle for native dom input box refocus
+  let terminalElement = $state(null); //for focusBottomOfTerminal
 
   async function handleSubmit() {
     //handle if an app is open
@@ -124,9 +125,8 @@
 
   async function focusBottomOfTerminal() {
     await tick(); //finish microtask queue
-    const terminal = document.getElementById('terminal');
     //https://stackoverflow.com/questions/11715646/scroll-automatically-to-the-bottom-of-the-page
-    if(terminal) { terminal.scrollTop = terminal.scrollHeight; }
+    if(terminalElement) { terminalElement.scrollTop = terminalElement.scrollHeight; }
   }
 </script>
 
@@ -149,6 +149,7 @@
     mainInput?.focus();
     await focusBottomOfTerminal(); 
   }}
+  bind:this={terminalElement}
 >
   {#each log.entries as message}
     <p>{@html message}</p>
@@ -173,7 +174,7 @@
         type="text"
         bind:value={inputElementStore.value}
         bind:this={mainInput}
-        {@attach focusOnMount}
+        {@attach focusElement}
         onkeydown={(event) => {
           if(event.key === 'Tab') { handleTabComplete(event); }
           if(event.key === 'ArrowUp') { 
@@ -222,5 +223,25 @@
     overflow-y: scroll;
     overflow-x: hidden;
     user-select: none; /* prevents user selection of text */
+  }
+
+  input {
+    font-family: Ubuntu Mono;
+    display: inline;
+    border: none;
+    width: 180px;
+    background-color: unset;
+    padding: 0;
+    margin: 0;
+    margin-top: -1px;
+    font-size: 16px;
+    color: var(--pink);
+    overflow: hidden;
+  }
+  input:focus{
+    border:none;
+    outline: none;
+    box-shadow: none;
+    background-color: unset;
   }
 </style>

@@ -32,7 +32,7 @@ class URLManager {
 
     // 404 unknown route fallback
     this.navigate('/');
-    window.alert("invalid path! redirecting to root")
+    //window.alert("invalid path! redirecting to root");
     return "";
   }
 }

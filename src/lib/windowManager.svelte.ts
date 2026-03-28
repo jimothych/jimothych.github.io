@@ -62,7 +62,7 @@ class WindowManager {
   activeWindow = $derived<WINDOW_ID>(this.windowZOrder.top);
 
   closeApp(): void { //reset back to just terminal
-    this.activeWindows = { terminal: TERMINAL, app: null };
+    this.activeWindows.app = null;
     this.windowZOrder = { bottom: WINDOW_ID_ENUM.TERMINAL, top: WINDOW_ID_ENUM.TERMINAL };
     urlManager.navigate("/");
   }

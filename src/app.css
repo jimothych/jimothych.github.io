@@ -2,6 +2,7 @@
   font-family: "Ubuntu Mono", "Ubuntu", sans-serif;
   line-height: 1.2;
   font-weight: 400;
+  font-size: 16px;
   color-scheme: light;
   color: var(--pink);
   background-color: #691935; /* not visible */
@@ -26,6 +27,8 @@
   --pink: #d3b0c3;
   --yellow: #F28B50;
   --beige: #E7C2A3;
+
+  --button-color: #242424;
 
   --terminal-inactive: #4d4d4d;
   --terminal-hover: #353535;
@@ -86,27 +89,6 @@ form {
   padding: 0;
   display: inline;
   /* margin-top: -7px; */
-}
-
-input {
-  font-family: Ubuntu Mono;
-  display: inline;
-  border: none;
-  width: 180px;
-  background-color: unset;
-  color:rgb(238, 238, 238);
-  padding: 0;
-  margin: 0;
-  margin-top: -1px;
-  font-size: 16px;
-  color: var(--pink);
-  overflow: hidden;
-}
-input:focus{
-  border:none;
-  outline: none;
-  box-shadow: none;
-  background-color: unset;
 }
 
 svg {

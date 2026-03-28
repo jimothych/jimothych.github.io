@@ -53,7 +53,7 @@
     width: 100%;
     height: 34px;
     background-color: var(--black);
-    cursor: default;
+    cursor: grab;
     user-select: none; /* prevents user selection of text */
   }
 

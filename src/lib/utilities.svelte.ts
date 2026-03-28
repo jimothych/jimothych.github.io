@@ -34,11 +34,18 @@ function centerContainer(element: HTMLElement, offsetX: number = 0, offsetY: num
 }
 
 function interactable(element: HTMLElement): () => void {
+  resolveInitialSize(element);
+  const dragHandle = element.querySelector('.drag-handle') as HTMLElement;
+  const onPointerDown = () => { dragHandle.style.cursor = 'grabbing'; };
+  const onPointerUp = () => { dragHandle.style.cursor = ''; };
+  dragHandle.addEventListener('pointerdown', onPointerDown);
+  dragHandle.addEventListener('pointerup',   onPointerUp);
   interact(element)
     .resizable({
       edges: { left: true, right: true, bottom: true, top: true },
       margin: 6, //resize trigger threshold
       listeners: {
+        start() { element.style.userSelect = 'none'; },
         move(event) {
           const t = event.target;
           let x = r(parseFloat(t.getAttribute('data-x')) || 0);
@@ -50,7 +57,8 @@ function interactable(element: HTMLElement): () => void {
           t.style.transform = `translate(${x}px,${y}px)`;
           t.setAttribute('data-x', String(x));
           t.setAttribute('data-y', String(y));
-        }
+        },
+        end() { element.style.userSelect = ''; }
       },
       modifiers: [
         interact.modifiers.restrictEdges({ outer: 'parent' }),
@@ -63,6 +71,7 @@ function interactable(element: HTMLElement): () => void {
     .draggable({
       cursorChecker(): string { return ''; }, //disable default css 'cursor: move'
       allowFrom: '.drag-handle',
+      ignoreFrom: '.drag-handle *',
       inertia: false,
       modifiers: [
         interact.modifiers.restrictRect({ 
@@ -71,6 +80,7 @@ function interactable(element: HTMLElement): () => void {
         })
       ],
       listeners: {
+        start() { element.style.userSelect = 'none'; },
         move(event) {
           const t = event.target;
           const x = r((parseFloat(t.getAttribute('data-x')) || 0) + event.dx);
@@ -78,11 +88,16 @@ function interactable(element: HTMLElement): () => void {
           t.style.transform = `translate(${x}px,${y}px)`;
           t.setAttribute('data-x', String(x));
           t.setAttribute('data-y', String(y));
-        }
+        },
+        end() { element.style.userSelect = ''; }
       }
     });
 
-  return () => interact(element).unset(); //cleanup
+  return () => {
+    interact(element).unset();
+    dragHandle.removeEventListener('pointerdown', onPointerDown);
+    dragHandle.removeEventListener('pointerup',   onPointerUp);
+  };
 }
 
 function maximizeContainer(container: HTMLElement): void {
@@ -99,8 +114,13 @@ function r(n: number): number {
   return Math.round(n);
 }
 
-function focusOnMount(element: HTMLElement): void {
+function focusElement(element: HTMLElement): void {
   element.focus();
+}
+
+function resolveInitialSize(element: HTMLElement): void {
+  element.style.width  = element.offsetWidth  + 'px';
+  element.style.height = element.offsetHeight + 'px';
 }
 
 //https://javascript.info/bubbling-and-capturing
@@ -134,9 +154,9 @@ export {
   WINDOW_ACTION,
   WINDOW_ID_ENUM,
   WINDOW_ID,
-  focusOnMount,
+  focusElement,
   activateWindowViaDOMCapture,
   activateWindowViaDOMBubbleUp,
   maximizeContainer,
-  minimizeContainer
+  minimizeContainer,
 }
