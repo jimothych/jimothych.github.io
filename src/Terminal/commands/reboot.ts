@@ -1,4 +1,4 @@
-import { ShellCommandTuple, invalidOption, usage, EMIT_COMMAND_ACTION } from "./common";
+import { ShellCommandObject, invalidOption, usage, EMIT_COMMAND_ACTION } from "./common";
 import { urlManager } from "../../lib/urlManager.svelte";
 
 const COMMAND_NAME: string = "reboot";
@@ -20,7 +20,7 @@ function reboot(args: string[], options: string[], isSuperUser: boolean): string
   return () => { urlManager.reload(); }
 }
 
-export const REBOOT: ShellCommandTuple = {
+export const REBOOT: ShellCommandObject = {
   name: COMMAND_NAME, 
   shellCommand: reboot, 
   autocompleteOptions: [...ALLOWED_ARGS, ...ALLOWED_OPTIONS]

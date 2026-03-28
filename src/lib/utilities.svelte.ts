@@ -88,13 +88,11 @@ function interactable(element: HTMLElement): () => void {
 function maximizeContainer(container: HTMLElement): void {
   container.style.width = (window.innerWidth - 4) + 'px';
   container.style.height = (window.innerHeight - 4) + 'px';
-  centerContainer(container);
 }
 
-function minimizeContainer(container: HTMLElement, offsetX: number = 0, offsetY: number = 0): void {
+function minimizeContainer(container: HTMLElement): void {
   container.style.width = MIN_WINDOW_WIDTH + 'px';
   container.style.height = MIN_WINDOW_HEIGHT + 'px';
-  centerContainer(container, offsetX, offsetY);
 }
 
 function r(n: number): number {
@@ -106,7 +104,7 @@ function focusOnMount(element: HTMLElement): void {
 }
 
 //https://javascript.info/bubbling-and-capturing
-function activateWindowViaCapture(id: WINDOW_ID) {
+function activateWindowViaDOMCapture(id: WINDOW_ID) {
   return (element: HTMLElement) => {
     const handler = () => { 
       windowManager.setActiveWindow(id); 
@@ -115,7 +113,7 @@ function activateWindowViaCapture(id: WINDOW_ID) {
     return () => element.removeEventListener('pointerdown', handler, { capture: true });
   }
 }
-function activateWindowViaBubble(id: WINDOW_ID) {
+function activateWindowViaDOMBubbleUp(id: WINDOW_ID) {
   return (element: HTMLElement) => {
     const handler = (event: PointerEvent) => { 
       if((event.target as HTMLElement).closest('.window-container')) { return; }
@@ -137,8 +135,8 @@ export {
   WINDOW_ID_ENUM,
   WINDOW_ID,
   focusOnMount,
-  activateWindowViaCapture,
-  activateWindowViaBubble,
+  activateWindowViaDOMCapture,
+  activateWindowViaDOMBubbleUp,
   maximizeContainer,
   minimizeContainer
 }

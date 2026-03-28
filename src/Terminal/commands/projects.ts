@@ -1,4 +1,4 @@
-import { ShellCommandTuple, invalidOption, usage } from "./common";
+import { ShellCommandObject, invalidOption, usage } from "./common";
 
 const COMMAND_NAME: string = "projects";
 const ALLOWED_ARGS: string[] = [];
@@ -36,7 +36,7 @@ function projects(args: string[], options: string[], isSuperUser: boolean): stri
 </p>`); 
 }
 
-export const PROJECTS: ShellCommandTuple = {
+export const PROJECTS: ShellCommandObject = {
   name: COMMAND_NAME, 
   shellCommand: projects, 
   autocompleteOptions: [...ALLOWED_ARGS, ...ALLOWED_OPTIONS]

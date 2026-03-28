@@ -1,4 +1,4 @@
-import { ShellCommandTuple, usage, notYetSupported } from "./common";
+import { ShellCommandObject, usage, notYetSupported } from "./common";
 
 const COMMAND_NAME: string = "psh";
 const ALLOWED_ARGS: string[] = [];
@@ -23,7 +23,7 @@ function psh(args: string[], options: string[], isSuperUser: boolean): string {
   return "";
 }
 
-export const PSH: ShellCommandTuple = {
+export const PSH: ShellCommandObject = {
   name: COMMAND_NAME, 
   shellCommand: psh, 
   autocompleteOptions: [...ALLOWED_ARGS, ...ALLOWED_OPTIONS]

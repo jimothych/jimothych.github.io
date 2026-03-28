@@ -1,4 +1,4 @@
-import { ShellCommandTuple, invalidOption, usage } from "./common";
+import { ShellCommandObject, invalidOption, usage } from "./common";
 
 const COMMAND_NAME: string = "help";
 const ALLOWED_ARGS: string[] = [];
@@ -41,7 +41,7 @@ function createPaddedString(word1: string, word2:string): string { //helper for 
   return `${paddedWord1} ${word2}`;
 }
 
-export const HELP: ShellCommandTuple = {
+export const HELP: ShellCommandObject = {
   name: COMMAND_NAME, 
   shellCommand: help, 
   autocompleteOptions: [...ALLOWED_ARGS, ...ALLOWED_OPTIONS]

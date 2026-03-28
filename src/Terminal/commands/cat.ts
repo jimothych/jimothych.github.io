@@ -1,4 +1,4 @@
-import { ShellCommandTuple, invalidOption, usage, hasInvalidArg } from "./common";
+import { ShellCommandObject, invalidOption, usage, hasInvalidArg } from "./common";
 import { getPoemNames, getPoemContent, removeFileExtensions, getPoemNamesWithFileExtensions } from "./poems";
 
 const COMMAND_NAME: string = "cat";
@@ -28,7 +28,7 @@ function cat(args: string[], options: string[], isSuperUser: boolean): string {
   return result;
 }
 
-export const CAT: ShellCommandTuple = {
+export const CAT: ShellCommandObject = {
   name: COMMAND_NAME, 
   shellCommand: cat, 
   autocompleteOptions: [...getPoemNamesWithFileExtensions(), ...ALLOWED_OPTIONS]

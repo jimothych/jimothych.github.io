@@ -18,7 +18,7 @@ type APPLICATION = {
   INITIAL_HEIGHT: string,
   BORDER_COLOR: "--dark-grey" | "--black"
 };
-const TERMINAL_APPLICATION: APPLICATION = {
+const TERMINAL: APPLICATION = {
   ID: WINDOW_ID_ENUM.TERMINAL, 
   HEADER: TerminalHeader, 
   CONTENT: Terminal,
@@ -30,7 +30,7 @@ const TERMINAL_APPLICATION: APPLICATION = {
   INITIAL_HEIGHT: "70vh",
   BORDER_COLOR: "--dark-grey",
 } as const;
-const VICTIONARIUM_APPLICATION: APPLICATION = {
+const VICTIONARIUM: APPLICATION = {
   ID: WINDOW_ID_ENUM.VICTIONARIUM, 
   HEADER: VictionariumHeader, 
   CONTENT: Victionarium,
@@ -42,7 +42,7 @@ const VICTIONARIUM_APPLICATION: APPLICATION = {
   INITIAL_HEIGHT: "95vh",
   BORDER_COLOR: "--black",
 } as const;
-const APPLICATIONS: APPLICATION[] = [TERMINAL_APPLICATION, VICTIONARIUM_APPLICATION];
+const APPLICATIONS: APPLICATION[] = [TERMINAL, VICTIONARIUM];
 
 //decided that only one app can be open at a time besides the terminal (kinda like a process) such that shareable urls can work
 type ActiveWindowPair = {
@@ -55,14 +55,14 @@ type WindowZOrder = {
 }
 
 class WindowManager {
-  activeWindows = $state<ActiveWindowPair>({ terminal: TERMINAL_APPLICATION, app: null });
+  activeWindows = $state<ActiveWindowPair>({ terminal: TERMINAL, app: null });
   hasActiveApp = $derived<boolean>(this.activeWindows.app ? true : false);
 
   windowZOrder = $state<WindowZOrder>({ bottom: WINDOW_ID_ENUM.TERMINAL, top: WINDOW_ID_ENUM.TERMINAL });
   activeWindow = $derived<WINDOW_ID>(this.windowZOrder.top);
 
   closeApp(): void { //reset back to just terminal
-    this.activeWindows = { terminal: TERMINAL_APPLICATION, app: null };
+    this.activeWindows = { terminal: TERMINAL, app: null };
     this.windowZOrder = { bottom: WINDOW_ID_ENUM.TERMINAL, top: WINDOW_ID_ENUM.TERMINAL };
     urlManager.navigate("/");
   }

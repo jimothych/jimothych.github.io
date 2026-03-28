@@ -30,23 +30,6 @@ class URLManager {
 
     //if(segments.length === 2 && validBlogSlugs.includes(segments[1])
 
-    // if (path === '/blog') {
-    //   callbacks.onBlog?.();
-    //   return;
-    // }
-
-    // if (path.startsWith('/blog/')) {
-    //   const slug = path.slice('/blog/'.length);
-
-    //   if (!validBlogSlugs.includes(slug)) {
-    //     this.navigate('/');
-    //     return;
-    //   }
-
-    //   callbacks.onBlogPost?.(slug);
-    //   return;
-    // }
-
     // 404 unknown route fallback
     this.navigate('/');
     window.alert("invalid path! redirecting to root")

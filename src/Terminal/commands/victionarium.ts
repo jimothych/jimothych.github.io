@@ -1,4 +1,4 @@
-import { ShellCommandTuple, invalidOption, usage, EMIT_COMMAND_ACTION } from "./common";
+import { ShellCommandObject, invalidOption, usage, EMIT_COMMAND_ACTION } from "./common";
 import { windowManager } from "../../lib/windowManager.svelte";
 import { urlManager } from "../../lib/urlManager.svelte";
 import { WINDOW_ID_ENUM } from "../../lib/utilities.svelte";
@@ -25,7 +25,7 @@ function victionarium(args: string[], options: string[], isSuperUser: boolean): 
   }
 }
 
-export const VICTIONARIUM: ShellCommandTuple = {
+export const VICTIONARIUM: ShellCommandObject = {
   name: COMMAND_NAME, 
   shellCommand: victionarium, 
   autocompleteOptions: [...ALLOWED_ARGS, ...ALLOWED_OPTIONS]

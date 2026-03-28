@@ -1,4 +1,4 @@
-import { ShellCommandTuple, invalidOption, usage } from "./common";
+import { ShellCommandObject, invalidOption, usage } from "./common";
 
 const COMMAND_NAME: string = "sudo";
 const ALLOWED_ARGS: string[] = [];
@@ -17,7 +17,7 @@ function sudo(args: string[], options: string[], isSuperUser: boolean): string {
   return usage(COMMAND_NAME, ALLOWED_ARGS_DESCRIPTION, ALLOWED_OPTIONS);
 }
 
-export const SUDO: ShellCommandTuple = {
+export const SUDO: ShellCommandObject = {
   name: COMMAND_NAME, 
   shellCommand: sudo, 
   autocompleteOptions: [...ALLOWED_ARGS, ...ALLOWED_OPTIONS]

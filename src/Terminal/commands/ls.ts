@@ -1,4 +1,4 @@
-import { ShellCommandTuple, tooManyArgs, hasInvalidOption, usage, notFound } from "./common";
+import { ShellCommandObject, tooManyArgs, hasInvalidOption, usage, notFound } from "./common";
 import { poems } from "./poems";
 
 const COMMAND_NAME: string = "ls";
@@ -61,7 +61,7 @@ function listLongFormat(
   ].join(" ");
 }
 
-export const LS: ShellCommandTuple = {
+export const LS: ShellCommandObject = {
   name: COMMAND_NAME, 
   shellCommand: projects, 
   autocompleteOptions: [...ALLOWED_OPTIONS]

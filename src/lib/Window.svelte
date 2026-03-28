@@ -9,7 +9,7 @@
     minimizeContainer,
     MIN_WINDOW_WIDTH,
     MIN_WINDOW_HEIGHT,
-    activateWindowViaCapture
+    activateWindowViaDOMCapture
   } from './utilities.svelte';
 
   //choosing to spread props because I've decided not to use ts in .svelte files so no type hints
@@ -22,17 +22,15 @@
 
   let container = $state(); //component-bound to the Window wrapper
 
-  $effect(() => {
-    untrack(() => {//basically an onMount
-      if(container) { centerContainer(container, offsetX, offsetY); }
-    });
-  });
+  function centerContainerClosure() { centerContainer(container, offsetX, offsetY); }
 
   $effect(() => {
     if(windowContext.action === WINDOW_ACTION_ENUM.MAXIMIZE) {
       maximizeContainer(container);
+      centerContainer(container);
     } else if(windowContext.action === WINDOW_ACTION_ENUM.MINIMIZE) {
-      minimizeContainer(container, offsetX, offsetY);
+      minimizeContainer(container);
+      centerContainer(container, offsetX, offsetY);
     } else if(windowContext.action === WINDOW_ACTION_ENUM.EXIT) { 
       windowManager.closeApp();
     }
@@ -54,7 +52,8 @@
   `}
   style:z-index={windowManager.getZIndex(id)} //sets property reactively without messing up interact.js
   {@attach interactable}
-  {@attach activateWindowViaCapture(id)}
+  {@attach activateWindowViaDOMCapture(id)}
+  {@attach centerContainerClosure}
 >
   <Header id={id}></Header>
   <Content id={id}></Content>

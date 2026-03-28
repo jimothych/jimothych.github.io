@@ -1,4 +1,4 @@
-import { ShellCommandTuple, invalidOption, usage } from "./common";
+import { ShellCommandObject, invalidOption, usage } from "./common";
 
 const COMMAND_NAME: string = "pwd";
 const ALLOWED_ARGS: string[] = [];
@@ -19,7 +19,7 @@ function pwd(args: string[], options: string[], isSuperUser: boolean): string {
   return (`<p style="white-space:pre-wrap">/users/jimothych/jameschang</p>`); 
 }
 
-export const PWD: ShellCommandTuple = {
+export const PWD: ShellCommandObject = {
   name: COMMAND_NAME, 
   shellCommand: pwd, 
   autocompleteOptions: [...ALLOWED_ARGS, ...ALLOWED_OPTIONS]

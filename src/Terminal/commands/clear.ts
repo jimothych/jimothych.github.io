@@ -1,4 +1,4 @@
-import { ShellCommandTuple, invalidOption, usage, EMIT_COMMAND_ACTION } from "./common";
+import { ShellCommandObject, invalidOption, usage, EMIT_COMMAND_ACTION } from "./common";
 import { log } from "../terminalStore.svelte";
 
 const COMMAND_NAME: string = "clear";
@@ -20,7 +20,7 @@ function clear(args: string[], options: string[], isSuperUser: boolean): string 
   return () => { log.clear() }
 }
 
-export const CLEAR: ShellCommandTuple = {
+export const CLEAR: ShellCommandObject = {
   name: COMMAND_NAME, 
   shellCommand: clear, 
   autocompleteOptions: [...ALLOWED_ARGS, ...ALLOWED_OPTIONS]

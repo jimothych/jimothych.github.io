@@ -2,7 +2,7 @@
   import Window from "./lib/Window.svelte"
   import MediaQueryModal from "./lib/MediaQueryModal.svelte";
   import { windowManager } from "./lib/windowManager.svelte";
-  import { WINDOW_ID_ENUM, activateWindowViaBubble } from "./lib/utilities.svelte";
+  import { WINDOW_ID_ENUM, activateWindowViaDOMBubbleUp } from "./lib/utilities.svelte";
 </script>
 
 <MediaQueryModal />
@@ -10,7 +10,7 @@
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <main
-  {@attach activateWindowViaBubble(WINDOW_ID_ENUM.NONE)}
+  {@attach activateWindowViaDOMBubbleUp(WINDOW_ID_ENUM.NONE)}
 >
   <Window
     id={windowManager.activeWindows.terminal.ID}

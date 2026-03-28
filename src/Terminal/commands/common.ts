@@ -1,7 +1,7 @@
 type EMIT_COMMAND_ACTION = () => void;
 
 type ShellCommand = (args: string[], options: string[], isSuperUser: boolean) => string | EMIT_COMMAND_ACTION;
-type ShellCommandTuple = {
+type ShellCommandObject = {
   name: string, 
   shellCommand: ShellCommand, 
   autocompleteOptions: string[]
@@ -61,7 +61,7 @@ function hasInvalidOption(commandName: string, options: string[],
 
 export { 
   ShellCommand, 
-  ShellCommandTuple, 
+  ShellCommandObject, 
   usage, 
   invalidOption,
   tooManyArgs,
