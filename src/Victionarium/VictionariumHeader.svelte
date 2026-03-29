@@ -37,7 +37,7 @@
     </button>
   </div>
 
-  <p style={`color: var(${focusColor})`}>
+  <p style={`color: var(${focusColor});`}>
     victionarium
   </p>
 

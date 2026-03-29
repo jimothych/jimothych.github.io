@@ -10,9 +10,10 @@ class Log {
   clear(): void { this.entries = []; }
 }
 
-class InputElementStore {
+class TerminalInputStore {
   value = $state<string>('');
-  visible = $state<boolean>(false);
+  element = $state<HTMLElement | null>(null); //the actual dom element for native focusing
+  isVisible = $state<boolean>(false);
   width = $derived<string>(`${(this.value ?? '').length}ch`);
 
   hasTrailingWhitespace(): boolean { 
@@ -29,7 +30,7 @@ class InputElementStore {
 
   reset(): void {
     this.value = '';
-    this.visible = false;
+    this.isVisible = false;
   }
 }
 
@@ -87,7 +88,7 @@ class TabCompletionStore {
 }
 
 let log = new Log();
-let inputElementStore = new InputElementStore();
+let terminalInputStore = new TerminalInputStore();
 let inputHistory = new InputHistory();
 let tabCompletionStore = new TabCompletionStore();
-export { log, inputElementStore, inputHistory, tabCompletionStore };
+export { log, terminalInputStore, inputHistory, tabCompletionStore };

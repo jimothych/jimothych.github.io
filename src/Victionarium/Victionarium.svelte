@@ -2,61 +2,84 @@
   import Sidebar from "./Sidebar.svelte";
   import DictionaryEntry from "./DictionaryEntry.svelte";
   import LoadingModal from "./LoadingModal.svelte";
-  import { focusElement, sleep } from "../lib/utilities.svelte";
+  import { onMount } from "svelte";
+  import { sleep } from "../lib/utilities.svelte";
   import { getRandomLatinLemmaHTML, getLatinLemmaHTMLByTitle } from "./wiktionary";
-  import { extractLatinSection, extractLatinSidebarContent, extractLatinDictionaryEntryContent } from "./htmlParser";
+  import { 
+    extractLatinSection, 
+    extractLatinSidebarContent, 
+    extractLatinDictionaryEntryContent
+  } from "./htmlParser";
+  import { victionariumInputStore } from "./victionariumStore.svelte";
+  import { HTTPError } from "ky";
+  import { urlManager } from "../lib/urlManager.svelte";
+  import { VICTIONARIUM } from "../Terminal/commands/victionarium";
 
-  let inputValue = $state("");
-  let inputElement = $state(null);
+  let victionariumElement = $state(null);
+
+  function handleHashLinkClick(e) {
+    // find the closest anchor element from the click target
+    const target = (e.target).closest('a');
+    if(!target) return;
+    const href = target.getAttribute('href');
+    // only handle hash links (sidebar links)
+    if(!href?.startsWith('#')) return;
+    e.preventDefault();
+    // strip leading # to get the element id
+    const id = href.slice(1);
+    // find the element with that id inside the scroll container
+    const el = victionariumElement.querySelector(`#${CSS.escape(id)}`);
+    if(!el) return;
+    const container = victionariumElement.querySelector('.dictionary-entry');
+    if (!container) return;
+    container.scrollTo({ top: el.offsetTop, behavior: 'smooth' });
+  }
 
   let latinSidebarContent = $state(null);
   let latinDictionaryEntryContent = $state(null);
+  let error = $state(null);
+
+  async function loadLatinLemma(fetchFn) {
+    latinSidebarContent = null;
+    latinDictionaryEntryContent = null;
+    error = null;
+    urlManager.navigate(`/${VICTIONARIUM.name}`);
+    try {
+      const { html, title } = await fetchFn();
+      const latinSection = extractLatinSection(html);
+      latinSidebarContent = extractLatinSidebarContent(latinSection, title);
+      latinDictionaryEntryContent = extractLatinDictionaryEntryContent(latinSection, title);
+      urlManager.navigate(`/${VICTIONARIUM.name}/${title}`);
+    } catch(e) {
+      if(e instanceof HTTPError && e.response.status === 404) {
+        error = `no results matched query :(`;
+      } else {
+        error = e.message;
+      }
+    }
+  }
 
   async function handleSubmit() {
-    try {
-      const html = await getLatinLemmaHTMLByTitle(inputValue);
-      const latinSection = extractLatinSection(html);
-      latinSidebarContent = extractLatinSidebarContent(latinSection);
-      latinDictionaryEntryContent = extractLatinDictionaryEntryContent(latinSection);
-    } catch(e) {
-      latinSidebarContent = null;
-      latinDictionaryEntryContent = `<p>${e.message}</p>`
-    }
-    inputValue = "";
+    await loadLatinLemma(() => getLatinLemmaHTMLByTitle(victionariumInputStore.value));
+    victionariumInputStore.value = "";
   }
 
-  async function generateRandomLatinLemmaOnMount() {
-    try {
-      const html = await getRandomLatinLemmaHTML();
-      const latinSection = extractLatinSection(html);
-      latinSidebarContent = extractLatinSidebarContent(latinSection);
-      latinDictionaryEntryContent = extractLatinDictionaryEntryContent(latinSection);
-    } catch(e) {
-      latinSidebarContent = null;
-      latinDictionaryEntryContent = `<p>${e.message}</p>`
-    }
-  }
-
-  $effect(async() => {
-    if (inputElement) { 
-      await sleep(200); //wait for other stateful stuff to complete elsewhere
-      focusElement(inputElement);
-    }
-  });
-
-  $effect(() => { //no dependencies, runs once on mount
-    (async () => { await generateRandomLatinLemmaOnMount(); })();
+  onMount(async () => {
+    await sleep(200); //wait for other stateful stuff to complete elsewhere
+    victionariumInputStore.element.focus()
+    await loadLatinLemma(() => getRandomLatinLemmaHTML());
   });
 </script>
 
-<LoadingModal isVisible={latinDictionaryEntryContent ? false : true} />
+<LoadingModal isVisible={!latinDictionaryEntryContent && !error} />
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <div 
   class="victionarium" 
-  onmouseup={() => { 
-    if(document.activeElement !== inputElement) { inputElement.focus(); } 
-  }}
+  bind:this={victionariumElement}
+  tabindex="-1"
+  onkeydown={() => victionariumInputStore.element.focus()}
+  onclick={handleHashLinkClick}
 >
   <form 
     onsubmit={async(e) => { 
@@ -67,15 +90,22 @@
   >
     <input 
       spellcheck="false" 
-      placeholder="īnscrībe" 
-      bind:value={inputValue}
-      bind:this={inputElement}
+      placeholder="quaere" 
+      bind:value={victionariumInputStore.value}
+      bind:this={victionariumInputStore.element}
     >
   </form>
 
   <div class="row">
-    <Sidebar />
-    <DictionaryEntry />
+    <Sidebar 
+      content={latinSidebarContent} 
+    />
+    <DictionaryEntry 
+      content={latinDictionaryEntryContent} 
+      error={error}
+      //big fancy closure :)
+      onNavigate={(word) => loadLatinLemma(() => getLatinLemmaHTMLByTitle(word))}
+    />
   </div>
 </div>
 
@@ -91,26 +121,19 @@
     height: 100%;
     flex: 1; /* fill inside parent */
     min-height: 0; /* prevents flex overflow */
-    overscroll-behavior-y: none;
     padding: 4px;
     margin: 0;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    overflow: hidden;
   }
 
   form {
     width: 100%;
-    height: 30px;
     flex-shrink: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
   .row {
     width: 100%;
-    flex: 1;
-    min-height: 0;
+    height: 100%;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -121,8 +144,8 @@
     font-family: "Ubuntu Sans";
     font-weight: 500;
     display: inline;
-    width: 45%;
-    height: 90%;
+    width: 35%;
+    height: 30px;
     background-color: var(--button-color);
     padding: 0;
     margin: 0;
@@ -132,17 +155,24 @@
     border: 1.5px solid var(--black);
     caret-color: var(--light-grey);
     padding-left: 6px;
+    position: absolute;
+    top: 4px;
+    left: 50%;
+    transform: translateX(-50%);
   }
   input:focus{
     outline: none;
     border: none;
     box-shadow: none;
-    border-radius: 5px;
     border: 1.5px solid var(--black);
+    background: var(--app-hover);
   }
   ::placeholder {
     color: var(--light-grey);
     font-style: italic;
     opacity: 1;
+  }
+  input:focus::placeholder {
+    opacity: 0.3;
   }
 </style>

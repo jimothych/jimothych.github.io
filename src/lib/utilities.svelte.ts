@@ -71,7 +71,7 @@ function interactable(element: HTMLElement): () => void {
     .draggable({
       cursorChecker(): string { return ''; }, //disable default css 'cursor: move'
       allowFrom: '.drag-handle',
-      ignoreFrom: '.drag-handle *',
+      ignoreFrom: '.drag-handle .github-link',
       inertia: false,
       modifiers: [
         interact.modifiers.restrictRect({ 

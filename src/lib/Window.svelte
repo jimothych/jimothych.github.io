@@ -66,7 +66,6 @@
     flex-direction: column;
     overflow: hidden;
     border-radius: 6px;
-    cursor: default;
-    box-shadow: rgba(0, 0, 0, 0.18) 0.5px 1.5px 4px;
+    box-shadow: rgba(0, 0, 0, 0.18) 0px 1px 4px;
   }
 </style>

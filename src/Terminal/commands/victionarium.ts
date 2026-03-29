@@ -21,7 +21,7 @@ function victionarium(args: string[], options: string[], isSuperUser: boolean): 
   
   return () => { 
     windowManager.openApp(WINDOW_ID_ENUM.VICTIONARIUM); 
-    urlManager.navigate(`/${VICTIONARIUM.name}`);
+    urlManager.navigate(`/${COMMAND_NAME}`);
   }
 }
 

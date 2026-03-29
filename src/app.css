@@ -20,12 +20,14 @@
   --med-grey: #2C2C2C;
   --light-grey: #898989;
   --red: #731F2E;
+  --red-rgb: 115, 31, 46;
   --red-shade: #731D1D;
   --purple: #59163B;
   --dark-purple: #260119;
+  --dark-purple-rgb: 38, 1, 25;
   --white: #bcbcbc;
   --pink: #d3b0c3;
-  --yellow: #F28B50;
+  --orange: #F28B50;
   --beige: #E7C2A3;
 
   --button-color: #242424;
@@ -53,6 +55,7 @@
 a {
   color: var(--light-grey);
   text-decoration: none;
+  white-space: nowrap;
 }
 a:hover {
   color: var(--light-grey);
@@ -84,6 +87,19 @@ p {
   white-space: normal;
 }
 
+::selection {
+  background-color: rgba(var(--red-rgb), 0.3);
+}
+
+
+h1, h2, h3, h4, h5 {
+  margin-bottom: 0.2em;
+}
+ul, ol {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+}
+
 form {
   margin: 0;
   padding: 0;
@@ -96,4 +112,25 @@ svg {
   height: 100%;
   opacity: 0.5;
   cursor: default;
+}
+
+sup {
+  color: var(--red);
+}
+
+table {
+  border-collapse: collapse; /* required for clean borders */
+}
+
+th, td {
+  border: 2px solid #101010;
+  padding: 4px;
+}
+
+th {
+  background: var(--black);
+}
+
+td {
+  background: var(--app-hover);
 }

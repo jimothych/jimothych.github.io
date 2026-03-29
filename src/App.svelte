@@ -3,6 +3,7 @@
   import MediaQueryModal from "./lib/MediaQueryModal.svelte";
   import { windowManager } from "./lib/windowManager.svelte";
   import { WINDOW_ID_ENUM, activateWindowViaDOMBubbleUp } from "./lib/utilities.svelte";
+  import Toast from "./lib/toast/Toast.svelte";
 </script>
 
 <MediaQueryModal />
@@ -12,6 +13,7 @@
 <main
   {@attach activateWindowViaDOMBubbleUp(WINDOW_ID_ENUM.NONE)}
 >
+  <Toast />
   <Window
     id={windowManager.activeWindows.terminal.ID}
     Header={windowManager.activeWindows.terminal.HEADER} 

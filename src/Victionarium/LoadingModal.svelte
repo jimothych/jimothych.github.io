@@ -8,7 +8,7 @@
     if (!canvasElement) { return; }
     const dotLottie = new DotLottie({
       canvas: canvasElement,
-      src: "/animations/isometric_loader.lottie",
+      src: "/animations/loading.lottie",
       loop: true,
       autoplay: true,
     });
@@ -17,9 +17,9 @@
 </script>
 
 {#if isVisible}
-  <div class="loading-modal">
-    <canvas bind:this={canvasElement} width="90" height="90"></canvas>
-  </div>
+<div class="loading-modal">
+  <canvas bind:this={canvasElement} width="85" height="85"></canvas>
+</div>
 {/if}
 
 <style>
@@ -28,7 +28,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(var(--dark-purple-rgb), 0.2);
     inset: 0;
     z-index: 9999;
   }
