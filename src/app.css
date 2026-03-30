@@ -114,12 +114,21 @@ svg {
   cursor: default;
 }
 
+svg:focus {
+  outline: none;
+}
+
+button:focus {
+  outline: none;
+}
+
 sup {
   color: var(--red);
 }
 
 table {
   border-collapse: collapse; /* required for clean borders */
+  margin-top: 4px;
 }
 
 th, td {

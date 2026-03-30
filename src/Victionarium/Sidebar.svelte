@@ -37,21 +37,15 @@
 
 <style>
   .sidebar {
-    margin-top: 30px;
+    height: 100%;
     box-sizing: border-box;
     width: 15%;
     display: flex;
     flex-direction: column;
     padding: 15px;
-    overflow: hidden;
-  }
-  .sidebar::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 1px;
-    height: 100%;
-    background: black;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    overscroll-behavior-y: contain;
+    padding-top: 45px;
   }
 </style>

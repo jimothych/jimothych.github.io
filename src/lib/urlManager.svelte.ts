@@ -4,6 +4,14 @@ import { toast } from "./toast/toastController.svelte";
 class URLManager {
   pathname = $state<string>(window.location.pathname);
 
+  isRestoringHistory = $state(false);
+  constructor() {
+    window.addEventListener('popstate', () => { //keeps track of browser history
+      this.isRestoringHistory = true;
+      this.pathname = window.location.pathname;
+    });
+  }
+
   //navigates absolute from root
   navigate(path: string): void {
     window.history.pushState(null, '', path);
@@ -15,26 +23,17 @@ class URLManager {
     window.location.reload();
   }
 
+  //this method's purpose is just to get the app mounted.
+  //url management once the app is mounted is up to the app to implement.
   getInitialRoute(): string {
-    //add listener for next and prev browser history actions
-    //handling this as an edge case. Dont want to add active browser url history as a feature
-    window.addEventListener('popstate', () => { this.restart(); });
-
     const path = this.pathname;
     const segments = path.split('/').filter(Boolean); //split & filter out empty strings
 
     if(segments.length === 0) { return ""; } //root
 
     if(segments[0] === VICTIONARIUM.name) { 
-      if(segments.length > 1) { 
-        toast.open(
-          `<p>victionarium doesn't support shareable urls :(<br>redirecting to /victionarium/{random}</p>`
-        );
-      }
       return VICTIONARIUM.name; 
     }
-
-    //if(segments.length === 2 && validBlogSlugs.includes(segments[1])
 
     // 404 unknown route fallback
     toast.open(
@@ -42,6 +41,16 @@ class URLManager {
     );
     this.navigate("/");
     return "";
+  }
+
+  getVictionariumSearchable(): string | null {
+    const segments = this.pathname.split('/').filter(Boolean);
+    if (segments[0] !== VICTIONARIUM.name || segments.length < 2) { return null; }
+
+    if(segments.length > 2) { 
+      toast.open(`<p>redirecting to /${segments[1]}</p>`);
+    }
+    return segments[1];
   }
 }
 

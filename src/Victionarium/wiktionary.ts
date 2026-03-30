@@ -34,7 +34,7 @@ async function getRandomLatinLemmaHTML(): Promise<LemmaResult> {
 }
 
 function randomLetter(): string {
-  return "abcdefghijklmnopqrstuvwxyz"[Math.floor(Math.random() * 26)];
+  return "abcdefghilmnopqrstuv"[Math.floor(Math.random() * 20)];
 }
 
 export { getRandomLatinLemmaHTML, getLatinLemmaHTMLByTitle }

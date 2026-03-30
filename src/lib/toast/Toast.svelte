@@ -74,7 +74,7 @@
     padding-top: 4px;
     padding-bottom: 4px;
     padding-left: 10px;
-    padding-right: 4px;
+    padding-right: 8px;
     height: 100%;
     cursor: default;
   }

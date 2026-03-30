@@ -32,7 +32,7 @@
     if(!el) return;
     const container = victionariumElement.querySelector('.dictionary-entry');
     if (!container) return;
-    container.scrollTo({ top: el.offsetTop, behavior: 'smooth' });
+    container.scrollTo({ top: el.offsetTop, behavior: 'instant' });
   }
 
   let latinSidebarContent = $state(null);
@@ -43,31 +43,52 @@
     latinSidebarContent = null;
     latinDictionaryEntryContent = null;
     error = null;
-    urlManager.navigate(`/${VICTIONARIUM.name}`);
     try {
       const { html, title } = await fetchFn();
       const latinSection = extractLatinSection(html);
       latinSidebarContent = extractLatinSidebarContent(latinSection, title);
       latinDictionaryEntryContent = extractLatinDictionaryEntryContent(latinSection, title);
-      urlManager.navigate(`/${VICTIONARIUM.name}/${title}`);
+      return title;
     } catch(e) {
       if(e instanceof HTTPError && e.response.status === 404) {
-        error = `no results matched query :(`;
+        error = `no query results :(`;
       } else {
         error = e.message;
       }
     }
   }
 
+  async function loadLemmaAndNavigate(fetchFn) {
+    const title = await loadLatinLemma(fetchFn);
+    if(title) { urlManager.navigate(`/${VICTIONARIUM.name}/${title}`); }
+  }
+
   async function handleSubmit() {
-    await loadLatinLemma(() => getLatinLemmaHTMLByTitle(victionariumInputStore.value));
+    await loadLemmaAndNavigate(() => getLatinLemmaHTMLByTitle(victionariumInputStore.value));
     victionariumInputStore.value = "";
   }
 
   onMount(async () => {
     await sleep(200); //wait for other stateful stuff to complete elsewhere
-    victionariumInputStore.element.focus()
-    await loadLatinLemma(() => getRandomLatinLemmaHTML());
+    victionariumInputStore.element.focus();
+
+    const searchableParameter = urlManager.getVictionariumSearchable();
+    if (searchableParameter) {
+      await loadLemmaAndNavigate(() => getLatinLemmaHTMLByTitle(searchableParameter));
+    } else {
+      await loadLemmaAndNavigate(() => getRandomLatinLemmaHTML());
+    }
+  });
+
+  $effect(() => {
+    if (!urlManager.isRestoringHistory) return;
+    urlManager.isRestoringHistory = false;
+    const searchableParameter = urlManager.getVictionariumSearchable();
+    if (searchableParameter) {
+      loadLatinLemma(() => getLatinLemmaHTMLByTitle(searchableParameter));
+    } else {
+      loadLatinLemma(() => getRandomLatinLemmaHTML()); 
+    }
   });
 </script>
 
@@ -104,7 +125,7 @@
       content={latinDictionaryEntryContent} 
       error={error}
       //big fancy closure :)
-      onNavigate={(word) => loadLatinLemma(() => getLatinLemmaHTMLByTitle(word))}
+      onNavigate={(word) => loadLemmaAndNavigate(() => getLatinLemmaHTMLByTitle(word))}
     />
   </div>
 </div>
@@ -121,7 +142,9 @@
     height: 100%;
     flex: 1; /* fill inside parent */
     min-height: 0; /* prevents flex overflow */
-    padding: 4px;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-bottom: 4px;
     margin: 0;
     overflow: hidden;
   }
