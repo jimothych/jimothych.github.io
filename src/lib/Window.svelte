@@ -1,5 +1,5 @@
 <script>
-  import { setContext, untrack } from 'svelte';
+  import { setContext } from 'svelte';
   import { windowManager } from './windowManager.svelte';
   import { 
     interactable, 
@@ -61,11 +61,13 @@
 
 <style>
   .window-container{
+    box-sizing: border-box;
     position: absolute;
     display: flex;
     flex-direction: column;
     overflow: hidden;
     border-radius: 6px;
+    background: var(--black);
     box-shadow: rgba(0, 0, 0, 0.18) 0px 1px 4px;
   }
 </style>

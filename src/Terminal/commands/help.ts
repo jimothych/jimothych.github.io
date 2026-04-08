@@ -24,8 +24,9 @@ use &#96;cat [file]&#96; to read the poems, e.g. &#96;cat poem2.txt&#96;.
 below are a few other commands you can run to learn more about me!
 
 commands:
-${createPaddedString(`whoami`, `who i am and what i do`)}
+${createPaddedString(`whoami`, `who i am`)}
 ${createPaddedString(`projects`, `what i've been up to`)}
+${createPaddedString(`blog`, `open blog`)}
 ${createPaddedString(`ls`, `list directory contents`)}
 ${createPaddedString(`cat`, `print file contents to output, e.g. &#96;cat poem1.txt&#96;`)}
 ${createPaddedString(`victionarium`, `id quod me iuvat`)}

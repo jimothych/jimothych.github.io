@@ -1,6 +1,7 @@
 import { EMIT_COMMAND_ACTION, ShellCommand } from "./commands/common";
 import { WHOAMI } from "./commands/whoami";
 import { PROJECTS } from "./commands/projects";
+import { BLOG } from "./commands/blog";
 import { LS } from "./commands/ls";
 import { CAT } from "./commands/cat";
 import { VICTIONARIUM } from "./commands/victionarium";
@@ -17,6 +18,7 @@ const SHELL_AUTOCOMPLETE_OPTIONS = new Map<string, string[]>();
 for (const { name, shellCommand, autocompleteOptions } of [
   WHOAMI,
   PROJECTS,
+  BLOG,
   LS,
   CAT,
   VICTIONARIUM,

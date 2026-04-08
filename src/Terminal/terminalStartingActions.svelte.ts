@@ -7,7 +7,7 @@ import { HELP } from "./commands/help";
 async function bootTerminal(): Promise<void> {
   await tick();
   windowManager.setActiveWindow(WINDOW_ID_ENUM.TERMINAL);
-  log.add("<em>salvēte amīcī!</em>");
+  log.add("<em>salvē amīce!</em>");
   await sleep(700);
   log.add("booting environment...");
   await sleep(1000);
@@ -18,7 +18,7 @@ async function bootTerminal(): Promise<void> {
 async function instantlyBootTerminalAndOpenApp(command: string): Promise<void> {
   await tick();
   windowManager.setActiveWindow(WINDOW_ID_ENUM.TERMINAL);
-  log.add("<em>salvēte amīcī!</em>");
+  log.add("<em>salvē amīce!</em>");
   log.add("booting environment...");
   log.add( 
     `<span style="color: var(--orange)">user</span>@weewaa-land-352 

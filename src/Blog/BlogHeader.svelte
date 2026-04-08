@@ -1,20 +1,33 @@
 <script>
-  import '@fortawesome/fontawesome-free/css/all.min.css'
   import { getContext } from 'svelte';
   import MinimizeSVG from '../assets/MinimizeSVG.svelte';
   import MaximizeSVG from '../assets/MaximizeSVG.svelte';
+  import ExitSVG from '../assets/ExitSVG.svelte';
   import { WINDOW_ACTION_ENUM } from '../lib/utilities.svelte';
   import { windowManager } from '../lib/windowManager.svelte';
+  import { tabManager, TAB_ENUM } from './tabManager.svelte';
+  import Tab from './Tab.svelte';
 
   const windowContext = getContext('windowContext');
   let { id } = $props();
 
   let focusColor = $derived(
-    (windowManager.activeWindow === id) ? "--light-grey" : "--terminal-inactive"
+    (windowManager.activeWindow === id) ? "--white" : "--app-inactive"
   );
 </script>
 
 <div class="header drag-handle">
+
+  <div class="tabs-absolute">
+    <Tab windowID={id} thisTabID={TAB_ENUM.HOME}>
+      Blog
+    </Tab>
+    {#if tabManager.blogData}
+    <Tab windowID={id} thisTabID={TAB_ENUM.BLOG}>
+      {tabManager.blogData.title}
+    </Tab>
+    {/if}
+  </div>
 
   <div class="icons-absolute">
     <button 
@@ -29,17 +42,13 @@
     >
       <MaximizeSVG color={`var(${focusColor})`} />
     </button>
+    <button 
+      class="icon-container"
+      onclick={() => windowContext.action = WINDOW_ACTION_ENUM.EXIT}
+    >
+      <ExitSVG color={`var(${focusColor})`} />
+    </button>
   </div>
-
-  <a 
-    class="github-link"
-    href="https://github.com/jimothych" 
-    target="_blank" 
-    style={`color: var(${focusColor})`}
-  >
-    <i class="fa-brands fa-github" style={`color: var(${focusColor})`}></i>
-    <span style={`margin-left: 6px;`}>github.com/jimothych</span>
-  </a>
 
 </div>
 
@@ -51,13 +60,24 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 24px;
-    background-color: var(--med-grey);
+    height: 34px;
+    background-color: var(--black);
     cursor: grab;
     user-select: none; /* prevents user selection of text */
   }
 
-  .icons-absolute{
+  .tabs-absolute {
+    position: absolute;
+    left: 0px;
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+
+  .icons-absolute {
     position: absolute;
     right: 4px;
     display: flex;
@@ -79,14 +99,7 @@
     padding: 0;
   }
   .icon-container:hover {
-    background-color: var(--terminal-hover);
+    background-color: var(--app-hover);
   }
 
-  .github-link {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    text-decoration: none;
-  }
 </style>

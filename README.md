@@ -26,6 +26,6 @@ https://jimothych.github.io/
 – Heber Leonard's [terminal-style-portfolio-page](https://github.com/heberleonard2/terminal-style-portfolio-page)  
 – [Ubuntu Yaru](https://github.com/ubuntu/yaru)  
 – [shelljs](https://github.com/shelljs/shelljs)  
-– the [Svelte tutorial](https://svelte.dev/) (I especially love this [demo of Svelte thru _Schotter_](https://svelte.dev/tutorial/svelte/context-api))  
+– the [Svelte tutorial](https://svelte.dev/) (I especially love [this demo](https://svelte.dev/tutorial/svelte/context-api))  
 – [interactjs](https://interactjs.io/)  
 – Wiktionary's [REST API](https://en.wiktionary.org/wiki/Special:RestSandbox/wmf-restbase?doc#/Page%20content/get_page_html__title_)  

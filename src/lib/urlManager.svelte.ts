@@ -14,6 +14,7 @@ class URLManager {
 
   //navigates absolute from root
   navigate(path: string): void {
+    if (window.location.pathname === path) { return; } //guard against duplicate nav
     window.history.pushState(null, '', path);
     this.pathname = path;
   }
@@ -36,9 +37,7 @@ class URLManager {
     }
 
     // 404 unknown route fallback
-    toast.open(
-      `<p>invalid path :(<br>redirecting to root</p>`
-    );
+    toast.open(`<p>invalid path :(<br>redirecting to root</p>`);
     this.navigate("/");
     return "";
   }

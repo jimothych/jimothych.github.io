@@ -16,8 +16,8 @@ function tooManyArgs(commandName: string): string {
 }
 
 function usage(commandName: string, ALLOWED_ARGS_DESCRIPTION: string[], ALLOWED_OPTIONS: string[]): string {
-  let argShowcase = ALLOWED_ARGS_DESCRIPTION.map((arg) => {return `[${arg}]`}).join(" "); 
-  let optionShowcase = ALLOWED_OPTIONS.map((option) => {return `[${option}]`}).join(" "); 
+  const argShowcase = ALLOWED_ARGS_DESCRIPTION.map((arg) => {return `[${arg}]`}).join(" "); 
+  const optionShowcase = ALLOWED_OPTIONS.map((option) => {return `[${option}]`}).join(" "); 
   return(`<p style="white-space:pre-wrap">usage: ${commandName} ${optionShowcase} ${argShowcase}</p>`)
 }
 

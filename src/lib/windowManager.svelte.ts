@@ -4,6 +4,8 @@ import TerminalHeader from "../Terminal/TerminalHeader.svelte";
 import Terminal from "../Terminal/Terminal.svelte";
 import VictionariumHeader from "../Victionarium/VictionariumHeader.svelte";
 import Victionarium from "../Victionarium/Victionarium.svelte";
+import Blog from "../Blog/Blog.svelte";
+import BlogHeader from "../Blog/BlogHeader.svelte";
 import { urlManager } from "./urlManager.svelte";
 
 type APPLICATION = {
@@ -42,7 +44,19 @@ const VICTIONARIUM: APPLICATION = {
   INITIAL_HEIGHT: "95vh",
   BORDER_COLOR: "--black",
 } as const;
-const APPLICATIONS: APPLICATION[] = [TERMINAL, VICTIONARIUM];
+const BLOG: APPLICATION = {
+  ID: WINDOW_ID_ENUM.BLOG, 
+  HEADER: BlogHeader, 
+  CONTENT: Blog,
+  FONT_FAMILY: "Ubuntu Sans",
+  TEXT_COLOR: "--white",
+  OFFSET_X: 0.10, //relative percentage of screen width
+  OFFSET_Y: -0.01, //relative percentage of screen height
+  INITIAL_WIDTH: "60vw",
+  INITIAL_HEIGHT: "95vh",
+  BORDER_COLOR: "--black",
+} as const;
+const APPLICATIONS: APPLICATION[] = [TERMINAL, VICTIONARIUM, BLOG];
 
 //decided that only one app can be open at a time besides the terminal (kinda like a process) such that shareable urls can work
 type ActiveWindowPair = {
@@ -79,15 +93,15 @@ class WindowManager {
 
   setActiveWindow(id: WINDOW_ID): void { 
     if(this.activeWindow === id) { return; } 
-    const other = this.windowZOrder.top === id ? this.windowZOrder.bottom : this.windowZOrder.top;
-    this.windowZOrder = { bottom: other, top: id };
+    const previousTop = this.windowZOrder.top === id ? this.windowZOrder.bottom : this.windowZOrder.top;
+    this.windowZOrder = { bottom: previousTop, top: id };
     console.log(`currently focused window: ${id}`);
   }
 
   getZIndex(id: WINDOW_ID): number {
-    if(this.windowZOrder.top === id) { return 1; }
-    if(this.windowZOrder.bottom === id) { return 0; }
-    return -1;
+    if(this.windowZOrder.top === id) { return 2; }
+    if(this.windowZOrder.bottom === id) { return 1; }
+    return 0;
   }
 }
 

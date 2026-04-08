@@ -50,8 +50,8 @@ function interactable(element: HTMLElement): () => void {
           const t = event.target;
           let x = r(parseFloat(t.getAttribute('data-x')) || 0);
           let y = r(parseFloat(t.getAttribute('data-y')) || 0);
-          t.style.width = r(event.rect.width) + 'px';
-          t.style.height = r(event.rect.height) + 'px';
+          t.style.width  = event.rect.width + 'px';
+          t.style.height = event.rect.height + 'px';
           x = r(x + (event.deltaRect?.left ?? 0));
           y = r(y + (event.deltaRect?.top ?? 0));
           t.style.transform = `translate(${x}px,${y}px)`;
@@ -61,9 +61,16 @@ function interactable(element: HTMLElement): () => void {
         end() { element.style.userSelect = ''; }
       },
       modifiers: [
-        interact.modifiers.restrictEdges({ outer: 'parent' }),
+        interact.modifiers.restrictEdges({
+          outer: () => ({
+            top: 2,
+            left: 2,
+            right: window.innerWidth - 2,
+            bottom: window.innerHeight - 2,
+          })
+        }),
         interact.modifiers.restrictSize({ 
-          min: { width: MIN_WINDOW_WIDTH, height: MIN_WINDOW_HEIGHT } 
+          min: { width: MIN_WINDOW_WIDTH, height: MIN_WINDOW_HEIGHT }
         })
       ],
       inertia: false
@@ -71,11 +78,11 @@ function interactable(element: HTMLElement): () => void {
     .draggable({
       cursorChecker(): string { return ''; }, //disable default css 'cursor: move'
       allowFrom: '.drag-handle',
-      ignoreFrom: '.drag-handle .github-link',
+      ignoreFrom: '.drag-handle .github-link, .drag-handle .tab',
       inertia: false,
       modifiers: [
         interact.modifiers.restrictRect({ 
-          restriction: 'parent', 
+          restriction: 'parent',
           endOnly: false //restrict immediately
         })
       ],
@@ -101,8 +108,8 @@ function interactable(element: HTMLElement): () => void {
 }
 
 function maximizeContainer(container: HTMLElement): void {
-  container.style.width = (window.innerWidth - 4) + 'px';
-  container.style.height = (window.innerHeight - 4) + 'px';
+  container.style.width = window.innerWidth + 'px';
+  container.style.height = window.innerHeight + 'px';
 }
 
 function minimizeContainer(container: HTMLElement): void {

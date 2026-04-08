@@ -34,7 +34,7 @@
 
     //determine command output
     const output = determineOutput(terminalInputStore.value);
-    let echoValue = terminalInputStore.value;
+    const echoValue = terminalInputStore.value;
     terminalInputStore.reset() //force need to re-render input element to focus again after new logs are flushed to DOM
 
     //adding non-empty cmd input to cmd history
@@ -50,7 +50,7 @@
     //printing cmd output
     if(output) {
       if(typeof output === 'function') {
-        output();
+        output(); // is type () => void as EMIT_COMMAND_ACTION
         await handleAfterSubmitProcess();
         return;
       }
@@ -228,7 +228,6 @@
     font-family: Ubuntu Mono;
     display: inline;
     border: none;
-    width: 180px;
     background-color: unset;
     padding: 0;
     margin: 0;

@@ -28,7 +28,7 @@
     // strip leading # to get the element id
     const id = href.slice(1);
     // find the element with that id inside the scroll container
-    const el = victionariumElement.querySelector(`#${CSS.escape(id)}`);
+    const el = victionariumElement.querySelector(`#${CSS.escape(id)}`); //escaping #
     if(!el) return;
     const container = victionariumElement.querySelector('.dictionary-entry');
     if (!container) return;
@@ -71,20 +71,21 @@
   onMount(async () => {
     await sleep(200); //wait for other stateful stuff to complete elsewhere
     victionariumInputStore.element.focus();
-
     const searchableParameter = urlManager.getVictionariumSearchable();
-    if (searchableParameter) {
+    if(searchableParameter) {
       await loadLemmaAndNavigate(() => getLatinLemmaHTMLByTitle(searchableParameter));
     } else {
       await loadLemmaAndNavigate(() => getRandomLatinLemmaHTML());
     }
   });
 
+  //when the user navigates back/forward in browser history, restore the content
+  //for that url without pushing a new history entry by calling navigate (which would corrupt the stack)
   $effect(() => {
-    if (!urlManager.isRestoringHistory) return;
+    if(!urlManager.isRestoringHistory) { return; }
     urlManager.isRestoringHistory = false;
     const searchableParameter = urlManager.getVictionariumSearchable();
-    if (searchableParameter) {
+    if(searchableParameter) {
       loadLatinLemma(() => getLatinLemmaHTMLByTitle(searchableParameter));
     } else {
       loadLatinLemma(() => getRandomLatinLemmaHTML()); 
@@ -132,6 +133,7 @@
 
 <style>
   .victionarium {
+    box-sizing: border-box;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -145,6 +147,8 @@
     padding-left: 4px;
     padding-right: 4px;
     padding-bottom: 4px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
     margin: 0;
     overflow: hidden;
   }
