@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { determineOutput, SHELL_AUTOCOMPLETE_OPTIONS } from "./shell";
   import beep from "../assets/beep";
   import { focusElement } from "../lib/utilities.svelte";
@@ -8,7 +8,7 @@
   import { bootTerminal, instantlyBootTerminalAndOpenApp } from "./terminalStartingActions.svelte";
   import { urlManager } from "../lib/urlManager.svelte";
 
-  let mainInput = $state(null); //component-binded handle for native dom input box refocus
+  let mainInput = $state<HTMLElement | null>(null); //component-binded handle for native dom input box refocus
 
   onMount(async () => {
     const command = urlManager.getInitialRoute();
@@ -20,7 +20,7 @@
     await handleSubmit();
   });
 
-  async function handleSubmit() {
+  async function handleSubmit(): Promise<void> {
     //handle if an app is open
     if(windowManager.hasActiveApp) { 
       beep();
@@ -62,14 +62,15 @@
   }
 
   //force focus to input elem
-  async function handleAfterSubmitProcess() {
+  async function handleAfterSubmitProcess(): Promise<void> {
     await tick(); //flush log entry to DOM
     terminalInputStore.isVisible = true;
     await focusBottomOfTerminal();
     if(windowManager.hasActiveApp){ mainInput?.blur(); } //force un-focus
   }
 
-  function buildTabCompletionState() {
+  type TabCompletionState = { word: string, matches: string[] }
+  function buildTabCompletionState(): TabCompletionState | null {
     const args = terminalInputStore.value.trim().split(/\s+/)
       .filter((string) => { return string.length > 0; }); //filter out empty strings
     if(args.length === 0) return null; //nothing typed
@@ -89,7 +90,7 @@
     return { word, matches };
   }
 
-  async function handleTabComplete(event) {
+  async function handleTabComplete(event: Event) {
     event.preventDefault();
     if(windowManager.hasActiveApp) { beep(); return; } //an app is running
     tabCompletionStore.isMutating = true;
@@ -106,6 +107,7 @@
         tabCompletionStore.isActive = true; //must be set before terminalInputStore mutation triggers $effect
         tabCompletionStore.options = state.matches.join('   '); //show all options on first tab
       } else {
+        if(!tabCompletionStore.matches) { beep(); return; }
         tabCompletionStore.index = ((tabCompletionStore.index + 1) % tabCompletionStore.matches.length); //advance cycle
       }
 
@@ -132,7 +134,7 @@
     if(!tabCompletionStore.isMutating) { tabCompletionStore.reset(); }
   });
 
-  async function focusBottomOfTerminal() {
+  async function focusBottomOfTerminal(): Promise<void> {
     await tick(); //finish microtask queue
     //https://stackoverflow.com/questions/11715646/scroll-automatically-to-the-bottom-of-the-page
     if(terminalInputStore.element) { terminalInputStore.element.scrollTop = terminalInputStore.element.scrollHeight; }
@@ -192,6 +194,7 @@
               focusBottomOfTerminal();
               windowManager.closeApp(); 
             } else {
+              terminalInputStore.reset();
               handleSubmit();
             }
           }

@@ -1,15 +1,15 @@
-<script>
+<script lang="ts">
   import { renderDictionaryEntry } from "./htmlParser";
 
   let { content, error, onNavigate } = $props();
 
   const nodes = $derived(content ? renderDictionaryEntry(content) : []);
 
-  function handleClick(e) {
-    const target = (e.target).closest('a');
+  function handleClick(e: MouseEvent) {
+    const target = (e.target as HTMLElement)?.closest('a');
     if(!target) return;
     const href = target.getAttribute('href');
-    if(href.startsWith('#')) return;
+    if(!href || href.startsWith('#')) return;
     e.preventDefault();
     if(href.startsWith('./')) { //detecting relative pathing
       const word = href.slice(2).split('?')[0];

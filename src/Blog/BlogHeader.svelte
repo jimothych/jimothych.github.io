@@ -1,15 +1,17 @@
-<script>
-  import { getContext } from 'svelte';
+<script lang="ts">
+  import { getWindowContext } from '../lib/context';
   import MinimizeSVG from '../assets/MinimizeSVG.svelte';
   import MaximizeSVG from '../assets/MaximizeSVG.svelte';
   import ExitSVG from '../assets/ExitSVG.svelte';
-  import { WINDOW_ACTION_ENUM } from '../lib/utilities.svelte';
+  import { WINDOW_ACTION_ENUM, type WINDOW_ID } from '../lib/utilities.svelte';
   import { windowManager } from '../lib/windowManager.svelte';
-  import { tabManager, TAB_ENUM } from './tabManager.svelte';
+  import { tabManager } from './tabManager.svelte';
   import Tab from './Tab.svelte';
 
-  const windowContext = getContext('windowContext');
-  let { id } = $props();
+  const windowContext = getWindowContext();
+
+  type Props = { id: WINDOW_ID }
+  let { id }: Props = $props();
 
   let focusColor = $derived(
     (windowManager.activeWindow === id) ? "--white" : "--app-inactive"
@@ -19,11 +21,11 @@
 <div class="header drag-handle">
 
   <div class="tabs-absolute">
-    <Tab windowID={id} thisTabID={TAB_ENUM.HOME}>
+    <Tab windowID={id} thisTabSlug={"home"}>
       Blog
     </Tab>
     {#if tabManager.blogData}
-    <Tab windowID={id} thisTabID={TAB_ENUM.BLOG}>
+    <Tab windowID={id} thisTabSlug={tabManager.blogData.slug}>
       {tabManager.blogData.title}
     </Tab>
     {/if}

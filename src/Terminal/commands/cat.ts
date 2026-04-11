@@ -1,4 +1,4 @@
-import { ShellCommandObject, invalidOption, usage, hasInvalidArg } from "./common";
+import { type ShellCommandObject, invalidOption, usage, hasInvalidArg } from "./common";
 import { getPoemNames, getPoemContent, removeFileExtensions, getPoemNamesWithFileExtensions } from "./poems";
 
 const COMMAND_NAME: string = "cat";

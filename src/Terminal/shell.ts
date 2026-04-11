@@ -1,4 +1,4 @@
-import { EMIT_COMMAND_ACTION, ShellCommand } from "./commands/common";
+import { type EMIT_COMMAND_ACTION, type ShellCommand } from "./commands/common";
 import { WHOAMI } from "./commands/whoami";
 import { PROJECTS } from "./commands/projects";
 import { BLOG } from "./commands/blog";

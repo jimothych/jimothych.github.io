@@ -1,4 +1,4 @@
-import { ShellCommandObject, invalidOption, usage, EMIT_COMMAND_ACTION } from "./common";
+import { type ShellCommandObject, invalidOption, usage, type EMIT_COMMAND_ACTION } from "./common";
 import { windowManager } from "../../lib/windowManager.svelte";
 import { WINDOW_ID_ENUM } from "../../lib/utilities.svelte";
 

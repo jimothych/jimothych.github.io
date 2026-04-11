@@ -1,4 +1,4 @@
-import { ShellCommandObject, usage, notYetSupported } from "./common";
+import { type ShellCommandObject, usage, notYetSupported } from "./common";
 
 const COMMAND_NAME: string = "psh";
 const ALLOWED_ARGS: string[] = [];

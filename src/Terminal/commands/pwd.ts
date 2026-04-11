@@ -1,4 +1,4 @@
-import { ShellCommandObject, invalidOption, usage } from "./common";
+import { type ShellCommandObject, invalidOption, usage } from "./common";
 
 const COMMAND_NAME: string = "pwd";
 const ALLOWED_ARGS: string[] = [];

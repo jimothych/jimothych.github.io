@@ -1,25 +1,25 @@
-<script>
+<script lang="ts">
   import Sidebar from "./Sidebar.svelte";
   import DictionaryEntry from "./DictionaryEntry.svelte";
   import LoadingModal from "./LoadingModal.svelte";
   import { onMount } from "svelte";
   import { sleep } from "../lib/utilities.svelte";
-  import { getRandomLatinLemmaHTML, getLatinLemmaHTMLByTitle } from "./wiktionary";
+  import { getRandomLatinLemmaHTML, getLatinLemmaHTMLByTitle, type LemmaResult } from "./wiktionary";
   import { 
     extractLatinSection, 
-    extractLatinSidebarContent, 
-    extractLatinDictionaryEntryContent
+    extractLatinSidebarContent, type SidebarContent,
+    extractLatinDictionaryEntryContent, type DictionaryEntryContent
   } from "./htmlParser";
   import { victionariumInputStore } from "./victionariumStore.svelte";
   import { HTTPError } from "ky";
   import { urlManager } from "../lib/urlManager.svelte";
   import { VICTIONARIUM } from "../Terminal/commands/victionarium";
 
-  let victionariumElement = $state(null);
+  let victionariumElement = $state<HTMLElement | null>(null);
 
-  function handleHashLinkClick(e) {
+  function handleHashLinkClick(e: MouseEvent) {
     // find the closest anchor element from the click target
-    const target = (e.target).closest('a');
+    const target = (e.target as HTMLElement)?.closest('a');
     if(!target) return;
     const href = target.getAttribute('href');
     // only handle hash links (sidebar links)
@@ -28,18 +28,19 @@
     // strip leading # to get the element id
     const id = href.slice(1);
     // find the element with that id inside the scroll container
-    const el = victionariumElement.querySelector(`#${CSS.escape(id)}`); //escaping #
+    const el = victionariumElement?.querySelector(`#${CSS.escape(id)}`) as HTMLElement;
     if(!el) return;
-    const container = victionariumElement.querySelector('.dictionary-entry');
+    const container = victionariumElement?.querySelector('.dictionary-entry');
     if (!container) return;
     container.scrollTo({ top: el.offsetTop, behavior: 'instant' });
   }
 
-  let latinSidebarContent = $state(null);
-  let latinDictionaryEntryContent = $state(null);
-  let error = $state(null);
+  let latinSidebarContent = $state<SidebarContent[] | null>(null);
+  let latinDictionaryEntryContent = $state<DictionaryEntryContent | null>(null);
+  let error = $state<string | null>(null);
 
-  async function loadLatinLemma(fetchFn) {
+  type FetchFn = () => Promise<LemmaResult>
+  async function loadLatinLemma(fetchFn: FetchFn) {
     latinSidebarContent = null;
     latinDictionaryEntryContent = null;
     error = null;
@@ -52,15 +53,17 @@
     } catch(e) {
       if(e instanceof HTTPError && e.response.status === 404) {
         error = `no query results :(`;
-      } else {
+      } else if(e instanceof Error) {
         error = e.message;
+      } else {
+        error = String(e);
       }
     }
   }
 
-  async function loadLemmaAndNavigate(fetchFn) {
+  async function loadLemmaAndNavigate(fetchFn: FetchFn) {
     const title = await loadLatinLemma(fetchFn);
-    if(title) { urlManager.navigate(`/${VICTIONARIUM.name}/${title}`); }
+    if(title) { urlManager.navigate(`/victionarium/${title}`); }
   }
 
   async function handleSubmit() {
@@ -70,10 +73,10 @@
 
   onMount(async () => {
     await sleep(200); //wait for other stateful stuff to complete elsewhere
-    victionariumInputStore.element.focus();
-    const searchableParameter = urlManager.getVictionariumSearchable();
-    if(searchableParameter) {
-      await loadLemmaAndNavigate(() => getLatinLemmaHTMLByTitle(searchableParameter));
+    victionariumInputStore.element?.focus();
+    const subpath = urlManager.getSubpath(VICTIONARIUM.name);
+    if(subpath) {
+      await loadLemmaAndNavigate(() => getLatinLemmaHTMLByTitle(subpath));
     } else {
       await loadLemmaAndNavigate(() => getRandomLatinLemmaHTML());
     }
@@ -84,9 +87,9 @@
   $effect(() => {
     if(!urlManager.isRestoringHistory) { return; }
     urlManager.isRestoringHistory = false;
-    const searchableParameter = urlManager.getVictionariumSearchable();
-    if(searchableParameter) {
-      loadLatinLemma(() => getLatinLemmaHTMLByTitle(searchableParameter));
+    const subpath = urlManager.getSubpath(VICTIONARIUM.name);
+    if(subpath) {
+      loadLatinLemma(() => getLatinLemmaHTMLByTitle(subpath));
     } else {
       loadLatinLemma(() => getRandomLatinLemmaHTML()); 
     }
@@ -100,7 +103,7 @@
   class="victionarium" 
   bind:this={victionariumElement}
   tabindex="-1"
-  onkeydown={() => victionariumInputStore.element.focus()}
+  onkeydown={() => victionariumInputStore.element?.focus()}
   onclick={handleHashLinkClick}
 >
   <form 
@@ -126,7 +129,7 @@
       content={latinDictionaryEntryContent} 
       error={error}
       //big fancy closure :)
-      onNavigate={(word) => loadLemmaAndNavigate(() => getLatinLemmaHTMLByTitle(word))}
+      onNavigate={(word: string) => loadLemmaAndNavigate(() => getLatinLemmaHTMLByTitle(word))}
     />
   </div>
 </div>

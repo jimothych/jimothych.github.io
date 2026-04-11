@@ -1,6 +1,11 @@
-<script>
-  import { tabManager, TAB_ENUM } from "./tabManager.svelte";
-  let { data } = $props();
+<script lang="ts">
+  import { tabManager } from "./tabManager.svelte";
+  import { urlManager } from "../lib/urlManager.svelte";
+  import type { BlogData } from "./blogs/template/template";
+
+  type Props = { data: BlogData }
+  let { data }: Props = $props();
+
 </script>
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
@@ -9,7 +14,8 @@
   class="thumbnail" 
   onclick={() => { 
     tabManager.blogData = data; 
-    tabManager.activeTabID = TAB_ENUM.BLOG; 
+    tabManager.activeTabSlug = data.slug;
+    urlManager.navigate(`/blog/${data.slug}`)
   }}
 >
 

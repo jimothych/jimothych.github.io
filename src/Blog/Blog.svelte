@@ -1,10 +1,31 @@
-<script>
+<script lang="ts">
+  import { onMount, tick } from 'svelte';
   import Thumbnail from './Thumbnail.svelte';
-  import { tabManager, TAB_ENUM } from './tabManager.svelte';
-  import { template } from './blogs/template/template';
+  import { tabManager, BLOGS } from './tabManager.svelte';
+  import { urlManager } from '../lib/urlManager.svelte';
+  import { BLOG } from '../Terminal/commands/blog';
+
+  onMount(async () => {
+    await tick(); //wait for other stateful stuff to complete elsewhere
+    const subpath = urlManager.getSubpath(BLOG.name);
+    if(!subpath) {
+      urlManager.navigate(`/blog/home`);
+    } else if (BLOGS.has(subpath)) {
+      tabManager.activeTabSlug = subpath
+      tabManager.blogData = BLOGS.get(subpath)!;
+      urlManager.navigate(`/blog/${subpath}`);
+    }
+  });
+
+  //when the user navigates back/forward in browser history
+  //we simply reload the page as preserving state is of no importance for blog app
+  $effect(() => {
+    if(!urlManager.isRestoringHistory) { return; }
+    window.location.reload();
+  });
 </script>
 
-{#if tabManager.activeTabID === TAB_ENUM.BLOG && tabManager.blogData}
+{#if (tabManager.activeTabSlug != "home") && (tabManager.blogData)}
 <div class="blog">
   <div class="content-container">
     {@html tabManager.blogData.content}
@@ -17,12 +38,9 @@
     <div class="menu">
       <p class="home-text">Home</p>
     </div>
-
-    <Thumbnail data={template}/>
-    <Thumbnail data={template}/>
-    <Thumbnail data={template}/>
-    <Thumbnail data={template}/>
-
+    {#each Array.from(BLOGS.values()) as blog (blog.slug)}
+      <Thumbnail data={blog} />
+    {/each}
   </div>
 </div>
 {/if}

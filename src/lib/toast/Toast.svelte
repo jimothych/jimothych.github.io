@@ -1,17 +1,19 @@
-<script>
+<script lang="ts">
   import { fly, fade } from "svelte/transition";
   import { toast } from "./toastController.svelte";
   import ExitSVG from "../../assets/ExitSVG.svelte";
 
-  let isVisible = $state(false);
-  let message = $state("");
-  let duration = $state(2500);
+  const DEFAULT_TOAST_DURATION: number = 2500;
 
-  let timeoutID = $state(null);
+  let isVisible = $state<boolean>(false);
+  let message = $state<string>("");
+  let duration = $state<number>(DEFAULT_TOAST_DURATION);
 
-  function open(msg, d) {
+  let timeoutID = $state<ReturnType<typeof setTimeout> | null>(null);
+
+  function open(msg: string, d?: number) {
     message = msg;
-    duration = d;
+    duration = d ?? DEFAULT_TOAST_DURATION;
     isVisible = true;
 
     if(timeoutID) { clearTimeout(timeoutID); }

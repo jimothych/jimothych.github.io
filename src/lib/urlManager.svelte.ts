@@ -1,4 +1,5 @@
 import { VICTIONARIUM } from "../Terminal/commands/victionarium";
+import { BLOG } from "../Terminal/commands/blog";
 import { toast } from "./toast/toastController.svelte";
 
 class URLManager {
@@ -9,6 +10,7 @@ class URLManager {
     window.addEventListener('popstate', () => { //keeps track of browser history
       this.isRestoringHistory = true;
       this.pathname = window.location.pathname;
+      if(this.pathname === "/") { this.restart(); } //to clear stale open windows if history nav goes back to root
     });
   }
 
@@ -35,6 +37,9 @@ class URLManager {
     if(segments[0] === VICTIONARIUM.name) { 
       return VICTIONARIUM.name; 
     }
+    if(segments[0] === BLOG.name) {
+      return BLOG.name;
+    }
 
     // 404 unknown route fallback
     toast.open(`<p>invalid path :(<br>redirecting to root</p>`);
@@ -42,9 +47,9 @@ class URLManager {
     return "";
   }
 
-  getVictionariumSearchable(): string | null {
+  getSubpath(appName: string): string | null {
     const segments = this.pathname.split('/').filter(Boolean);
-    if (segments[0] !== VICTIONARIUM.name || segments.length < 2) { return null; }
+    if (segments[0] !== appName || segments.length < 2) { return null; }
 
     if(segments.length > 2) { 
       toast.open(`<p>redirecting to /${segments[1]}</p>`);

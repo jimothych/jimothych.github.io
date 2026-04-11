@@ -1,6 +1,6 @@
-<script>
-  import { setContext } from 'svelte';
+<script lang="ts">
   import { windowManager } from './windowManager.svelte';
+  import { setWindowContext, type WindowContext } from './context';
   import { 
     interactable, 
     centerContainer,
@@ -10,27 +10,41 @@
     MIN_WINDOW_WIDTH,
     MIN_WINDOW_HEIGHT,
     activateWindowViaDOMCapture,
+    type WINDOW_ID,
   } from './utilities.svelte';
+  import type { Component } from 'svelte';
 
-  //choosing to spread props because I've decided not to use ts in .svelte files so no type hints
-  let { id, Header, Content, offsetX, offsetY, initialWidth, initialHeight, 
-    fontFamily, textColor, borderColor } = $props();
+  type Props = {
+    id: WINDOW_ID;
+    Header: Component<{ id: string }>;
+    Content: Component<{ id: string }>;
+    offsetX: number;
+    offsetY: number;
+    initialWidth: string;
+    initialHeight: string;
+    fontFamily: string;
+    textColor: string;
+    borderColor: string;
+  }
+  let { id, Header, Content, offsetX, offsetY, initialWidth, initialHeight, fontFamily, textColor, borderColor }: Props = $props();
 
   //for interactable buttons in header
-  const windowContext = $state({ action: null });
-  setContext('windowContext', windowContext);
+  const windowContext = $state<WindowContext>({ action: null });
+  setWindowContext(windowContext);
 
-  let container = $state(); //component-bound to the Window wrapper
+  let container = $state<HTMLElement>(); //component-bound to the Window wrapper
 
-  function centerContainerClosure() { centerContainer(container, offsetX, offsetY); }
+  function centerContainerClosure(): void { 
+    centerContainer(container!, offsetX, offsetY); 
+  }
 
   $effect(() => {
     if(windowContext.action === WINDOW_ACTION_ENUM.MAXIMIZE) {
-      maximizeContainer(container);
-      centerContainer(container);
+      maximizeContainer(container!);
+      centerContainer(container!);
     } else if(windowContext.action === WINDOW_ACTION_ENUM.MINIMIZE) {
-      minimizeContainer(container);
-      centerContainer(container, offsetX, offsetY);
+      minimizeContainer(container!);
+      centerContainer(container!, offsetX, offsetY);
     } else if(windowContext.action === WINDOW_ACTION_ENUM.EXIT) { 
       windowManager.closeApp();
     }

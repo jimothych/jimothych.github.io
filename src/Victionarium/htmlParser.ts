@@ -222,4 +222,5 @@ export {
   extractLatinSidebarContent, 
   extractLatinDictionaryEntryContent,
   renderDictionaryEntry,
-};
+}
+export type { SidebarContent, DictionaryEntryContent }

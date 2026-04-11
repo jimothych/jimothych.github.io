@@ -1,8 +1,10 @@
-<script>
+<script lang="ts">
   import { DotLottie } from "@lottiefiles/dotlottie-web";
 
-  let { isVisible } = $props();
-  let canvasElement = $state(null);
+  type Props = { isVisible: boolean }
+  let { isVisible }: Props = $props();
+
+  let canvasElement = $state<HTMLCanvasElement | null>(null);
 
   $effect(() => {
     if (!canvasElement) { return; }

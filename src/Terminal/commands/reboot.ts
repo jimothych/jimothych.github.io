@@ -1,4 +1,4 @@
-import { ShellCommandObject, invalidOption, usage, EMIT_COMMAND_ACTION } from "./common";
+import { type ShellCommandObject, invalidOption, usage, type EMIT_COMMAND_ACTION } from "./common";
 import { urlManager } from "../../lib/urlManager.svelte";
 
 const COMMAND_NAME: string = "reboot";

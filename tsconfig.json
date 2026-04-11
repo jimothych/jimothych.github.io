@@ -4,6 +4,8 @@
     "skipLibCheck": true,
     "lib": ["ES2023", "DOM"],
     "target": "ES2023",
-    "moduleResolution": "bundler"
+    "moduleResolution": "bundler",
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true
   }
 }

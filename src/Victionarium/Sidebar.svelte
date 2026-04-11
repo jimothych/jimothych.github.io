@@ -1,5 +1,13 @@
-<script>
-  let { content } = $props();
+<script lang="ts">
+  type SidebarEntry = {
+    title: string;
+    hash: string;
+    level: number;
+    children: SidebarEntry[];
+  }
+
+  type Props= { content: SidebarEntry[] | null }
+  let { content }: Props = $props();
 
   // [
   //   {"title":"Etymology","hash":"#Etymology","level":3,"children":[]},
@@ -9,7 +17,7 @@
   //   ]},
   //   {"title":"References","hash":"#References","level":3,"children":[]}
   // ]
-  function sidebarContentToHTML(entries, depth = 0) {
+  function sidebarContentToHTML(entries: SidebarEntry[], depth = 0): string {
     return entries.map(entry => {
       const indent = depth * 10;
       const children = (entry.children.length > 0) 

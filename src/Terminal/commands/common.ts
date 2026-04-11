@@ -60,14 +60,12 @@ function hasInvalidOption(commandName: string, options: string[],
 }
 
 export { 
-  ShellCommand, 
-  ShellCommandObject, 
   usage, 
   invalidOption,
   tooManyArgs,
   hasInvalidArg,
   hasInvalidOption,
   notYetSupported,
-  notFound,
-  EMIT_COMMAND_ACTION
+  notFound
 }
+export type { ShellCommand, ShellCommandObject, EMIT_COMMAND_ACTION }

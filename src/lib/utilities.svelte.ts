@@ -158,12 +158,11 @@ export {
   MIN_WINDOW_WIDTH, 
   MIN_WINDOW_HEIGHT,
   WINDOW_ACTION_ENUM,
-  WINDOW_ACTION,
   WINDOW_ID_ENUM,
-  WINDOW_ID,
   focusElement,
   activateWindowViaDOMCapture,
   activateWindowViaDOMBubbleUp,
   maximizeContainer,
   minimizeContainer,
 }
+export type { WINDOW_ACTION, WINDOW_ID }

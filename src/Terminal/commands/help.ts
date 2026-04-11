@@ -1,4 +1,4 @@
-import { ShellCommandObject, invalidOption, usage } from "./common";
+import { type ShellCommandObject, invalidOption, usage } from "./common";
 
 const COMMAND_NAME: string = "help";
 const ALLOWED_ARGS: string[] = [];
@@ -26,7 +26,7 @@ below are a few other commands you can run to learn more about me!
 commands:
 ${createPaddedString(`whoami`, `who i am`)}
 ${createPaddedString(`projects`, `what i've been up to`)}
-${createPaddedString(`blog`, `open blog`)}
+${createPaddedString(`blog`, `my blog`)}
 ${createPaddedString(`ls`, `list directory contents`)}
 ${createPaddedString(`cat`, `print file contents to output, e.g. &#96;cat poem1.txt&#96;`)}
 ${createPaddedString(`victionarium`, `id quod me iuvat`)}

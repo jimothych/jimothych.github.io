@@ -1,15 +1,21 @@
-import { BlogContract } from "./blogs/template/template";
+import { type BlogData, template } from "./blogs/template/template";
 
-const TAB_ENUM = {
-  HOME: "HOME",
-  BLOG: "BLOG",
-} as const;
-type Tab = typeof TAB_ENUM[keyof typeof TAB_ENUM];
+const BLOGS = new Map<string, BlogData>();
+for(const blog of [
+  template
+]) {
+  BLOGS.set(blog.slug, blog);
+}
 
 class TabManager {
-  blogData = $state<BlogContract | null>(null);
-  activeTabID = $state<Tab>(TAB_ENUM.HOME);
+  blogData = $state<BlogData | null>(null);
+  activeTabSlug = $state<string>("home");
+
+  reset() {
+    this.blogData = null;
+    this.activeTabSlug = "home"
+  }
 }
 
 let tabManager = new TabManager();
-export { tabManager, TAB_ENUM }
+export { tabManager, BLOGS }

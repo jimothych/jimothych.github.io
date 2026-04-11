@@ -1,5 +1,5 @@
-import { WINDOW_ID_ENUM, WINDOW_ID } from "./utilities.svelte";
-import { Component } from "svelte";
+import { WINDOW_ID_ENUM, type WINDOW_ID } from "./utilities.svelte";
+import { type Component } from "svelte";
 import TerminalHeader from "../Terminal/TerminalHeader.svelte";
 import Terminal from "../Terminal/Terminal.svelte";
 import VictionariumHeader from "../Victionarium/VictionariumHeader.svelte";

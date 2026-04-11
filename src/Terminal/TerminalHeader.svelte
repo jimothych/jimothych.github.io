@@ -1,13 +1,16 @@
-<script>
+<script lang="ts">
   import '@fortawesome/fontawesome-free/css/all.min.css'
-  import { getContext } from 'svelte';
+  import { getWindowContext } from '../lib/context';
   import MinimizeSVG from '../assets/MinimizeSVG.svelte';
   import MaximizeSVG from '../assets/MaximizeSVG.svelte';
   import { WINDOW_ACTION_ENUM } from '../lib/utilities.svelte';
   import { windowManager } from '../lib/windowManager.svelte';
+  import type { WINDOW_ID } from '../lib/utilities.svelte';
 
-  const windowContext = getContext('windowContext');
-  let { id } = $props();
+  const windowContext = getWindowContext();
+
+  type Props = { id: WINDOW_ID }
+  let { id }: Props = $props();
 
   let focusColor = $derived(
     (windowManager.activeWindow === id) ? "--light-grey" : "--terminal-inactive"

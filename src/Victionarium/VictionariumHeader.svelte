@@ -1,13 +1,15 @@
-<script>
-  import { getContext } from 'svelte';
+<script lang="ts">
+  import { getWindowContext } from '../lib/context';
   import MinimizeSVG from '../assets/MinimizeSVG.svelte';
   import MaximizeSVG from '../assets/MaximizeSVG.svelte';
   import ExitSVG from '../assets/ExitSVG.svelte';
-  import { WINDOW_ACTION_ENUM } from '../lib/utilities.svelte';
+  import { WINDOW_ACTION_ENUM, type WINDOW_ID } from '../lib/utilities.svelte';
   import { windowManager } from '../lib/windowManager.svelte';
 
-  const windowContext = getContext('windowContext');
-  let { id } = $props();
+  const windowContext = getWindowContext();
+
+  type Props = { id: WINDOW_ID }
+  let { id }: Props = $props();
 
   let focusColor = $derived(
     (windowManager.activeWindow === id) ? "--white" : "--app-inactive"

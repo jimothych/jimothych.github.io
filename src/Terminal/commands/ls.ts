@@ -1,4 +1,4 @@
-import { ShellCommandObject, tooManyArgs, hasInvalidOption, usage, notFound } from "./common";
+import { type ShellCommandObject, tooManyArgs, hasInvalidOption, usage, notFound } from "./common";
 import { poems } from "./poems";
 
 const COMMAND_NAME: string = "ls";

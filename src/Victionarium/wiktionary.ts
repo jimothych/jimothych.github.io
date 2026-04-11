@@ -38,3 +38,4 @@ function randomLetter(): string {
 }
 
 export { getRandomLatinLemmaHTML, getLatinLemmaHTMLByTitle }
+export type { LemmaResult }

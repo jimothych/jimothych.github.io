@@ -1,15 +1,19 @@
-<script>
-  import { tabManager, TAB_ENUM } from './tabManager.svelte';
+<script lang="ts">
+  import { tabManager } from './tabManager.svelte';
   import ExitSVG from '../assets/ExitSVG.svelte';
   import { windowManager } from '../lib/windowManager.svelte';
+  import { urlManager } from '../lib/urlManager.svelte';
+  import type { Snippet } from 'svelte';
+    import type { WINDOW_ID } from '../lib/utilities.svelte';
 
-  let { windowID, thisTabID, children } = $props();
+  type Props = { windowID: WINDOW_ID; thisTabSlug: string; children: Snippet; }
+  let { windowID, thisTabSlug, children }: Props = $props();
 
   let focusColor = $derived(
     windowManager.activeWindow === windowID ? '--white' : '--app-inactive'
   );
   let bgColor = $derived(
-    tabManager.activeTabID === thisTabID ? '--dark-grey' : '--mid-black'
+    tabManager.activeTabSlug === thisTabSlug ? '--dark-grey' : '--mid-black'
   );
 </script>
 
@@ -17,26 +21,28 @@
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <div
   class="tab"
-  class:active={tabManager.activeTabID === thisTabID}
+  class:active={tabManager.activeTabSlug === thisTabSlug}
   style={`
     --tab-bg: var(${bgColor});
     color: var(${focusColor});
   `}
-  onclick={() => {
-    tabManager.activeTabID = thisTabID;
+  onclick={() => { 
+    tabManager.activeTabSlug = thisTabSlug; 
+    urlManager.navigate(`/blog/${thisTabSlug}`);
   }}
 >
   <div class="tab-text">
     {@render children()}
   </div>
 
-  {#if thisTabID == TAB_ENUM.BLOG}
+  <!-- expose a clickable close button for blog tabs -->
+  {#if thisTabSlug != "home"}
   <button 
     class="icon-container"
-    onclick={(e) =>  { 
+    onclick={(e) => { 
       e.stopPropagation(); // prevent the parent click from happening
-      tabManager.blogData = null;
-      tabManager.activeTabID = TAB_ENUM.HOME;
+      tabManager.reset();
+      urlManager.navigate(`/blog/home`);
     }}
   >
     <ExitSVG color={`var(${focusColor})`} />
@@ -48,7 +54,7 @@
   .tab {
     box-sizing: border-box;
     width: min(125px, 35%);
-    margin-left: 6px;
+    margin-left: 4px;
     height: 90%;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;

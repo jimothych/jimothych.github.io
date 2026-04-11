@@ -6,9 +6,9 @@ function slugify(s: string): string {
   return s.toLowerCase().trim().replace(/\s+/g, '-');
 }
 
-type BlogContract = {
-  title: string,
+type BlogData = {
   slug: string,
+  title: string,
   thumbnail: {
     description: string,
     date: string,
@@ -18,9 +18,9 @@ type BlogContract = {
 }
 
 const TITLE = "This is a Placeholder Title"
-const template: BlogContract = {
-  title: TITLE,
+const template: BlogData = {
   slug: slugify(TITLE),
+  title: TITLE,
   thumbnail: {
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut mollit anim id est laborum.",
     date: "Nov 13, 2025",
@@ -29,4 +29,5 @@ const template: BlogContract = {
   content: CONTENT
 }
 
-export { slugify, BlogContract, template }
+export { slugify, template }
+export type { BlogData }
