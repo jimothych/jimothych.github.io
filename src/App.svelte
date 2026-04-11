@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import Window from "./lib/Window.svelte"
   import MediaQueryModal from "./lib/MediaQueryModal.svelte";
   import { windowManager } from "./lib/windowManager.svelte";

@@ -10,8 +10,8 @@ import { urlManager } from "./urlManager.svelte";
 
 type APPLICATION = {
   ID: WINDOW_ID,
-  HEADER: Component<any> | null,
-  CONTENT: Component<any> | null,
+  HEADER: Component<any>,
+  CONTENT: Component<any>,
   FONT_FAMILY: "Ubuntu Mono" | "Ubuntu Sans",
   TEXT_COLOR: "--white" | "--pink",
   OFFSET_X: number,

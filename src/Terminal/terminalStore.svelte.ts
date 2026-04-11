@@ -76,14 +76,17 @@ class TabCompletionStore {
     return this.originalText!.trimEnd().replace(/\S+$/, '') + this.matches![0]; //replace word in original
   }
 
-  reset(): void {
+  resetAllButOptions(): void { //to preserve tab completion options state
     this.originalText = null;
     this.originalWord = null;
     this.matches = null;
     this.index = -1;
-    this.options = "";
     this.isActive = false;
     this.isMutating = false;
+  }
+  reset(): void {
+    this.resetAllButOptions();
+    this.options = "";
   }
 }
 

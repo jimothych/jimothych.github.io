@@ -1,3 +1,5 @@
+<script lang="ts"></script>
+
 <div class="screen-too-small">
   {"mobile incompatible :("}
   <br><br>

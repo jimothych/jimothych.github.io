@@ -131,7 +131,7 @@
   $effect(() => {
     terminalInputStore.value; //subscribe
     //resetting tab state on any external input change
-    if(!tabCompletionStore.isMutating) { tabCompletionStore.reset(); }
+    if(!tabCompletionStore.isMutating) { tabCompletionStore.resetAllButOptions(); }
   });
 
   async function focusBottomOfTerminal(): Promise<void> {

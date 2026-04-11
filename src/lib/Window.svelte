@@ -16,8 +16,8 @@
 
   type Props = {
     id: WINDOW_ID;
-    Header: Component<{ id: string }>;
-    Content: Component<{ id: string }>;
+    Header: Component<any>;
+    Content: Component<any>;
     offsetX: number;
     offsetY: number;
     initialWidth: string;
