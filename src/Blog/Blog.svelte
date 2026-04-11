@@ -27,8 +27,13 @@
 
 {#if (tabManager.activeTabSlug != "home") && (tabManager.blogData)}
 <div class="blog">
+  <div class="content-scrollable-container">
   <div class="content-container">
+    <h1 style="margin-top: 32px; margin-bottom: 8px;">
+      {tabManager.blogData.title}
+    </h1>
     {@html tabManager.blogData.content}
+  </div>
   </div>
 </div>
 {:else}
@@ -59,12 +64,27 @@
     min-height: 0; /* prevents flex overflow */
     border-top-right-radius: 6px;
     margin: 0;
-    overflow: hidden;
   }
 
   /* ---------------------------------------------------- */
   /* blog-specific custom classes section                 */
   /* ---------------------------------------------------- */
+
+  .content-scrollable-container {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+    overscroll-behavior-y: contain;
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0,
+      var(--dark-purple) 6px,
+      var(--dark-purple) calc(100% - 6px),
+      transparent 100%
+    );
+  }
 
   .content-container {
     display: flex;
@@ -75,21 +95,81 @@
     padding-right: 8px;
     padding-top: 30px;
     padding-bottom: 30px;
-    width: min(800px, 70%);
-    height: 100%;
-    overflow-y: scroll;
-    overscroll-behavior-y: contain;
-    mask-image: linear-gradient(
-      to bottom,
-      transparent 0,
-      var(--dark-purple) 8px,
-      var(--dark-purple) calc(100% - 8px),
-      transparent 100%
-    );
+    width: min(750px, 70%);
   }
 
   .content-container :global(p) {
+    font-size: 20px;
+    line-height: 1.3em;
+  }
+
+  .content-container :global(.img-container) {
+    box-sizing: border-box;
+    align-self: center;
+    margin-top: 24px;
+    margin-bottom: 24px;
+
+    display: inline-block;
+    width: min-content;
+  }
+
+  .content-container :global(.img) {
+    object-fit: contain;
+  }
+
+  .content-container :global(.img-description) {
+    margin-top: 4px;
+    font-size: 14px;
+    color: var(--light-grey);
+    font-style: italic;
+  }
+
+  .content-container :global(.markdown) {
+    background-color: var(--med-grey);
+    border-radius: 5px;
     font-size: 18px;
+    font-weight: 500;
+    padding: 2px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .content-container :global(.multi-line) {
+    align-self: center;
+    width: 80%;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    overflow-x: scroll;
+    overscroll-behavior-x: none;
+    white-space: pre;
+  }
+
+  .content-container :global(.block-quote) {
+    align-self: center;
+    width: 85%;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin-top: 18px;
+    margin-bottom: 18px;
+    font-style: italic;
+    font-size: 18px;
+    border-left: 2px solid var(--light-grey);
+    white-space: pre-wrap;
+  }
+
+  .content-container :global(a) {
+    color: var(--orange)
+  }
+
+  .content-container :global(h2) {
+    margin-bottom: 10px;
+    margin-top: 28px;
   }
 
   /* ---------------------------------------------------- */
@@ -111,7 +191,7 @@
   }
 
   .menu {
-    width: min(800px, 70%);
+    width: min(750px, 70%);
     flex-direction: row;
     justify-content: flex-start;
     cursor: default;

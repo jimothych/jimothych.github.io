@@ -35,7 +35,7 @@
 <style>
   .thumbnail {
     margin-bottom: 24px;
-    width: min(800px, 70%);
+    width: min(750px, 70%);
     height: 200px;
     flex-shrink: 0;
     /* background-color: var(--black); */

@@ -1,8 +1,9 @@
-import { type BlogData, template } from "./blogs/template/template";
+import { type BlogData, TEMPLATE } from "./blogs/template/template";
+import { HELLO_WORLD } from "./blogs/hello-world/helloWorld";
 
 const BLOGS = new Map<string, BlogData>();
 for(const blog of [
-  template
+  HELLO_WORLD
 ]) {
   BLOGS.set(blog.slug, blog);
 }

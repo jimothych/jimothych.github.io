@@ -502,4 +502,4 @@ export {
   extractLatinDictionaryEntryContent,
   renderDictionaryEntry,
 }
-export type { SidebarContent, DictionaryEntryContent }
+export type { SidebarContent, DictionaryEntryContent, RenderedNode }

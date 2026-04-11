@@ -1,9 +1,18 @@
 <script lang="ts">
-  import { renderDictionaryEntry } from "./htmlParser";
+  import { 
+    renderDictionaryEntry, 
+    type DictionaryEntryContent, 
+    type RenderedNode 
+  } from "./htmlParser";
 
-  let { content, error, onNavigate } = $props();
+  type Props = {
+    content: DictionaryEntryContent | null,
+    error: string | null,
+    onNavigate: (word: string) => Promise<void>
+  }
+  let { content, error, onNavigate }: Props = $props();
 
-  const nodes = $derived(content ? renderDictionaryEntry(content) : []);
+  const nodes = $derived<RenderedNode[]>(content ? renderDictionaryEntry(content) : []);
 
   function handleClick(e: MouseEvent) {
     const target = (e.target as HTMLElement)?.closest('a');

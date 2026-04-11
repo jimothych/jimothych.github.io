@@ -12,7 +12,7 @@
   type Props = { id: WINDOW_ID }
   let { id }: Props = $props();
 
-  let focusColor = $derived(
+  let focusColor = $derived<string>(
     (windowManager.activeWindow === id) ? "--light-grey" : "--terminal-inactive"
   );
 </script>

@@ -4,15 +4,15 @@
   import { windowManager } from '../lib/windowManager.svelte';
   import { urlManager } from '../lib/urlManager.svelte';
   import type { Snippet } from 'svelte';
-    import type { WINDOW_ID } from '../lib/utilities.svelte';
+  import type { WINDOW_ID } from '../lib/utilities.svelte';
 
   type Props = { windowID: WINDOW_ID; thisTabSlug: string; children: Snippet; }
   let { windowID, thisTabSlug, children }: Props = $props();
 
-  let focusColor = $derived(
+  let focusColor = $derived<string>(
     windowManager.activeWindow === windowID ? '--white' : '--app-inactive'
   );
-  let bgColor = $derived(
+  let bgColor = $derived<string>(
     tabManager.activeTabSlug === thisTabSlug ? '--dark-grey' : '--mid-black'
   );
 </script>

@@ -18,7 +18,7 @@ type BlogData = {
 }
 
 const TITLE = "This is a Placeholder Title"
-const template: BlogData = {
+const TEMPLATE: BlogData = {
   slug: slugify(TITLE),
   title: TITLE,
   thumbnail: {
@@ -29,5 +29,5 @@ const template: BlogData = {
   content: CONTENT
 }
 
-export { slugify, template }
+export { slugify, TEMPLATE }
 export type { BlogData }
