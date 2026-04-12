@@ -105,5 +105,5 @@ class WindowManager {
   }
 }
 
-const windowManager = new WindowManager();
+let windowManager = new WindowManager();
 export { windowManager }

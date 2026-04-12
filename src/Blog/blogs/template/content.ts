@@ -51,3 +51,15 @@ let x = y;
 
 <p>Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
 `;
+
+//video example:
+// <div class="img-container">
+//   <video class="img" autoplay loop muted playsinline loading="lazy" style="
+//     width: 275px;
+//   ">
+//     <source src="${save_tuba_carousel}" type="video/mp4">
+//   </video>
+//   <p class="img-description">
+//     my favorite feature: an animated welcome screen
+//   </p>
+// </div>

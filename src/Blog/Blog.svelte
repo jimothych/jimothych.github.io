@@ -6,7 +6,7 @@
   import { BLOG } from '../Terminal/commands/blog';
 
   onMount(async () => {
-    await tick(); //wait for other stateful stuff to complete elsewhere
+    await tick(); //flush
     const subpath = urlManager.getSubpath(BLOG.name);
     if(!subpath) {
       urlManager.navigate(`/blog/home`);
@@ -29,9 +29,8 @@
 <div class="blog">
   <div class="content-scrollable-container">
   <div class="content-container">
-    <h1 style="margin-top: 32px; margin-bottom: 8px;">
-      {tabManager.blogData.title}
-    </h1>
+    <h1>{tabManager.blogData.title}</h1>
+    <p class="date">{tabManager.blogData.thumbnail.date}</p>
     {@html tabManager.blogData.content}
   </div>
   </div>
@@ -94,13 +93,28 @@
     padding-left: 8px;
     padding-right: 8px;
     padding-top: 30px;
-    padding-bottom: 30px;
+    padding-bottom: 64px;
     width: min(750px, 70%);
+  }
+
+  .content-container h1 {
+    margin-top: 40px;
+    margin-bottom: 8px;
+  }
+
+  .content-container .date {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--light-grey);
+    width: 100%;
+    height: 20px;
+    margin-bottom: 16px;
+    border-bottom: 3px solid var(--red);
   }
 
   .content-container :global(p) {
     font-size: 20px;
-    line-height: 1.3em;
+    line-height: 1.35em;
   }
 
   .content-container :global(.img-container) {
@@ -129,14 +143,17 @@
     border-radius: 5px;
     font-size: 18px;
     font-weight: 500;
-    padding: 2px;
-    padding-left: 8px;
-    padding-right: 8px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 6px;
+    padding-right: 6px;
+    margin-left: 2px;
+    margin-right: 2px;
   }
 
   .content-container :global(.multi-line) {
     align-self: center;
-    width: 80%;
+    width: 85%;
     padding-top: 12px;
     padding-bottom: 12px;
     padding-left: 20px;

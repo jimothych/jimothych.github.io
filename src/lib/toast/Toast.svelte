@@ -1,9 +1,7 @@
 <script lang="ts">
   import { fly, fade } from "svelte/transition";
-  import { toast } from "./toastController.svelte";
+  import { toast, DEFAULT_TOAST_DURATION } from "./toastController.svelte";
   import ExitSVG from "../../assets/ExitSVG.svelte";
-
-  const DEFAULT_TOAST_DURATION: number = 2500;
 
   let isVisible = $state<boolean>(false);
   let message = $state<string>("");

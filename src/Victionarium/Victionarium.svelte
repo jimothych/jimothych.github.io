@@ -11,7 +11,6 @@
     extractLatinDictionaryEntryContent, type DictionaryEntryContent
   } from "./htmlParser";
   import { victionariumInputStore } from "./victionariumStore.svelte";
-  import { HTTPError } from "ky";
   import { urlManager } from "../lib/urlManager.svelte";
   import { VICTIONARIUM } from "../Terminal/commands/victionarium";
 
@@ -51,7 +50,7 @@
       latinDictionaryEntryContent = extractLatinDictionaryEntryContent(latinSection, title);
       return title;
     } catch(e) {
-      if(e instanceof HTTPError && e.response.status === 404) {
+      if(e instanceof Response && e.status === 404) {
         error = `no query results :(`;
       } else if(e instanceof Error) {
         error = e.message;

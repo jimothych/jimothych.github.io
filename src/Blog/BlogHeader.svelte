@@ -46,7 +46,10 @@
     </button>
     <button 
       class="icon-container"
-      onclick={() => windowContext.action = WINDOW_ACTION_ENUM.EXIT}
+      onclick={() => { 
+        tabManager.reset();
+        windowContext.action = WINDOW_ACTION_ENUM.EXIT 
+      }}
     >
       <ExitSVG color={`var(${focusColor})`} />
     </button>

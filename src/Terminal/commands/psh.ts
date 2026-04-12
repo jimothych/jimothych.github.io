@@ -15,7 +15,7 @@ function psh(args: string[], options: string[], isSuperUser: boolean): string {
 
   for(const option of options) {
     if(ALLOWED_OPTIONS.includes(option)) {
-      return (`<pseudo-shell style="white-space:pre-wrap">psh, version 0.1.6</p>`);
+      return (`<pseudo-shell style="white-space:pre-wrap">psh, v0.1.6</p>`);
     }
   }
   //ignoring all other options per bash behaviour

@@ -1,3 +1,5 @@
+const DEFAULT_TOAST_DURATION: number = 3000
+
 type ToastInstance = {
   open: (message: string, duration?: number) => void;
   close: () => void;
@@ -9,7 +11,7 @@ class ToastController {
     this.instance = ref;
   }
 
-  open(message: string, duration: number = 2500): void {
+  open(message: string, duration: number = DEFAULT_TOAST_DURATION): void {
     this.instance?.open(message, duration);
   }
 
@@ -18,4 +20,5 @@ class ToastController {
   }
 }
 
-export const toast = new ToastController();
+let toast = new ToastController();
+export { toast, DEFAULT_TOAST_DURATION }
