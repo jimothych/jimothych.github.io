@@ -34,8 +34,9 @@
 
   let container = $state<HTMLElement>(); //component-bound to the Window wrapper
 
-  function centerContainerClosure(): void { 
-    centerContainer(container!, offsetX, offsetY); 
+  function centerContainerClosure(): void {
+    //defer to prevent sizing bugs on slow load
+    requestAnimationFrame(() => centerContainer(container!, offsetX, offsetY));
   }
 
   $effect(() => {
@@ -69,8 +70,8 @@
   {@attach activateWindowViaDOMCapture(id)}
   {@attach centerContainerClosure}
 >
-  <Header id={id}></Header>
-  <Content id={id}></Content>
+  <Header id={id} />
+  <Content id={id} />
 </div>
 
 <style>

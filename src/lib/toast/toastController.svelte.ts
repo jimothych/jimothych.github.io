@@ -1,7 +1,7 @@
 const DEFAULT_TOAST_DURATION: number = 3000
 
 type ToastInstance = {
-  open: (message: string, duration?: number) => void;
+  open: (message: string, duration: number) => void;
   close: () => void;
 };
 class ToastController {

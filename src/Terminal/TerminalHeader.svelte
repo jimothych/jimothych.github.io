@@ -1,5 +1,5 @@
 <script lang="ts">
-  import '@fortawesome/fontawesome-free/css/all.min.css'
+  import GitHubSVG from '../assets/GitHubSVG.svelte';
   import { getWindowContext } from '../lib/context';
   import MinimizeSVG from '../assets/MinimizeSVG.svelte';
   import MaximizeSVG from '../assets/MaximizeSVG.svelte';
@@ -14,6 +14,9 @@
 
   let focusColor = $derived<string>(
     (windowManager.activeWindow === id) ? "--light-grey" : "--terminal-inactive"
+  );
+  let githubIconColor = $derived<string>(
+    (windowManager.activeWindow === id) ? "--white" : "--terminal-inactive"
   );
 </script>
 
@@ -40,7 +43,7 @@
     target="_blank" 
     style={`color: var(${focusColor})`}
   >
-    <i class="fa-brands fa-github" style={`color: var(${focusColor})`}></i>
+    <GitHubSVG color={`var(${githubIconColor})`} />
     <span style={`margin-left: 6px;`}>github.com/jimothych</span>
   </a>
 

@@ -38,7 +38,7 @@ function determineOutput(inputValue: string): string | EMIT_COMMAND_ACTION | nul
   if(!inputValue) { return null } //nothing entered into input, go next
 
   const commandLineArgs = inputValue.trim().split(/\s+/);
-  console.log(`determineOutput --> ${[...commandLineArgs]}`);
+  //console.log(`determineOutput --> ${[...commandLineArgs]}`);
 
   let command: Command = parseArgs(commandLineArgs);
 

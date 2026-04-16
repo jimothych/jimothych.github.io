@@ -126,8 +126,11 @@ function focusElement(element: HTMLElement): void {
 }
 
 function resolveInitialSize(element: HTMLElement): void {
-  element.style.width  = element.offsetWidth  + 'px';
-  element.style.height = element.offsetHeight + 'px';
+  //defer to prevent sizing bugs on slow load
+  requestAnimationFrame(() => {
+    element.style.width  = element.offsetWidth  + 'px';
+    element.style.height = element.offsetHeight + 'px';
+  });
 }
 
 //https://javascript.info/bubbling-and-capturing

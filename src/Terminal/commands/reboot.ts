@@ -17,7 +17,7 @@ function reboot(args: string[], options: string[], isSuperUser: boolean): string
     return (`<p style="white-space:pre-wrap">${COMMAND_NAME}: operation not permitted</p>`);
   }
   
-  return (() => { urlManager.restart(); }) as EMIT_COMMAND_ACTION;
+  return (() => { urlManager.reload(); }) as EMIT_COMMAND_ACTION;
 }
 
 export const REBOOT: ShellCommandObject = {

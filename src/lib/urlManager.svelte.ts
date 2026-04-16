@@ -10,7 +10,7 @@ class URLManager {
     window.addEventListener('popstate', () => { //keeps track of browser history
       this.isRestoringHistory = true;
       this.pathname = window.location.pathname;
-      if(this.pathname === "/") { this.restart(); } //to clear stale open windows if history nav goes back to root
+      if(this.pathname === "/") { this.reload(); } //to clear stale open windows if history nav goes back to root
     });
   }
 
@@ -19,9 +19,10 @@ class URLManager {
     if (window.location.pathname === path) { return; } //guard against duplicate nav
     window.history.pushState(null, '', path);
     this.pathname = path;
+    //console.log(`navigating to: ${this.pathname}`);
   }
 
-  restart(): void {
+  reload(): void {
     this.navigate("/");
     window.location.reload();
   }

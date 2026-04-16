@@ -9,9 +9,9 @@
 
   let timeoutID = $state<ReturnType<typeof setTimeout> | null>(null);
 
-  function open(msg: string, d?: number) {
+  function open(msg: string, d: number) {
     message = msg;
-    duration = d ?? DEFAULT_TOAST_DURATION;
+    duration = d
     isVisible = true;
 
     if(timeoutID) { clearTimeout(timeoutID); }

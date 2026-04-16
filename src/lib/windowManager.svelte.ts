@@ -95,7 +95,7 @@ class WindowManager {
     if(this.activeWindow === id) { return; } 
     const previousTop = this.windowZOrder.top === id ? this.windowZOrder.bottom : this.windowZOrder.top;
     this.windowZOrder = { bottom: previousTop, top: id };
-    console.log(`currently focused window: ${id}`);
+    //console.log(`currently focused window: ${id}`);
   }
 
   getZIndex(id: WINDOW_ID): number {

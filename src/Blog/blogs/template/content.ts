@@ -4,7 +4,7 @@ export const CONTENT = `
 <p>
 At vero eos et sint et molestiae non recusandae.
 </p>
-<br>
+
 <p>
 Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis volupt
 </p>
@@ -22,7 +22,7 @@ Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis volupt
 Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis volupt
 </p>
 
-<h2>Section Header</h2>
+<h3>Section Header</h3>
 <p>
 similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis 
 <span class="markdown">markdown</span> 
