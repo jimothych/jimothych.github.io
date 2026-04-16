@@ -72,7 +72,7 @@ export { log }  <span class="comment">//  for use elsewhere</span>
 </p>
 
 <p>
-In keeping with the above, all reactive elements on this website have logical wirings handled by their own singleton JavaScript class. This includes URL navigation, tab navigation, and window management. Before you say anything -- I know there are many who will gag at the mere mention of singletons and global state -- the pattern works miracles here; give it a try and compare it to those popular React libraries like Redux and React Router, or even some entirely other UI paradigm like MVC. You will see how much less overhead there is.
+In keeping with the above, all reactive elements on this website have logical wirings handled a singleton JavaScript class. This includes URL navigation, tab navigation, and window management. Before you say anything -- I know there are many who will gag at the mere mention of singletons and global state -- the pattern works miracles here; give it a try and compare it to those popular React libraries like Redux and React Router, or even some entirely other UI paradigm like MVC. You will see how much less overhead there is.
 </p>
 
 <h3>HTML Magic</h3>
@@ -81,15 +81,12 @@ The rest of this site's magic is thanks to Svelte's <span class="markdown">@html
 </p>
 
 <p class="markdown multi-line"><span class="comment">//  breaking the fourth wall for a second</span>
-export const CONTENT = &#96;
-
 &lt;h2&gt;HTML Magic&lt;/h2&gt;
 &lt;p&gt;
-Much of the rest of the magic of this site is thanks to Svelte's 
+The rest of this site's magic is thanks to Svelte's 
 &lt;span class="markdown"&gt;@html&lt;/span&gt; template tag. 
 I'm currently writing this blog as stringified HTML!
 &lt;/p&gt;
-&#96;;
 </p>
 
 <p>
@@ -143,6 +140,7 @@ I'm so glad that in 2023 I stumbled upon Rich Harris' now famous <a href="https:
 Having used Svelte for quite a while now, I feel that it has fundamentally shifted the way I think about making things. At the core of Svelte's philosophy is the idea that your tools should be tools without limitations; in this manner I've found my newfound tools to have enabled me to do whatever I want.
 </p>
 
+<br>
 <br>
 <br>
 <br>
