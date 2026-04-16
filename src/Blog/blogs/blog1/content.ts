@@ -8,7 +8,7 @@ The following is a behind-the-scenes look at how this website works.
 <h3>Some DOM Trickery in the Terminal</h3>
 
 <p>
-The position of the terminal's cursor is determined by an auto-focused input box. When you press submit, the input box is unmounted and the contents in the box are copied verbatim back to a master log. This master log is just an array of <span class="markdown">&lt;p&gt;</span> tags rendered as a column.
+The position of the terminal's cursor is determined by an auto-focused input box. When you press submit, the input box is unmounted and the contents in the box are echoed to a master log. This master log is just an array of <span class="markdown">&lt;p&gt;</span> tags rendered as a column.
 </p>
 
 <p>
@@ -72,7 +72,11 @@ export { log }  <span class="comment">//  for use elsewhere</span>
 </p>
 
 <p>
-In keeping with the above, all reactive elements on this website have logical wirings handled a singleton JavaScript class. This includes URL navigation, tab navigation, and window management. Before you say anything -- I know there are many who will gag at the mere mention of singletons and global state -- the pattern works miracles here; give it a try and compare it to those popular React libraries like Redux and React Router, or even some entirely other UI paradigm like MVC. You will see how much less overhead there is.
+In keeping with the above, all reactive elements on this website have logical wirings handled by a singleton JavaScript class. This includes URL navigation, tab navigation, and window management. 
+</p>
+
+<p>
+Before you say anything -- I know there are many who will gag at the mere mention of singletons and global state -- the pattern works miracles here; give it a try and compare it to those popular React libraries like Redux and React Router, or even some entirely other UI paradigm like MVC. You will see how much less overhead there is.
 </p>
 
 <h3>HTML Magic</h3>
@@ -81,7 +85,7 @@ The rest of this site's magic is thanks to Svelte's <span class="markdown">@html
 </p>
 
 <p class="markdown multi-line"><span class="comment">//  breaking the fourth wall for a second</span>
-&lt;h2&gt;HTML Magic&lt;/h2&gt;
+&lt;h3&gt;HTML Magic&lt;/h3&gt;
 &lt;p&gt;
 The rest of this site's magic is thanks to Svelte's 
 &lt;span class="markdown"&gt;@html&lt;/span&gt; template tag. 
@@ -137,7 +141,7 @@ I'm so glad that in 2023 I stumbled upon Rich Harris' now famous <a href="https:
 </p>
 
 <p>
-Having used Svelte for quite a while now, I feel that it has fundamentally shifted the way I think about making things. At the core of Svelte's philosophy is the idea that your tools should be tools without limitations; in this manner I've found my newfound tools to have enabled me to do whatever I want.
+Having used Svelte for a short while now, I feel that it has fundamentally shifted the way I think about making things. At the core of Svelte's philosophy is the idea that your tools should be tools without limitations; in this manner I've found my newfound tools to have enabled me to do whatever I want.
 </p>
 
 <br>
@@ -154,5 +158,6 @@ Having used Svelte for quite a while now, I feel that it has fundamentally shift
 >
   1.
 </a>
-  This website has but two runtime dependencies: <b>interactjs</b> to make windows draggable and resizeable and <b>@lottiefiles/dotlottie-web</b> to run that nice victionarium loading animation.
+  This website has but two runtime dependencies: <b>interactjs</b> to make windows draggable and resizable and <b>@lottiefiles/dotlottie-web</b> to run that nice victionarium loading animation.
+</p>
 `;
