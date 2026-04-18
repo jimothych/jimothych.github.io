@@ -1,6 +1,7 @@
 import { VICTIONARIUM } from "../Terminal/commands/victionarium";
 import { BLOG } from "../Terminal/commands/blog";
 import { toast } from "./toast/toastController.svelte";
+import { windowManager } from "./windowManager.svelte";
 
 class URLManager {
   pathname = $state<string>(window.location.pathname);
@@ -10,7 +11,12 @@ class URLManager {
     window.addEventListener('popstate', () => { //keeps track of browser history
       this.isRestoringHistory = true;
       this.pathname = window.location.pathname;
-      if(this.pathname === "/") { this.reload(); } //to clear stale open windows if history nav goes back to root
+
+      //to clear stale open windows if history nav goes back to root
+      if(this.pathname === "/") { this.reload(); }
+
+      //to re-open stale closed windows if history nav goes back to open window
+      if(!windowManager.hasActiveApp) { this.reload(); }
     });
   }
 
@@ -23,7 +29,6 @@ class URLManager {
   }
 
   reload(): void {
-    this.navigate("/");
     window.location.reload();
   }
 

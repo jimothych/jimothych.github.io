@@ -2,13 +2,13 @@ import demystified_terminal_labeled from "../../../assets/demystified_terminal_l
 
 export const CONTENT = `
 <p>
-The following is a behind-the-scenes look at how this website works.
+This website uses a JavaScript UI framework called <a href="https://svelte.dev/docs/svelte/overview" target="_blank">Svelte</a>. The following is a brief overview of how this website works!
 </p>
 
 <h3>Some DOM Trickery in the Terminal</h3>
 
 <p>
-The position of the terminal's cursor is determined by an auto-focused input box. When you press submit, the input box is unmounted and the contents in the box are echoed to a master log. This master log is just an array of <span class="markdown">&lt;p&gt;</span> tags rendered as a column.
+Starting with the terminal emulator: the position of the terminal's cursor is determined by an auto-focused input box. When you press submit, the input box is unmounted and the contents in the box are echoed to a master log. This master log is just an array of <span class="markdown">&lt;p&gt;</span> tags rendered as a column.
 </p>
 
 <p>
@@ -24,29 +24,7 @@ The illusion is broken somewhat if you enter too many characters into the input 
 </p>
 
 <p>
-Staying in the terminal for a second, you might've also noticed the <i>"booting environment"</i> message when you first opened the website. I must confess: the terminal doesn't actually do any work while it's "booting" on initial mount. It's a fake boot simulated by a one-second sleep 😅. 
-</p>
-
-<p>
-After this sleep, the <span class="markdown">help</span> command is auto-typed via a Svelte binding to an <span class="markdown">&lt;input&gt;</span> tag:
-</p>
-
-<p class="markdown multi-line"><span class="comment">//  the terminalInputStore.value variable is reactively 
-//  bound to the input box in Terminal.svelte:</span>
-&lt;input
-        bind:value={terminalInputStore.value}
-&gt;
-
-<span class="comment">//  elsewhere, the following function is called on mount</span>
-async function bootTerminal(): Promise&lt;void&gt; {
-        log.add("<em>salvē amīce!</em>");
-        await sleep(700);
-        log.add("booting environment...");
-        await sleep(1000);  <span class="comment">//  the aforementioned one-second sleep</span>
-
-        <span class="comment">//  this function directly modifies terminalInputStore.value</span>
-        await terminalInputStore.simulateTyping('help');
-}
+You might've also noticed the <i>"booting environment"</i> message on init. I must confess: the terminal doesn't actually do any work while it's "booting". It's a fake boot simulated by a one-second sleep 😅. 
 </p>
 
 <h3>Idiomatic State Management</h3>
@@ -68,11 +46,11 @@ Here's how I've implemented the terminal's master log following this pattern:
 }
 
 let log = new Log();
-export { log }  <span class="comment">//  for use elsewhere</span>
+export { log }  <span class="comment">//  for use in Terminal.svelte</span>
 </p>
 
 <p>
-In keeping with the above, all reactive elements on this website have logical wirings handled by a singleton JavaScript class. This includes URL navigation, tab navigation, and window management. 
+In keeping with the above, <i>all</i> reactive elements on this website have logical wirings handled by a singleton JavaScript class. This includes URL navigation, tab navigation, and window management. 
 </p>
 
 <p>
@@ -85,12 +63,15 @@ The rest of this site's magic is thanks to Svelte's <span class="markdown">@html
 </p>
 
 <p class="markdown multi-line"><span class="comment">//  breaking the fourth wall for a second</span>
+export const CONTENT = &#96;
+
 &lt;h3&gt;HTML Magic&lt;/h3&gt;
 &lt;p&gt;
 The rest of this site's magic is thanks to Svelte's 
 &lt;span class="markdown"&gt;@html&lt;/span&gt; template tag. 
 I'm currently writing this blog as stringified HTML!
 &lt;/p&gt;
+&#96;;
 </p>
 
 <p>
@@ -103,7 +84,7 @@ One of the main selling points of React over other frontend frameworks is its va
 </p>
 
 <p>
-In my opinion, the fact of the matter is simply that making things with React is really really freaking hard, and as such it takes massive amounts of collective effort to curb these difficulties. So we end up with lots of little libraries for things like animations and dropdowns and modals and popups and draggables etc. etc. etc.
+In my opinion, the fact of the matter is simply that making things with React is really really freaking hard, and as such it takes massive amounts of collective effort to curb these difficulties. So we end up with lots of little libraries for animations and dropdowns and modals and popups and draggables etc. etc. etc.
 </p>
 
 <p>
@@ -135,16 +116,10 @@ With Svelte on the other hand, the provided tools are already flexible and power
 .
 </p>
 
-<h3>Epilogue</h3>
 <p>
-I'm so glad that in 2023 I stumbled upon Rich Harris' now famous <a href="https://www.youtube.com/watch?v=AdNJ3fydeao" target="_blank">rethinking reactivity</a> talk. This was the talk that introduced me to Svelte.
+If you're interested in learning more about Svelte I'd recommend you start with Rich Harris' <a href="https://www.youtube.com/watch?v=AdNJ3fydeao" target="_blank">rethinking reactivity</a> talk. It's one of my favorites 🙂.
 </p>
 
-<p>
-Having used Svelte for a short while now, I feel that it has fundamentally shifted the way I think about making things. At the core of Svelte's philosophy is the idea that your tools should be tools without limitations; in this manner I've found my newfound tools to have enabled me to do whatever I want.
-</p>
-
-<br>
 <br>
 <br>
 <br>
