@@ -25,7 +25,6 @@ below are a few other commands you can run to learn more about me!
 
 commands:
 ${createPaddedString(`whoami`, `who i am`)}
-${createPaddedString(`projects`, `what i've been up to`)}
 ${createPaddedString(`blog`, `my blog`)}
 ${createPaddedString(`ls`, `list directory contents`)}
 ${createPaddedString(`cat`, `print file contents to output, e.g. &#96;cat poem1.txt&#96;`)}
