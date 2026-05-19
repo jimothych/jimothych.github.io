@@ -21,7 +21,7 @@ Grand Asia Market is an Asian grocery store close to where I work. It sells a va
 </div>
 
 <p>
-A few weeks ago I impulse bought three pounds of korean radish from Grand Asia Market seeing as they don't sell it all the time. Was this too much radish? No. What was I to do with all this radish? Make korean radish salad, duh.
+A few weeks ago I impulse bought three pounds of korean radish seeing as they don't sell it all the time. Was this too much radish? No. What was I to do with all this radish? Make korean radish salad, duh.
 </p>
 
 <p>
@@ -29,7 +29,7 @@ After perusing the internet a bit I found this great recipe <a href="https://www
 </p>
 
 <p>
-I forgot to take a photo of my finished product before it was all gone so here is a stock photo to sate your eyes.
+I forgot to take a photo of the finished product before it was all gone so here is a stock photo to sate your eyes.
 </p>
 
 <div class="img-container">
@@ -42,7 +42,7 @@ I forgot to take a photo of my finished product before it was all gone so here i
 <h3>Snack Showcase</h3>
 
 <p>
-Here are some of my favorite snacks that I get from Grand Asia Market 😁.
+Here are some of my favorite snacks that I get from Grand Asia Market :)
 </p>
 
 <div class="img-container">
