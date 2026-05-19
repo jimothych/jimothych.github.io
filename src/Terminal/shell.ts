@@ -17,7 +17,6 @@ const SHELL_AUTOCOMPLETE_OPTIONS = new Map<string, string[]>();
 
 for (const { name, shellCommand, autocompleteOptions } of [
   WHOAMI,
-  PROJECTS,
   BLOG,
   LS,
   CAT,
