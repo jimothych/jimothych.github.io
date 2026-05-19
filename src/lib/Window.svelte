@@ -83,6 +83,6 @@
     overflow: hidden;
     border-radius: 6px;
     background: var(--black);
-    box-shadow: rgba(0, 0, 0, 0.18) 0px 1px 4px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px;
   }
 </style>

@@ -7,7 +7,7 @@ const BLOG1: BlogData = {
   slug: slugify(TITLE),
   title: TITLE,
   thumbnail: {
-    description: "A behind-the-scenes look at how this website works along with some thoughts about Svelte now that I've used it to make something.",
+    description: "The following is a behind-the-scenes look at how this website works along with some thoughts about Svelte now that I've used it to make something.",
     date: "Apr 12, 2026",
     asset: horizontal_placeholder
   },

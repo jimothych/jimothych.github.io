@@ -2,17 +2,17 @@ import demystified_terminal_labeled from "../../../assets/demystified_terminal_l
 
 export const CONTENT = `
 <p>
-This website uses a JavaScript UI framework called <a href="https://svelte.dev/docs/svelte/overview" target="_blank">Svelte</a>. The following is a brief overview of how this website works!
+The following is a behind-the-scenes look at how this website works along with some thoughts about <a href="https://svelte.dev/docs/svelte/overview" target="_blank">Svelte</a> now that I've used it to make something.
 </p>
 
 <h3>Some DOM Trickery in the Terminal</h3>
 
 <p>
-Starting with the terminal emulator: the position of the terminal's cursor is determined by an auto-focused input box. When you press submit, the input box is unmounted and the contents in the box are echoed to a master log. This master log is just an array of <span class="markdown">&lt;p&gt;</span> tags rendered as a column.
+Starting with the terminal emulator: the position of the terminal's cursor is determined by an auto-focused input box. When you press submit, the input box is unmounted and the contents in the box are echoed to a log. This log is just an array of <span class="markdown">&lt;p&gt;</span> tags rendered as a column.
 </p>
 
 <p>
-After the new entry is added, the input box is cleared and remounted at its position below the master log.
+After the new entry is added, the input box is cleared and remounted at its position below the log.
 </p>
 
 <div class="img-container">
@@ -24,7 +24,7 @@ The illusion is broken somewhat if you enter too many characters into the input 
 </p>
 
 <p>
-You might've also noticed the <i>"booting environment"</i> message on init. I must confess: the terminal doesn't actually do any work while it's "booting". It's a fake boot simulated by a one-second sleep 😅. 
+You might've also noticed the <i>booting environment</i> message on init. I must confess: the terminal doesn't actually do any work while it's "booting". It's a fake boot simulated by a one-second sleep 😅. 
 </p>
 
 <h3>Idiomatic State Management</h3>
@@ -32,7 +32,7 @@ You might've also noticed the <i>"booting environment"</i> message on init. I mu
 The Svelte documentation has a small section on
 <a href="https://svelte.dev/docs/svelte/$state#Classes" target="_blank">
 idiomatic usage of the <span class="markdown">$state</span> rune</a>. 
-Here's how I've implemented the terminal's master log following this pattern:
+Here's how I've implemented the terminal's log following this pattern:
 </p>
 
 <p class="markdown multi-line">class Log {
@@ -50,7 +50,7 @@ export { log }  <span class="comment">//  for use in Terminal.svelte</span>
 </p>
 
 <p>
-In keeping with the above, <i>all</i> reactive elements on this website have logical wirings handled by a singleton JavaScript class. This includes URL navigation, tab navigation, and window management. 
+In keeping with the above, <i>all</i> reactive things on this website have logical wirings handled by some singleton JavaScript class. This includes URL navigation, tab navigation, and window management. 
 </p>
 
 <p>
@@ -84,7 +84,7 @@ One of the main selling points of React over other frontend frameworks is its va
 </p>
 
 <p>
-In my opinion, the fact of the matter is simply that making things with React is really really freaking hard, and as such it takes massive amounts of collective effort to curb these difficulties. So we end up with lots of little libraries for animations and dropdowns and modals and popups and draggables etc. etc. etc.
+The fact of the matter is simply that making things with React is really hard, and as such it takes massive amounts of collective effort to curb these difficulties. So we end up with lots of little libraries for animations and dropdowns and modals and popups and menus etc.
 </p>
 
 <p>
